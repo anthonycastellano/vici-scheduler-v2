@@ -1,21 +1,26 @@
 require('dotenv').config();
 const express = require('express');
-const { mongoConnect } = require('./helpers/cosmosHelpers');
-const scheduleController = require('./controllers/scheduleController');
+const cors = require('cors');
+const { graphqlHTTP } = require('express-graphql');
+const schema = require('./schema/schema');
+const mongoose = require('mongoose');
 
 const PORT = process.env.PORT || '3001';
 const app = express();
 
-app.get('/schedule', (req, res) => {
-    return scheduleController.index(req, res);
+// middleware
+app.use(cors());
+
+mongoose.connect(process.env.COSMOS_CONNECTION_STRING);
+mongoose.connection.once('open', () => {
+    console.log('connected to db');
 });
 
-app.get('/employees', (req, res) => {
-    return employeeController.index(req, res);
-});
+app.use('/graphql', graphqlHTTP({
+    schema,
+    graphiql: true
+}));
 
-mongoConnect(() => {
-    app.listen(PORT, () => {
-        console.log(`listening on port ${PORT}`);
-    });
+app.listen(PORT, () => {
+    console.log(`listening on port ${PORT}`);
 });
