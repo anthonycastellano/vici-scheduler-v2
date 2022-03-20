@@ -1,8 +1,7 @@
 const scheduleHelpers = require('../helpers/scheduleHelpers');
-const { getDB } = require('../helpers/cosmosHelpers');
 
+// return all created schedules
 exports.index = async (req, res) => {
-    const db = getDB();
-    const collection = db.collection('schedule');
-    res.send(await scheduleHelpers.printCollection(collection));
+    const schedules = await scheduleHelpers.getMasterSchedule();
+    res.send(schedules);
 };

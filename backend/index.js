@@ -10,6 +10,10 @@ app.get('/schedule', (req, res) => {
     return scheduleController.index(req, res);
 });
 
+app.get('/employees', (req, res) => {
+    return employeeController.index(req, res);
+});
+
 mongoConnect(() => {
     app.listen(PORT, () => {
         console.log(`listening on port ${PORT}`);
