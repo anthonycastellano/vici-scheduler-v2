@@ -2,7 +2,12 @@ const { getDB } = require('./cosmosHelpers');
 
 const EMPLOYEE_COLLECTION_NAME = 'employees';
 
-exports.getEmployees = async () => {
+exports.getEmployees = () => {
     const employeeCollection = getDB().collection(EMPLOYEE_COLLECTION_NAME);
-    const employees = await scheduleCollection.find({}).toArray();
+    return employeeCollection.find({}).toArray();
+};
+
+exports.createEmployee = (employee) => {
+    const employeeCollection = getDB().collection(EMPLOYEE_COLLECTION_NAME);
+    return employeeCollection.insertMany([employee]);
 };
