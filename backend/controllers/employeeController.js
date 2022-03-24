@@ -1,17 +1,5 @@
 const employeeHelpers = require('../helpers/employeeHelpers.js');
-const { validate } = require('indicative/validator');
-const { sanitize } = require('indicative/sanitizer');
-
-const employeeValidationRules = {
-    firstName: 'required|alpha',
-    lastName: 'alpha'
-};
-
-// remove html tags
-const employeeSanitizationRules = {
-    firstName: 'stripTags',
-    lastName: 'stripTags'
-};
+const validateHelpers = require('../helpers/validateHelpers');
 
 // return list of all employees
 exports.index = async (req, res) => {
@@ -23,6 +11,32 @@ exports.index = async (req, res) => {
 // TODO: duplicate check
 exports.create = async (req, res) => {
     // sanitize body
+    validateHelpers.sanitizeEmployee(req.body);
+
+    // validate body
+    try {
+        await validateHelpers.validateEmployee(req.body);
+    } catch (e) {
+        res.status(400);
+        return res.send(e);
+    }
+
+    // create employee
+    const employee = await employeeHelpers.createEmployee({
+        firstName: req.body.firstName.toLowerCase(),
+        lastName: req.body.lastName ? req.body.lastName.toLowerCase() : null
+    });
+    if (employee && employee.length) {
+        return res.json(employee[0]);
+    }
+    res.status(500);
+    return res.json({ err: "error creating employee" });
+};
+
+// modify existing employee
+// TODO: this
+exports.update = async (req, res) => {
+    // sanitize body
     sanitize(req.body, employeeSanitizationRules);
 
     // validate body
@@ -32,9 +46,9 @@ exports.create = async (req, res) => {
         return res.send(e);
     }
 
-    const employee = await employeeHelpers.createEmployee({
+    const employee = await employeeHelpers.updateEmployee({
         firstName: req.body.firstName.toLowerCase(),
         lastName: req.body.lastName ? req.body.lastName.toLowerCase() : null
     });
-    res.json(employee ? employee : { err: "error creating employee" });
+    res.json(employee && employee.length ? employee[0] : { err: "error updating employee" });
 };

@@ -22,6 +22,10 @@ app.post('/employees', (req, res) => {
     return employeeController.create(req, res);
 });
 
+app.put('/employees', (req, res) => {
+    return employeeController.update(req, res);
+});
+
 mongoConnect(() => {
     app.listen(PORT, () => {
         console.log(`listening on port ${PORT}`);
