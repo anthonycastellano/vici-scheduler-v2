@@ -7,6 +7,12 @@ exports.getEmployees = () => {
     return employeeCollection.find({}).toArray();
 };
 
+exports.exists = async (employee) => {
+    const employeeCollection = getDB().collection(EMPLOYEE_COLLECTION_NAME);
+    const employees = await employeeCollection.find(employee).toArray();
+    return employees.length;
+};
+
 exports.createEmployee = async (employee) => {
     const employeeCollection = getDB().collection(EMPLOYEE_COLLECTION_NAME);
     const { insertedIds } = await employeeCollection.insertMany([employee]);
@@ -14,4 +20,8 @@ exports.createEmployee = async (employee) => {
         return await employeeCollection.find({ _id: insertedIds["0"] }).toArray();
     }
     return;
+};
+
+exports.updateEmployee = (employee) => {
+    
 };

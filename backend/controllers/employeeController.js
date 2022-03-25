@@ -8,7 +8,6 @@ exports.index = async (req, res) => {
 };
 
 // add new employee to db
-// TODO: duplicate check
 exports.create = async (req, res) => {
     // sanitize body
     validateHelpers.sanitizeEmployee(req.body);
@@ -18,7 +17,14 @@ exports.create = async (req, res) => {
         await validateHelpers.validateEmployee(req.body);
     } catch (e) {
         res.status(400);
+        e[0].err = 'validation failed';
         return res.send(e);
+    }
+
+    // check for duplicate employee
+    if (employeeHelpers.exists(req.body)) {
+        res.status(400);
+        return res.send({ err: 'employee already exists' });
     }
 
     // create employee
@@ -30,7 +36,7 @@ exports.create = async (req, res) => {
         return res.json(employee[0]);
     }
     res.status(500);
-    return res.json({ err: "error creating employee" });
+    return res.json({ err: 'error creating employee' });
 };
 
 // modify existing employee
