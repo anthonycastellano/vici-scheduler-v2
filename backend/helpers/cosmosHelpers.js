@@ -5,7 +5,7 @@ let _db;
 exports.mongoConnect = (callback) => {
     MongoClient.connect(process.env.COSMOS_CONNECTION_STRING, (err, client) => {
         _db = client.db('calendar-db');
-        console.log('db connected');
+        console.log('DB connected');
         callback();
     });
 };
@@ -14,6 +14,6 @@ exports.getDB = () => {
     if (_db) {
         return _db;
     } else {
-        throw new Error('unable to connect to DB');
+        throw new Error('Unable to connect to DB');
     }
 };

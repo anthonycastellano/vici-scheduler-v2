@@ -19,9 +19,13 @@ exports.createEmployee = async (employee) => {
     if (insertedIds) {
         return await employeeCollection.find({ _id: insertedIds["0"] }).toArray();
     }
-    return;
 };
 
-exports.updateEmployee = (employee) => {
-    
+exports.updateEmployee = async (employee, updatedEmployee) => {
+    const employeeCollection = getDB().collection(EMPLOYEE_COLLECTION_NAME);
+    await employeeCollection.updateOne(employee, { $set: {
+        firstName: updatedEmployee.firstName,
+        lastName: updatedEmployee.lastName
+    }});
+    return await employeeCollection.find(updatedEmployee).toArray();
 };

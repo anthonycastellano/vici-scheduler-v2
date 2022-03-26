@@ -17,44 +17,66 @@ exports.create = async (req, res) => {
         await validateHelpers.validateEmployee(req.body);
     } catch (e) {
         res.status(400);
-        e[0].err = 'validation failed';
+        e[0].error = 'Validation failed';
         return res.send(e);
     }
 
     // check for duplicate employee
-    if (employeeHelpers.exists(req.body)) {
+    if (await employeeHelpers.exists(req.body)) {
         res.status(400);
-        return res.send({ err: 'employee already exists' });
+        return res.send({ error: 'Employee already exists' });
     }
 
     // create employee
     const employee = await employeeHelpers.createEmployee({
-        firstName: req.body.firstName.toLowerCase(),
-        lastName: req.body.lastName ? req.body.lastName.toLowerCase() : null
+        firstName: req.body.firstName,
+        lastName: req.body.lastName ? req.body.lastName : null
     });
+
+
     if (employee && employee.length) {
         return res.json(employee[0]);
     }
     res.status(500);
-    return res.json({ err: 'error creating employee' });
+    return res.json({ error: 'Error creating employee' });
 };
 
 // modify existing employee
-// TODO: this
 exports.update = async (req, res) => {
     // sanitize body
-    sanitize(req.body, employeeSanitizationRules);
+    validateHelpers.sanitizeEmployee(req.body.employeeOld);
+    validateHelpers.sanitizeEmployee(req.body.employeeNew);
 
     // validate body
     try {
-        validate(req.body, employeeValidationRules);
+        await validateHelpers.validateEmployee(req.body.employeeOld);
+        await validateHelpers.validateEmployee(req.body.employeeNew);
     } catch (e) {
+        res.status(400);
+        e[0].error = 'Validation failed';
         return res.send(e);
     }
 
-    const employee = await employeeHelpers.updateEmployee({
-        firstName: req.body.firstName.toLowerCase(),
-        lastName: req.body.lastName ? req.body.lastName.toLowerCase() : null
-    });
-    res.json(employee && employee.length ? employee[0] : { err: "error updating employee" });
+    // check for duplicate employee
+    if (await employeeHelpers.exists({
+        firstName: req.body.newFirstName,
+        lastName: req.body.newLastName
+    })) {
+        res.status(400);
+        return res.send({ error: 'Employee already exists' });
+    }
+
+    // update employee in collection
+    const employee = await employeeHelpers.updateEmployee(req.body.employeeOld, req.body.employeeNew);
+
+    if (employee && employee.length) {
+        return res.json(employee[0]);
+    }
+    res.status(500);
+    return res.json({ error: 'Error updating employee' });
+};
+
+// delete employee
+exports.delete = async (req, res) => {
+    
 };
