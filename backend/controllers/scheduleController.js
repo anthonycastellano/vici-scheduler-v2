@@ -1,9 +1,13 @@
 const scheduleHelpers = require('../helpers/scheduleHelpers');
 
-// return one or all created schedules
-// TODO: handle query for specific schedule
+// return one or all schedules
 exports.index = async (req, res) => {
-    const schedules = await scheduleHelpers.getSchedules();
+    const params = req.query && (req.query.month || req.query.year) ? {
+        month: parseInt(req.query.month),
+        year: parseInt(req.query.year)
+    } : {};
+    console.log(params);
+    const schedules = await scheduleHelpers.getSchedules(params);
     res.send(schedules);
 };
 
