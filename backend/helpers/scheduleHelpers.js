@@ -15,6 +15,9 @@ exports.updateSchedule = (schedule) => {
 
 };
 
-exports.deleteSchedule = (month, year) => {
-
+exports.deleteSchedule = async (month, year) => {
+    const scheduleCollection = getDB().collection(SCHEDULE_COLLECTION_NAME);
+    const foundSchedules = await scheduleCollection.find({ month, year }).toArray();
+    if (!foundSchedules.length) return {};
+    return scheduleCollection.deleteMany({ _id: foundSchedules[0]._id });
 };

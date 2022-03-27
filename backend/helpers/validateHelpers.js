@@ -43,6 +43,8 @@ const scheduleValidationRules = {
     ]
 };
 
+
+// TODO: add leads and backups sanitizations
 const scheduleSanitizationRules = {
     month: [
         sanitizations.stripTags(),
