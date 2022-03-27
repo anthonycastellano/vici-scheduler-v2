@@ -10,15 +10,17 @@ const app = express();
 // middleware
 app.use(express.json());
 
-// schedule
-app.get('/schedule', (req, res) => scheduleController.index(req, res));
+// schedules
+app.get('/schedules', (req, res) => scheduleController.index(req, res));
+app.post('/schedules', (req, res) => scheduleController.create(req, res));
+app.put('/schedules', (req, res) => scheduleController.update(req, res));
+app.delete('/schedules', (req, res) => scheduleController.delete(req, res)); 
 
 // employees
 app.get('/employees', (req, res) => employeeController.index(req, res));
 app.post('/employees', (req, res) => employeeController.create(req, res));
 app.put('/employees', (req, res) => employeeController.update(req, res));
 app.delete('/employees', (req, res) => employeeController.delete(req, res));
-
 
 mongoConnect(() => {
     app.listen(PORT, () => {
