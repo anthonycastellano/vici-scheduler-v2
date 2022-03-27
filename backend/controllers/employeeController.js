@@ -58,10 +58,7 @@ exports.update = async (req, res) => {
     }
 
     // check for duplicate employee
-    if (await employeeHelpers.exists({
-        firstName: req.body.newFirstName,
-        lastName: req.body.newLastName
-    })) {
+    if (await employeeHelpers.exists(req.body.employeeNew)) {
         res.status(400);
         return res.send({ error: 'Employee already exists' });
     }
@@ -78,5 +75,22 @@ exports.update = async (req, res) => {
 
 // delete employee
 exports.delete = async (req, res) => {
-    
+    // sanitize body
+    validateHelpers.sanitizeEmployee(req.body);
+
+    // validate body
+    try {
+        await validateHelpers.validateEmployee(req.body);
+    } catch (e) {
+        res.status(400);
+        e[0].error = 'Validation failed';
+        return res.send(e);
+    }
+
+    const result = await employeeHelpers.deleteEmployee(req.body);
+    if (result.deletedCount) {
+        return res.json({ msg: 'Successfully deleted employee' });
+    }
+    res.status(500);
+    res.json({ error: 'Error deleting employee' });
 };

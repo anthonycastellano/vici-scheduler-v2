@@ -9,6 +9,7 @@ exports.getEmployees = () => {
 
 exports.exists = async (employee) => {
     const employeeCollection = getDB().collection(EMPLOYEE_COLLECTION_NAME);
+    if (!employee.lastName) employee.lastName = null;
     const employees = await employeeCollection.find(employee).toArray();
     return employees.length;
 };
@@ -23,9 +24,18 @@ exports.createEmployee = async (employee) => {
 
 exports.updateEmployee = async (employee, updatedEmployee) => {
     const employeeCollection = getDB().collection(EMPLOYEE_COLLECTION_NAME);
+    if (!employee.lastName) employee.lastName = null;
     await employeeCollection.updateOne(employee, { $set: {
         firstName: updatedEmployee.firstName,
         lastName: updatedEmployee.lastName
     }});
     return await employeeCollection.find(updatedEmployee).toArray();
+};
+
+exports.deleteEmployee = async (employee) => {
+    const employeeCollection = getDB().collection(EMPLOYEE_COLLECTION_NAME);
+    if (!employee.lastName) employee.lastName = null;
+    const foundEmployees = await employeeCollection.find(employee).toArray();
+    if (!foundEmployees.length) return {};
+    return employeeCollection.deleteMany({ _id: foundEmployees[0]._id });
 };
