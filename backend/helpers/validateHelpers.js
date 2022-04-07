@@ -38,19 +38,32 @@ const scheduleValidationRules = {
     leads: [
         validations.array()
     ],
+    'leads.*': [
+        validations.alphaNumeric()
+    ],
     backups: [
         validations.array()
+    ],
+    'backups.*': [
+        validations.alphaNumeric()
     ]
 };
 
 
-// TODO: add leads and backups sanitizations
 const scheduleSanitizationRules = {
     month: [
         sanitizations.stripTags(),
         sanitizations.trim()
     ],
     year: [
+        sanitizations.stripTags(),
+        sanitizations.trim()
+    ],
+    'leads.*': [
+        sanitizations.stripTags(),
+        sanitizations.trim()
+    ],
+    'backups.*': [
         sanitizations.stripTags(),
         sanitizations.trim()
     ]

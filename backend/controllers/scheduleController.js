@@ -13,12 +13,44 @@ exports.index = async (req, res) => {
 
 // generate a new schedule
 exports.create = async (req, res) => {
+    // sanitize body
+    validateHelpers.sanitizeSchedule(req.body);
 
+    // validate body
+    try {
+        await validateHelpers.validateSchedule(req.body);
+    } catch (e) {
+        res.status(400);
+        e[0].error = 'Validation failed';
+        return res.send(e);
+    }
+
+    const newSchedule = await scheduleHelpers.createSchedule(req.body.month, req.body.year);
+    
 };
 
 // modify existing schedule
 exports.update = async (req, res) => {
+    // sanitize body
+    validateHelpers.sanitizeSchedule(req.body);
 
+    // validate body
+    try {
+        await validateHelpers.validateSchedule(req.body);
+    } catch (e) {
+        res.status(400);
+        e[0].error = 'Validation failed';
+        return res.send(e);
+    }
+
+    // update schedule in collection
+    const schedule = await scheduleHelpers.updateSchedule(req.body);
+
+    if (schedule && schedule.length) {
+        return res.json(schedule[0]);
+    }
+    res.status(500);
+    return res.json({ error: 'Error updating schedule' });
 };
 
 // delete schedule
