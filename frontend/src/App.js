@@ -1,5 +1,7 @@
 import './App.css';
+import { useEffect } from 'react';
 import { Route, Switch, Redirect } from 'react-router-dom';
+import { useSelector, useDispatch } from 'react-redux';
 
 // pages
 import Home from './pages/Home';
@@ -9,7 +11,15 @@ import Admin from './pages/Admin';
 // components
 import Header from './components/Header';
 
+// helpers
+
 function App() {
+  const schedules = useSelector(state => state.schedules);
+
+  useEffect(() => {
+    // fetch schedules
+  });
+
   return (
     <div className='App'>
       <Header />
