@@ -8,7 +8,7 @@ let initialState = {
 const reducer = (state = initialState, action) => {
     if (action.type === 'setAllSchedules') {
         return {
-            loggedIn: state.loggedIn,
+            ...state,
             schedules: action.schedules
         }
     }

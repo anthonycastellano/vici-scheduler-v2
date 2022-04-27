@@ -1,15 +1,17 @@
 import { Link } from 'react-router-dom';
 
-const Header = () => {
+import classes from './css/Nav.module.css';
+
+const Nav = () => {
     return (
-        <header>
+        <header className={classes.header}>
             <nav>
                 <ul>
                     <li>
-                        <Link to="/">Home</Link>
+                        <Link to="/">Schedule</Link>
                     </li>
                     <li>
-                        <Link to='/all-schedules'>All Schedules</Link>
+                        <Link to='/employees'>Employees</Link>
                     </li>
                     <li>
                         <Link to='/admin'>Admin</Link>
@@ -20,4 +22,4 @@ const Header = () => {
     );
 };
 
-export default Header;
+export default Nav;

@@ -1,0 +1,31 @@
+.header {
+    width: 100%;
+    height: 5rem;
+    background-color: #3e4b6b;
+    position: absolute;
+    bottom: 0;
+}
+
+.header nav {
+    height: 100%;
+}
+
+.header ul {
+    height: 100%;
+    list-style: none;
+    display: flex;
+    padding: 0;
+    margin: 0;
+    align-items: center;
+    justify-content: center;
+}
+
+.header li {
+    margin: 0 1rem;
+    width: 5rem;
+}
+
+.header a {
+    color: aliceblue;
+    text-decoration: none;
+}

@@ -1,35 +1,24 @@
 import './App.css';
-import { useEffect } from 'react';
 import { Route, Switch, Redirect } from 'react-router-dom';
-import { useSelector, useDispatch } from 'react-redux';
 
 // pages
-import Home from './pages/Home';
-import AllSchedules from './pages/AllSchedules';
+import Employees from './pages/Employees';
+import Schedules from './pages/Schedules';
 import Admin from './pages/Admin';
 
 // components
-import Header from './components/Header';
-
-// helpers
+import Nav from './components/Nav';
 
 function App() {
-  const schedules = useSelector(state => state.schedules);
-
-  useEffect(() => {
-    // fetch schedules
-  });
-
   return (
     <div className='App'>
-      <Header />
       <Switch>
         <Route exact path='/'>
-          <Home />
+          <Schedules />
         </Route>
 
-        <Route exact path='/all-schedules'>
-          <AllSchedules />
+        <Route exact path='/employees'>
+          <Employees />
         </Route>
 
         <Route exact path='/admin'>
@@ -40,6 +29,7 @@ function App() {
           <Redirect to='/' />
         </Route>
       </Switch>
+      <Nav />
     </div>
   );
 }
