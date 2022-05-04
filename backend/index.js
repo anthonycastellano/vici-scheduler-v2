@@ -4,7 +4,7 @@ const { mongoConnect } = require('./helpers/cosmosHelpers');
 const scheduleController = require('./controllers/scheduleController');
 const employeeController = require('./controllers/employeeController');
 
-const PORT = process.env.PORT || '443';
+const PORT = process.env.PORT || '80';
 const app = express();
 
 // middleware
