@@ -24,12 +24,11 @@ jobs:
       - name: npm install
         run: |
           npm install
-        working-directory: ./backend
+        working-directory: backend
 
       - name: 'Deploy to Azure'
         uses: azure/webapps-deploy@v2
         with:
           app-name: 'vici-scheduler-api-server'
-          slot-name: 'Production'
           publish-profile: ${{ secrets.AZUREAPPSERVICE_PUBLISHPROFILE_B5B992D6AC9C42719E0D018A64192209 }}
-          package: ./backend
+          package: backend
