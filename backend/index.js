@@ -22,6 +22,10 @@ app.post('/employees', (req, res) => employeeController.create(req, res));
 app.put('/employees', (req, res) => employeeController.update(req, res));
 app.delete('/employees', (req, res) => employeeController.delete(req, res));
 
+app.get('/*', (req, res) => {
+    res.send('hello');
+});
+
 mongoConnect(() => {
     app.listen(PORT, () => {
         console.log(`Server listening on port ${PORT}`);
