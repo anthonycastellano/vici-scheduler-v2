@@ -7,7 +7,7 @@ import { useDispatch } from 'react-redux';
 import ScheduleAccordion from '../components/ScheduleAccordion';
 
 // css
-import classes from './css/Schedules.module.css';
+// import classes from './css/Schedules.module.css';
 
 const Schedules = () => {
     const schedules = useSelector(state => state.schedules);
@@ -18,7 +18,7 @@ const Schedules = () => {
       getSchedules().then(({ data }) => {
         dispatch({ type: 'setSchedules', schedules: data });
       });
-    }, []);
+    }, [dispatch]);
 
     return (
         <div>
