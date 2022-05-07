@@ -12,6 +12,7 @@ import Nav from './components/Nav';
 function App() {
   return (
     <div className='App'>
+      <Nav />
       <Switch>
         <Route exact path='/'>
           <Schedules />
@@ -29,7 +30,6 @@ function App() {
           <Redirect to='/' />
         </Route>
       </Switch>
-      <Nav />
     </div>
   );
 }
