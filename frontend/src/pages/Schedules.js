@@ -6,27 +6,26 @@ import { useDispatch } from 'react-redux';
 // components
 import ScheduleAccordion from '../components/ScheduleAccordion';
 
-// css
-// import classes from './css/Schedules.module.css';
-
 const Schedules = () => {
     const schedules = useSelector(state => state.schedules);
     const dispatch = useDispatch();
 
     useEffect(() => {
-      // fetch schedules and update state
-      getSchedules().then(({ data }) => {
-        dispatch({ type: 'setSchedules', schedules: data });
-      });
+        if (schedules.length) return;
+
+        // fetch schedules and update state
+        getSchedules().then(({ data }) => {
+          dispatch({ type: 'setSchedules', schedules: data });
+        });
     }, [dispatch]);
 
     return (
         <div>
-            <h1>Schedule List</h1>
+            <h1>Schedules</h1>
             {schedules ?
                 <ScheduleAccordion schedules={schedules} />
             :
-                <p>Loading Schedules...</p>
+                <p>Loading schedules...</p>
             }
         </div>
     );

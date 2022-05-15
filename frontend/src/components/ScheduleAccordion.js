@@ -1,8 +1,25 @@
 import React, { useState } from 'react';
 import ScheduleAccordionItem from './ScheduleAccordionItem';
 
+const getCurrentMonthIndex = (schedules) => {
+    const date = new Date();
+    const currentMonth = date.getMonth() + 1;
+    const currentYear = date.getFullYear();
+
+    let index = 0;
+    for (const schedule of schedules) {
+        if (parseInt(schedule.month) === currentMonth && parseInt(schedule.year) === currentYear) {
+            return index;
+        }
+        index++;
+    }
+
+    return 0;
+};
+
 const ScheduleAccordion = ({ schedules }) => {
-    const [activeIndex, setActiveIndex] = useState(0);
+    console.log(getCurrentMonthIndex(schedules))
+    const [activeIndex, setActiveIndex] = useState(getCurrentMonthIndex(schedules));
 
     const renderedSchedules = schedules.map((schedule, index) => {
         const showDescription = index === activeIndex ? "show-description": "";

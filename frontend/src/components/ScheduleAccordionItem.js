@@ -1,4 +1,11 @@
 
+const employeeList = (employees) => employees.map((employee) => {
+    return  (
+        <li>
+	    <p>{employee}</p>
+	</li>
+    )
+});
 
 const ScheduleAccordionItem = ({
     schedule,
@@ -16,11 +23,26 @@ const ScheduleAccordionItem = ({
                     {`${schedule.month}/${schedule.year}`}
             </button>
         </dt>
-        <dd>
-            <p id={`schedule${index}-desc`}>
-                {schedule.leads}
-            </p>
-        </dd>
+
+        <div id={`schedule${index}-desc`} hidden={!showDescription}>
+            <dt>
+                <p>Leads</p>
+            </dt>
+            <dd >
+                <ul>
+                    {employeeList(schedule.leads)}
+                </ul>
+            </dd>
+            
+            <dt>
+                <p>Backups</p>
+            </dt>
+            <dd>
+                <ul>
+                    {employeeList(schedule.backups)}
+                </ul>
+            </dd>
+        </div>
     </div>
 );
 
