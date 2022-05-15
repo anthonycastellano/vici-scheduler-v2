@@ -9,7 +9,6 @@ const getCurrentMonthIndex = (schedules) => {
     let index = 0;
     for (const schedule of schedules) {
         if (parseInt(schedule.month) === currentMonth && parseInt(schedule.year) === currentYear) {
-            console.log(index);
             return index;
         }
         index++;

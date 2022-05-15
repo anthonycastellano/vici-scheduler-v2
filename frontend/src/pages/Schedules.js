@@ -6,6 +6,10 @@ import { useDispatch } from 'react-redux';
 // components
 import ScheduleAccordion from '../components/ScheduleAccordion';
 
+const scheduleCompareFn = (schedule1, schedule2) => {
+    return schedule1.year > schedule2.year ||  (schedule1.year === schedule2.year && schedule1.month > schedule2.month) ?  1 : -1;
+};
+
 const Schedules = () => {
     const schedules = useSelector(state => state.schedules);
     const dispatch = useDispatch();
@@ -14,7 +18,8 @@ const Schedules = () => {
         if (schedules.length) return;
         // fetch schedules and update state
         getSchedules().then(({ data }) => {
-          dispatch({ type: 'setSchedules', schedules: data });
+            data.sort(scheduleCompareFn);
+            dispatch({ type: 'setSchedules', schedules: data });
         });
     }, [dispatch]);
 
