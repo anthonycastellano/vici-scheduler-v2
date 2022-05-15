@@ -1,9 +1,11 @@
 
+const LIST_CONTRAST_COLOR = '#3c424f';
+
 const employeeList = (employees) => employees.map((employee) => {
     return  (
         <li>
-	    <p>{employee}</p>
-	</li>
+	        <p>{employee}</p>
+	    </li>
     )
 });
 
@@ -11,22 +13,18 @@ const ScheduleAccordionItem = ({
     schedule,
     index,
     showDescription,
-    ariaExpanded,
     onClick
 }) => (
-    <div className="schedule-item">
+    <div className="schedule-item" style={{backgroundColor: index % 2 == 0 ? LIST_CONTRAST_COLOR : ''}}>
         <dt>
-            <button
-                aria-expanded={ariaExpanded}
-                data-qa="schedule-item-button"
-                onClick={onClick}>
-                    {`${schedule.month}/${schedule.year}`}
+            <button onClick={onClick}>
+                {`${schedule.month}/${schedule.year}`}
             </button>
         </dt>
 
         <div id={`schedule${index}-desc`} hidden={!showDescription}>
             <dt>
-                <p>Leads</p>
+                <h3>Leads</h3>
             </dt>
             <dd >
                 <ul>
@@ -35,7 +33,7 @@ const ScheduleAccordionItem = ({
             </dd>
             
             <dt>
-                <p>Backups</p>
+                <h3>Backups</h3>
             </dt>
             <dd>
                 <ul>

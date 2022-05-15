@@ -9,28 +9,26 @@ const getCurrentMonthIndex = (schedules) => {
     let index = 0;
     for (const schedule of schedules) {
         if (parseInt(schedule.month) === currentMonth && parseInt(schedule.year) === currentYear) {
+            console.log(index);
             return index;
         }
         index++;
     }
-
+    console.log(index);
     return 0;
 };
 
 const ScheduleAccordion = ({ schedules }) => {
-    console.log(getCurrentMonthIndex(schedules))
     const [activeIndex, setActiveIndex] = useState(getCurrentMonthIndex(schedules));
 
     const renderedSchedules = schedules.map((schedule, index) => {
-        const showDescription = index === activeIndex ? "show-description": "";
-        const ariaExpanded = index === activeIndex ? "true" : "false";
+        const showDescription = index === activeIndex;
 
         return (
             <ScheduleAccordionItem
                 schedule={schedule}
                 index={index}
                 showDescription={showDescription}
-                ariaExpanded={ariaExpanded}
                 onClick={() => {
                     setActiveIndex(index);
                 }}

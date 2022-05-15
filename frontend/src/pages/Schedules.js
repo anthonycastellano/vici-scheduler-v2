@@ -12,7 +12,6 @@ const Schedules = () => {
 
     useEffect(() => {
         if (schedules.length) return;
-
         // fetch schedules and update state
         getSchedules().then(({ data }) => {
           dispatch({ type: 'setSchedules', schedules: data });
@@ -22,10 +21,10 @@ const Schedules = () => {
     return (
         <div>
             <h1>Schedules</h1>
-            {schedules ?
+            {schedules.length ?
                 <ScheduleAccordion schedules={schedules} />
             :
-                <p>Loading schedules...</p>
+                <p>Loading...</p>
             }
         </div>
     );
