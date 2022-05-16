@@ -6,6 +6,9 @@ import { useDispatch } from 'react-redux';
 // components
 import ScheduleAccordion from '../components/ScheduleAccordion';
 
+// css
+import classes from './css/Schedules.module.css';
+
 const scheduleCompareFn = (schedule1, schedule2) => {
     return schedule1.year > schedule2.year ||  (schedule1.year === schedule2.year && schedule1.month > schedule2.month) ?  1 : -1;
 };
@@ -24,7 +27,7 @@ const Schedules = () => {
     }, [dispatch]);
 
     return (
-        <div>
+        <div className={classes.header}>
             <h1>Schedules</h1>
             {schedules.length ?
                 <ScheduleAccordion schedules={schedules} />
