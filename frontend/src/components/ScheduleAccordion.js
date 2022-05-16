@@ -1,6 +1,9 @@
 import React, { useState } from 'react';
 import ScheduleAccordionItem from './ScheduleAccordionItem';
 
+// css
+import classes from './css/ScheduleAccordion.module.css';
+
 const getCurrentMonthIndex = (schedules) => {
     const date = new Date();
     const currentMonth = date.getMonth() + 1;
@@ -37,8 +40,8 @@ const ScheduleAccordion = ({ schedules }) => {
     });
 
     return (
-        <div className='schedules'>
-            {renderedSchedules}
+        <div className={classes.schedules}>
+            <d1>{renderedSchedules}</d1>
         </div>
     );
 }

@@ -1,7 +1,6 @@
 import { createStore } from 'redux';
 
 let initialState = {
-    loggedIn: false,
     schedules: []
 }
 

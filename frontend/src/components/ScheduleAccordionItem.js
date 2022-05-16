@@ -1,3 +1,4 @@
+import classes from './css/ScheduleAccordionItem.module.css';
 
 const LIST_CONTRAST_COLOR = '#3c424f';
 
@@ -15,7 +16,7 @@ const ScheduleAccordionItem = ({
     showDescription,
     onClick
 }) => (
-    <div className="schedule-item" style={{backgroundColor: index % 2 == 0 ? LIST_CONTRAST_COLOR : ''}}>
+    <div className={classes.scheduleItem} style={{backgroundColor: index % 2 == 0 ? LIST_CONTRAST_COLOR : ''}}>
         <dt>
             <button onClick={onClick}>
                 {`${schedule.month}/${schedule.year}`}
