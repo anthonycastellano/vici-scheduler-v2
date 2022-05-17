@@ -23,7 +23,7 @@ const ScheduleAccordionItem = ({
             </button>
         </dt>
 
-        <div id={`schedule${index}-desc`} hidden={!showDescription}>
+        <div class={classes.scheduleDesc} hidden={!showDescription}>
             <dt>
                 <h3>Leads</h3>
             </dt>
