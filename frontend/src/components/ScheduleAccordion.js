@@ -1,8 +1,10 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import ScheduleAccordionItem from './ScheduleAccordionItem';
 
 // css
 import classes from './css/ScheduleAccordion.module.css';
+
+const ACTIVE_ACCORDION_OFFSET = 90;
 
 const getCurrentMonthIndex = (schedules) => {
     const date = new Date();
@@ -22,6 +24,15 @@ const getCurrentMonthIndex = (schedules) => {
 
 const ScheduleAccordion = ({ schedules }) => {
     const [activeIndex, setActiveIndex] = useState(getCurrentMonthIndex(schedules));
+    const activeItem = useRef();
+
+    useEffect(() => {
+        window.scrollTo({
+            top: activeItem.current.offsetTop - ACTIVE_ACCORDION_OFFSET,
+            behavior: 'smooth'
+        });
+        console.log(activeItem.current.offsetTop);
+    }, []);
 
     const renderedSchedules = schedules.map((schedule, index) => {
         const showDescription = index === activeIndex;
@@ -35,6 +46,7 @@ const ScheduleAccordion = ({ schedules }) => {
                     setActiveIndex(index);
                 }}
                 key={`${schedule.month}/${schedule.year}`}
+                activeItem={activeItem}
             />
         );
     });

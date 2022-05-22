@@ -22,9 +22,13 @@ const ScheduleAccordionItem = ({
     schedule,
     index,
     showDescription,
-    onClick
+    onClick,
+    activeItem
 }) => (
-    <div className={classes.scheduleItem} style={{backgroundColor: index % 2 == 0 ? LIST_CONTRAST_COLOR : ''}}>
+    <div
+        className={classes.scheduleItem}
+        style={{backgroundColor: index % 2 == 0 ? LIST_CONTRAST_COLOR : ''}}
+        ref={showDescription ? activeItem : null}>
         <dt>
             <button onClick={onClick}>
                 {`${getMonthString(schedule.month)} ${schedule.year}`}
