@@ -10,6 +10,14 @@ const employeeList = (employees) => employees.map((employee) => {
     )
 });
 
+const getMonthString = (month) => {
+    const date = new Date();
+    date.setMonth(month - 1);
+    return date.toLocaleString('en-US', {
+        month: 'long'
+    });
+};
+
 const ScheduleAccordionItem = ({
     schedule,
     index,
@@ -19,7 +27,7 @@ const ScheduleAccordionItem = ({
     <div className={classes.scheduleItem} style={{backgroundColor: index % 2 == 0 ? LIST_CONTRAST_COLOR : ''}}>
         <dt>
             <button onClick={onClick}>
-                {`${schedule.month}/${schedule.year}`}
+                {`${getMonthString(schedule.month)} ${schedule.year}`}
             </button>
         </dt>
 
