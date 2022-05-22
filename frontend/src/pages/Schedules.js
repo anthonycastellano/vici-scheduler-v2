@@ -24,7 +24,7 @@ const Schedules = () => {
             data.sort(scheduleCompareFn);
             dispatch({ type: 'setSchedules', schedules: data });
         });
-    }, [dispatch]);
+    }, []);
 
     return (
         <div>
