@@ -7,26 +7,34 @@ import { useDispatch } from 'react-redux';
 import ScheduleAccordion from '../components/ScheduleAccordion';
 
 // css
-// import classes from './css/Schedules.module.css';
+import classes from './css/Schedules.module.css';
+
+const scheduleCompareFn = (schedule1, schedule2) => {
+    return schedule1.year > schedule2.year ||  (schedule1.year === schedule2.year && schedule1.month > schedule2.month) ?  1 : -1;
+};
 
 const Schedules = () => {
     const schedules = useSelector(state => state.schedules);
     const dispatch = useDispatch();
 
     useEffect(() => {
-      // fetch schedules and update state
-      getSchedules().then(({ data }) => {
-        dispatch({ type: 'setSchedules', schedules: data });
-      });
+        if (schedules.length) return;
+        // fetch schedules and update state
+        getSchedules().then(({ data }) => {
+            data.sort(scheduleCompareFn);
+            dispatch({ type: 'setSchedules', schedules: data });
+        });
     }, [dispatch]);
 
     return (
         <div>
-            <h1>Schedule List</h1>
-            {schedules ?
+            <div className={classes.header}>
+                <h1><b>Schedules</b></h1>
+            </div>
+            {schedules.length ?
                 <ScheduleAccordion schedules={schedules} />
             :
-                <p>Loading Schedules...</p>
+                <p>Loading...</p>
             }
         </div>
     );

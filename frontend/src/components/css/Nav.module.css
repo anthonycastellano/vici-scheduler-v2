@@ -2,6 +2,8 @@
     width: 100%;
     height: 5rem;
     background-color: #3e4b6b;
+    position: fixed;
+    top: 0px;
 }
 
 .header nav {
@@ -10,6 +12,8 @@
 
 .header a {
     padding: 0.5rem;
+    color: aliceblue;
+    text-decoration: none;
 }
 
 .header ul {
@@ -25,9 +29,4 @@
 .header li {
     margin: 0 1rem;
     width: 5rem;
-}
-
-.header a {
-    color: aliceblue;
-    text-decoration: none;
 }

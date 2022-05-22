@@ -1,7 +1,7 @@
 window.env = {
   "npm_config_user_agent": "npm/8.5.5 node/v16.15.0 linux x64 workspaces/false",
   "NODE_VERSION": "16.15.0",
-  "HOSTNAME": "bb5e1e4c29a1",
+  "HOSTNAME": "ea7f70294c39",
   "YARN_VERSION": "1.22.18",
   "npm_node_execpath": "/usr/local/bin/node",
   "SHLVL": "2",
@@ -27,6 +27,7 @@ window.env = {
   "npm_execpath": "/usr/local/lib/node_modules/npm/bin/npm-cli.js",
   "npm_config_global_prefix": "/usr/local",
   "npm_command": "start",
+  "affinity:container": "=915690e5211696409961a652042a150ea3eae636aad4808218a209259c73e2d0",
   "INIT_CWD": "/app",
   "EDITOR": "vi"
 };

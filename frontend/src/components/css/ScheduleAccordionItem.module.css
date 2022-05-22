@@ -1,0 +1,11 @@
+.scheduleItem button {
+    width: 100%;
+    background: transparent;
+    border: none;
+    color: white;
+    font-size: 2rem;
+}
+
+.scheduleItem .scheduleDesc {
+    box-shadow: 0 0 0 0 rgba(0, 0, 0, 0);
+}

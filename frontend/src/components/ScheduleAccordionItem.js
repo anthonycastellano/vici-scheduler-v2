@@ -1,26 +1,59 @@
+import classes from './css/ScheduleAccordionItem.module.css';
 
+const LIST_CONTRAST_COLOR = '#3c424f';
+
+const employeeList = (employees) => employees.map((employee) => {
+    return  (
+        <li>
+	        <p>{employee}</p>
+	    </li>
+    )
+});
+
+const getMonthString = (month) => {
+    const date = new Date();
+    date.setMonth(month - 1);
+    return date.toLocaleString('en-US', {
+        month: 'long'
+    });
+};
 
 const ScheduleAccordionItem = ({
     schedule,
     index,
     showDescription,
-    ariaExpanded,
-    onClick
+    onClick,
+    activeItem
 }) => (
-    <div className="schedule-item">
+    <div
+        className={classes.scheduleItem}
+        style={{backgroundColor: index % 2 == 0 ? LIST_CONTRAST_COLOR : ''}}
+        ref={showDescription ? activeItem : null}>
         <dt>
-            <button
-                aria-expanded={ariaExpanded}
-                data-qa="schedule-item-button"
-                onClick={onClick}>
-                    {`${schedule.month}/${schedule.year}`}
+            <button onClick={onClick}>
+                {`${getMonthString(schedule.month)} ${schedule.year}`}
             </button>
         </dt>
-        <dd>
-            <p id={`schedule${index}-desc`}>
-                {schedule.leads}
-            </p>
-        </dd>
+
+        <div class={classes.scheduleDesc} hidden={!showDescription}>
+            <dt>
+                <h3>Leads</h3>
+            </dt>
+            <dd >
+                <ul>
+                    {employeeList(schedule.leads)}
+                </ul>
+            </dd>
+            
+            <dt>
+                <h3>Backups</h3>
+            </dt>
+            <dd>
+                <ul>
+                    {employeeList(schedule.backups)}
+                </ul>
+            </dd>
+        </div>
     </div>
 );
 
