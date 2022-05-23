@@ -5,7 +5,7 @@ import { useDispatch } from 'react-redux';
 import CONSTANTS from '../store/constants';
 
 // components
-import EmployeeList from '../components/EmployeeList';
+import EmployeeAccordion from '../components/EmployeeAccordion';
 
 // css
 import classes from './css/Employees.module.css';
@@ -29,7 +29,7 @@ const Employees = () => {
                 <h1><b>Employees</b></h1>
             </div>
             {employees.length ?
-                <EmployeeList />
+                <EmployeeAccordion employees={employees} />
             :
                 <p>Loading...</p>
             }
