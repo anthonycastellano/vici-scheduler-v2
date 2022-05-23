@@ -31,7 +31,6 @@ const ScheduleAccordion = ({ schedules }) => {
             top: activeItem.current.offsetTop - ACTIVE_ACCORDION_OFFSET,
             behavior: 'smooth'
         });
-        console.log(activeItem.current.offsetTop);
     }, []);
 
     const renderedSchedules = schedules.map((schedule, index) => {

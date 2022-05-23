@@ -2,6 +2,7 @@ import { useEffect } from 'react';
 import { useSelector } from 'react-redux';
 import { getSchedules } from '../apiHelpers/schedule';
 import { useDispatch } from 'react-redux';
+import CONSTANTS from '../store/constants'
 
 // components
 import ScheduleAccordion from '../components/ScheduleAccordion';
@@ -19,10 +20,11 @@ const Schedules = () => {
 
     useEffect(() => {
         if (schedules.length) return;
+
         // fetch schedules and update state
         getSchedules().then(({ data }) => {
             data.sort(scheduleCompareFn);
-            dispatch({ type: 'setSchedules', schedules: data });
+            dispatch({ type: CONSTANTS.SET_SCHEDULES_ACTION, schedules: data });
         });
     }, []);
 

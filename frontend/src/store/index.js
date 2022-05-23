@@ -1,16 +1,25 @@
 import { createStore } from 'redux';
+import CONSTANTS from './constants';
 
 let initialState = {
-    schedules: []
+    schedules: [],
+    employees: []
 }
 
-// TODO: use switch
 const reducer = (state = initialState, action) => {
-    if (action.type === 'setSchedules') {
-        return {
-            ...state,
-            schedules: action.schedules
-        }
+    switch(action.type) {
+        case CONSTANTS.SET_SCHEDULES_ACTION:
+            return {
+                ...state,
+                schedules: action.schedules
+            }
+        case CONSTANTS.SET_EMPLOYEES_ACTION:
+            return {
+                ...state,
+                employees: action.employees
+            }
+        default:
+            break;
     }
 
     return state;
