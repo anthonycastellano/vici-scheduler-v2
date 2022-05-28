@@ -2,7 +2,7 @@ import React, { useState, useEffect, useRef } from 'react';
 import ScheduleAccordionItem from './ScheduleAccordionItem';
 
 // css
-import classes from './css/ScheduleAccordion.module.css';
+import classes from './css/Accordion.module.css';
 
 const ACTIVE_ACCORDION_OFFSET = 90;
 

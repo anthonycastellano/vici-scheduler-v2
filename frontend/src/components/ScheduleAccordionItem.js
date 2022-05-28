@@ -1,4 +1,4 @@
-import classes from './css/ScheduleAccordionItem.module.css';
+import classes from './css/AccordionItem.module.css';
 
 const LIST_CONTRAST_COLOR = '#3c424f';
 
