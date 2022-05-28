@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import EmployeeAccordionItem from './EmployeeAccordionItem';
 
 // css
@@ -20,6 +20,9 @@ const EmployeeAccordion = ({employees}) => {
             />
         );
     }));
+
+    // negate scroll from schedule page
+    useEffect(() => { window.scrollTo(0, 0) }, []);
 
     return (
         <div className={classes.employees}>
