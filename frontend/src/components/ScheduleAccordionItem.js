@@ -30,16 +30,14 @@ const ScheduleAccordionItem = ({
         style={{backgroundColor: index % 2 === 0 ? LIST_CONTRAST_COLOR : ''}}
         ref={showDescription ? activeItem : null}>
         <dt>
-            <button onClick={onClick}>
-                {`${getMonthString(schedule.month)} ${schedule.year}`}
-            </button>
+            <button onClick={onClick}>{`${getMonthString(schedule.month)} ${schedule.year}`}</button>
         </dt>
 
         <div class={classes.scheduleDesc} hidden={!showDescription}>
             <dt>
                 <h3>Leads</h3>
             </dt>
-            <dd >
+            <dd>
                 <ul>
                     {employeeList(schedule.leads)}
                 </ul>

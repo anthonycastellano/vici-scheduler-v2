@@ -26,7 +26,7 @@ const EmployeeAccordion = ({employees}) => {
 
     return (
         <div className={classes.employees}>
-            {renderedEmployees}
+            <dl>{renderedEmployees}</dl>
         </div>
     )
 };
