@@ -1,7 +1,14 @@
 import axios from 'axios';
 
 const getEmployees = () => {
-    return axios.get(`/api/employees`);
+    return axios.get('/api/employees');
 };
 
-export { getEmployees };
+const getEmployeesWithSchedules = () => {
+    return axios.get('/api/employees?withSchedules=true');
+};
+
+export {
+    getEmployees,
+    getEmployeesWithSchedules
+};

@@ -25,9 +25,7 @@ const EmployeeAccordionItem = ({
             </dt>
 
             <div class={classes.scheduleDesc} hidden={!showDescription}>
-                <dd>
-                    {scheduleList([1,2,3])}
-                </dd>
+                <dd>{scheduleList([1,2,3])}</dd>
             </div>
         </div>
     );

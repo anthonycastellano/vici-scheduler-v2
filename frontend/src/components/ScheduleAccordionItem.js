@@ -7,7 +7,7 @@ const employeeList = (employees) => employees.map((employee) => {
         <li>
 	        <p>{employee}</p>
 	    </li>
-    )
+    );
 });
 
 const getMonthString = (month) => {
@@ -38,18 +38,14 @@ const ScheduleAccordionItem = ({
                 <h3>Leads</h3>
             </dt>
             <dd>
-                <ul>
-                    {employeeList(schedule.leads)}
-                </ul>
+                <ul>{employeeList(schedule.leads)}</ul>
             </dd>
             
             <dt>
                 <h3>Backups</h3>
             </dt>
             <dd>
-                <ul>
-                    {employeeList(schedule.backups)}
-                </ul>
+                <ul>{employeeList(schedule.backups)}</ul>
             </dd>
         </div>
     </div>
