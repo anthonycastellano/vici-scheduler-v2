@@ -13,3 +13,11 @@
     box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.5);
     border-radius: 15px;
 }
+
+button {
+    transition:font-size 0.5s;
+}
+
+button:hover {
+    font-size: 38px;
+}
