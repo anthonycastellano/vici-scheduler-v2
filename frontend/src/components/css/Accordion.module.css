@@ -14,10 +14,7 @@
     border-radius: 15px;
 }
 
-button {
-    transition:font-size 0.5s;
-}
-
 button:hover {
     font-size: 38px;
+    transition:font-size 0.2s;
 }
