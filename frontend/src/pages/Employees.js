@@ -7,9 +7,6 @@ import CONSTANTS from '../store/constants';
 // components
 import EmployeeAccordion from '../components/EmployeeAccordion';
 
-// css
-import classes from './css/Employees.module.css';
-
 const Employees = () => {
     const employees = useSelector(state => state.employees);
     const dispatch = useDispatch();
@@ -25,7 +22,7 @@ const Employees = () => {
 
     return (
         <div>
-            <div className={classes.header}>
+            <div>
                 <h1><b>Employees</b></h1>
             </div>
             {employees.length ?

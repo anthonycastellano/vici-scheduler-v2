@@ -1,9 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import EmployeeAccordionItem from './EmployeeAccordionItem';
 
-// css
-import classes from './css/Accordion.module.css';
-
 const EmployeeAccordion = ({employees}) => {
     const [activeIndex, setActiveIndex] = useState();
 
@@ -25,7 +22,7 @@ const EmployeeAccordion = ({employees}) => {
     useEffect(() => { window.scrollTo(0, 0) }, []);
 
     return (
-        <div className={classes.employees}>
+        <div>
             <dl>{renderedEmployees}</dl>
         </div>
     )

@@ -1,5 +1,3 @@
-import classes from './css/AccordionItem.module.css';
-
 const LIST_CONTRAST_COLOR = '#3c424f';
 
 const employeeList = (employees) => employees.map((employee) => {
@@ -23,31 +21,30 @@ const ScheduleAccordionItem = ({
     index,
     showDescription,
     onClick,
-    activeItem
+    activeItem,
+    ariaExpanded
 }) => (
     <div
-        className={classes.scheduleItem}
         style={{backgroundColor: index % 2 === 0 ? LIST_CONTRAST_COLOR : ''}}
         ref={showDescription ? activeItem : null}>
         <dt>
-            <button onClick={onClick}>{`${getMonthString(schedule.month)} ${schedule.year}`}</button>
+            <button 
+                onClick={onClick}
+                aria-expanded={ariaExpanded}
+                aria-controls={`item${index}_desc`}
+            >{`${getMonthString(schedule.month)} ${schedule.year}`}</button>
         </dt>
 
-        <div class={classes.scheduleDesc} hidden={!showDescription}>
-            <dt>
+        <dd>
+            <div
+                id={`item${index}_desc`}
+            >
                 <h3>Leads</h3>
-            </dt>
-            <dd>
                 <ul>{employeeList(schedule.leads)}</ul>
-            </dd>
-            
-            <dt>
                 <h3>Backups</h3>
-            </dt>
-            <dd>
                 <ul>{employeeList(schedule.backups)}</ul>
-            </dd>
-        </div>
+            </div>
+        </dd>
     </div>
 );
 

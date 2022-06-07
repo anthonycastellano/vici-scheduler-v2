@@ -7,9 +7,6 @@ import CONSTANTS from '../store/constants'
 // components
 import ScheduleAccordion from '../components/ScheduleAccordion';
 
-// css
-import classes from './css/Schedules.module.css';
-
 const scheduleCompareFn = (schedule1, schedule2) => {
     return schedule1.year > schedule2.year ||  (schedule1.year === schedule2.year && schedule1.month > schedule2.month) ?  1 : -1;
 };
@@ -30,7 +27,7 @@ const Schedules = () => {
 
     return (
         <div>
-            <div className={classes.header}>
+            <div>
                 <h1><b>Schedules</b></h1>
             </div>
             {schedules.length ?

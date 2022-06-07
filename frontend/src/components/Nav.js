@@ -1,10 +1,8 @@
 import { Link } from 'react-router-dom';
 
-import classes from './css/Nav.module.css';
-
 const Nav = () => {
     return (
-        <header className={classes.header}>
+        <header>
             <nav>
                 <ul>
                     <li>

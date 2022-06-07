@@ -1,9 +1,6 @@
 import React, { useState, useEffect, useRef } from 'react';
 import ScheduleAccordionItem from './ScheduleAccordionItem';
 
-// css
-import classes from './css/Accordion.module.css';
-
 const ACTIVE_ACCORDION_OFFSET = 90;
 
 const getCurrentMonthIndex = (schedules) => {
@@ -35,6 +32,7 @@ const ScheduleAccordion = ({ schedules }) => {
 
     const renderedSchedules = schedules.map((schedule, index) => {
         const showDescription = index === activeIndex;
+        const ariaExpanded = index === activeIndex ? 'true' : 'false';
 
         return (
             <ScheduleAccordionItem
@@ -46,12 +44,13 @@ const ScheduleAccordion = ({ schedules }) => {
                 }}
                 key={`${schedule.month}/${schedule.year}`}
                 activeItem={activeItem}
+                ariaExpanded={ariaExpanded}
             />
         );
     });
 
     return (
-        <div className={classes.schedules}>
+        <div>
             <d1>{renderedSchedules}</d1>
         </div>
     );
