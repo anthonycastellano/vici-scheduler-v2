@@ -25,10 +25,11 @@ const ScheduleAccordionItem = ({
     ariaExpanded
 }) => (
     <div
+        className='schedule-accordion'
         style={{backgroundColor: index % 2 === 0 ? LIST_CONTRAST_COLOR : ''}}
         ref={showDescription ? activeItem : null}>
         <dt>
-            <button 
+            <button
                 onClick={onClick}
                 aria-expanded={ariaExpanded}
                 aria-controls={`item${index}_desc`}

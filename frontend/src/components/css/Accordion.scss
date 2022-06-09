@@ -1,0 +1,40 @@
+@import '../../config';
+
+// schedule accordion
+
+div.schedule-accordion {
+    margin-left: 10%;
+    margin-right: 10%;
+    margin-bottom: 1rem;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.5);
+    border-radius: 15px;
+}
+
+.schedule-accordion button {
+    width: 100%;
+    background: transparent;
+    border: none;
+    color: $text-primary;
+    font-size: 2rem;
+    margin-top: 0.5rem;
+    margin-bottom: 0.5rem;
+}
+
+button.schedule-accordion-button:hover {
+    font-size: 38px;
+    transition:font-size 0.2s;
+}
+
+.schedule-accordion li {
+    list-style-type: none;
+}
+
+// employee accordion
+
+div.employee-accordion {
+    margin-left: 20%;
+    margin-right: 20%;
+    margin-bottom: 1rem;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.5);
+    border-radius: 15px;
+}

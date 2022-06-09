@@ -4,6 +4,9 @@ import { getSchedules } from '../apiHelpers/schedule';
 import { useDispatch } from 'react-redux';
 import CONSTANTS from '../store/constants'
 
+// styling
+import './css/Schedules.scss';
+
 // components
 import ScheduleAccordion from '../components/ScheduleAccordion';
 
@@ -27,7 +30,7 @@ const Schedules = () => {
 
     return (
         <div>
-            <div>
+            <div className='schedule-header'>
                 <h1><b>Schedules</b></h1>
             </div>
             {schedules.length ?

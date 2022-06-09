@@ -1,6 +1,9 @@
 import React, { useState, useEffect, useRef } from 'react';
 import ScheduleAccordionItem from './ScheduleAccordionItem';
 
+// styling
+import './css/Accordion.scss';
+
 const ACTIVE_ACCORDION_OFFSET = 90;
 
 const getCurrentMonthIndex = (schedules) => {
