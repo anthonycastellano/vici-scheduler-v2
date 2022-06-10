@@ -22,7 +22,7 @@ const EmployeeAccordionItem = ({
             </dt>
 
             <div className={`employee-accordion-desc ${showDescription ? 'shown' : 'hidden'}`}>
-                <dd hidden={!showDescription}>{scheduleList([1,2,3])}</dd>
+                <dd>{scheduleList([1,2,3])}</dd>
             </div>
         </div>
     );
