@@ -25,7 +25,7 @@ const ScheduleAccordionItem = ({
             </dt>
     
             <div className={`schedule-accordion-desc ${showDescription ? 'shown' : 'hidden'}`}>
-                <dd hidden={!showDescription}>
+                <dd>
                     <h3>Leads</h3>
                     <ul>{employeeList(schedule.leads)}</ul>
 
