@@ -22,6 +22,14 @@ const getCurrentMonthIndex = (schedules) => {
     return 0;
 };
 
+const getMonthString = (month) => {
+    const date = new Date();
+    date.setMonth(month - 1);
+    return date.toLocaleString('en-US', {
+        month: 'long'
+    });
+};
+
 const ScheduleAccordion = ({ schedules }) => {
     const [activeIndex, setActiveIndex] = useState(getCurrentMonthIndex(schedules));
     const activeItem = useRef();
@@ -35,19 +43,15 @@ const ScheduleAccordion = ({ schedules }) => {
 
     const renderedSchedules = schedules.map((schedule, index) => {
         const showDescription = index === activeIndex;
-        const ariaExpanded = index === activeIndex ? 'true' : 'false';
 
         return (
             <ScheduleAccordionItem
                 schedule={schedule}
                 index={index}
                 showDescription={showDescription}
-                onClick={() => {
-                    setActiveIndex(index);
-                }}
-                key={`${schedule.month}/${schedule.year}`}
+                onClick={() => { setActiveIndex(index) }}
+                title={`${getMonthString(schedule.month)} ${schedule.year}`}
                 activeItem={activeItem}
-                ariaExpanded={ariaExpanded}
             />
         );
     });

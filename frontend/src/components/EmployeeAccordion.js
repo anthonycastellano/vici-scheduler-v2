@@ -16,7 +16,7 @@ const EmployeeAccordion = ({employees}) => {
                 index={index}
                 showDescription={showDescription}
                 onClick={() => { setActiveIndex(index) }}
-                key={`${employee._id}-item`}
+                title={`${employee.firstName} ${employee.lastName}`}
             />
         );
     }));

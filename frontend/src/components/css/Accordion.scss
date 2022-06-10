@@ -14,19 +14,31 @@ div.schedule-accordion {
     border-radius: 15px;
 }
 
+div.schedule-accordion-desc {
+    transition: max-height $accordion-transition-speed;
+}
+
+div.schedule-accordion-desc.hidden {
+    max-height: 0;
+}
+
+div.schedule-accordion-desc.shown {
+    max-height: 400px;
+}
+
 .schedule-accordion button {
     width: 100%;
     background: transparent;
     border: none;
     color: $text-primary;
+    font-weight: 100;
     font-size: 2rem;
     margin-top: 0.5rem;
     margin-bottom: 0.5rem;
 }
 
 .schedule-accordion button:hover {
-    font-size: 38px;
-    transition:font-size 0.2s;
+    font-weight: bold;
 }
 
 .schedule-accordion li {
@@ -43,17 +55,33 @@ div.employee-accordion {
     border-radius: 15px;
 }
 
+div.employee-accordion-desc {
+    transition: max-height $accordion-transition-speed;
+}
+
+div.employee-accordion-desc.hidden {
+    max-height: 0;
+}
+
+div.employee-accordion-desc.shown {
+    max-height: 400px;
+}
+
 .employee-accordion button {
     width: 100%;
     background: transparent;
     border: none;
     color: $text-primary;
-    font-size: 2rem;
+    font-weight: 100;
+    font-size: 1.4rem;
     margin-top: 0.5rem;
     margin-bottom: 0.5rem;
 }
 
 .employee-accordion button:hover {
-    font-size: 38px;
-    transition:font-size 0.2s;
+    font-weight: bold;
+}
+
+.employee-accordion li {
+    list-style-type: none;
 }

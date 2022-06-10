@@ -10,16 +10,19 @@ const EmployeeAccordionItem = ({
     employee,
     index,
     showDescription,
-    onClick
+    onClick,
+    title
 }) => {
+    const buttonText = showDescription ? <b>{title}</b> : <span>{title}</span>
+
     return (
-        <div className={'employee-accordion ' + `${index % 2 === 0 && 'alt'}`}>
+        <div className={`employee-accordion ${index % 2 === 0 && 'alt'}`}>
             <dt>
-                <button onClick={onClick}>{employee.firstName} {employee.lastName}</button>
+                <button onClick={onClick}>{buttonText}</button>
             </dt>
 
-            <div hidden={!showDescription}>
-                <dd>{scheduleList([1,2,3])}</dd>
+            <div className={`employee-accordion-desc ${showDescription ? 'shown' : 'hidden'}`}>
+                <dd hidden={!showDescription}>{scheduleList([1,2,3])}</dd>
             </div>
         </div>
     );

@@ -6,44 +6,35 @@ const employeeList = (employees) => employees.map((employee) => {
     );
 });
 
-const getMonthString = (month) => {
-    const date = new Date();
-    date.setMonth(month - 1);
-    return date.toLocaleString('en-US', {
-        month: 'long'
-    });
-};
-
 const ScheduleAccordionItem = ({
     schedule,
     index,
     showDescription,
     onClick,
-    activeItem,
-    ariaExpanded
-}) => (
-    <div
-        className={'schedule-accordion ' + `${index % 2 === 0 && 'alt'}`}
-        ref={showDescription ? activeItem : null}>
-        <dt>
-            <button
-                onClick={onClick}
-                aria-expanded={ariaExpanded}
-                aria-controls={`item${index}_desc`}
-            >{`${getMonthString(schedule.month)} ${schedule.year}`}</button>
-        </dt>
+    title,
+    activeItem
+}) => {
+    const buttonText = showDescription ? <b>{title}</b> : <span>{title}</span>
 
-        <dd>
-            <div
-                id={`item${index}_desc`}
-            >
-                <h3>Leads</h3>
-                <ul>{employeeList(schedule.leads)}</ul>
-                <h3>Backups</h3>
-                <ul>{employeeList(schedule.backups)}</ul>
+    return (
+        <div
+            className={`schedule-accordion ${index % 2 === 0 && 'alt'}`}
+            ref={showDescription ? activeItem : null}>
+            <dt>
+                <button onClick={onClick}>{buttonText}</button>
+            </dt>
+    
+            <div className={`schedule-accordion-desc ${showDescription ? 'shown' : 'hidden'}`}>
+                <dd hidden={!showDescription}>
+                    <h3>Leads</h3>
+                    <ul>{employeeList(schedule.leads)}</ul>
+
+                    <h3>Backups</h3>
+                    <ul>{employeeList(schedule.backups)}</ul>
+                </dd>
             </div>
-        </dd>
-    </div>
-);
+        </div>
+    );
+}
 
 export default ScheduleAccordionItem;
