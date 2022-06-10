@@ -1,5 +1,3 @@
-const LIST_CONTRAST_COLOR = '#3c424f';
-
 const scheduleList = (schedules) => schedules.map((schedule) => {
     return (
         <li>
@@ -15,8 +13,7 @@ const EmployeeAccordionItem = ({
     onClick
 }) => {
     return (
-        <div
-        style={{backgroundColor: index % 2 === 0 ? LIST_CONTRAST_COLOR : ''}}>
+        <div className={'employee-accordion ' + `${index % 2 === 0 && 'alt'}`}>
             <dt>
                 <button onClick={onClick}>{employee.firstName} {employee.lastName}</button>
             </dt>

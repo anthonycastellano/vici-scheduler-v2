@@ -1,5 +1,3 @@
-const LIST_CONTRAST_COLOR = '#3c424f';
-
 const employeeList = (employees) => employees.map((employee) => {
     return  (
         <li>
@@ -25,8 +23,7 @@ const ScheduleAccordionItem = ({
     ariaExpanded
 }) => (
     <div
-        className='schedule-accordion'
-        style={{backgroundColor: index % 2 === 0 ? LIST_CONTRAST_COLOR : ''}}
+        className={'schedule-accordion ' + `${index % 2 === 0 && 'alt'}`}
         ref={showDescription ? activeItem : null}>
         <dt>
             <button

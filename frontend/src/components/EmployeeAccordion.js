@@ -1,5 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import EmployeeAccordionItem from './EmployeeAccordionItem';
+
+// styling
 import './css/Accordion.scss';
 
 const EmployeeAccordion = ({employees}) => {
@@ -23,7 +25,7 @@ const EmployeeAccordion = ({employees}) => {
     useEffect(() => { window.scrollTo(0, 0) }, []);
 
     return (
-        <div className='employee-accordion'>
+        <div>
             <dl>{renderedEmployees}</dl>
         </div>
     )
