@@ -44,6 +44,7 @@ div.schedule-accordion-desc.hidden dd {
     font-size: 2rem;
     margin-top: 0.5rem;
     margin-bottom: 0.5rem;
+    transition: font-weight $accordion-transition-speed;
 }
 
 .schedule-accordion button:hover {
@@ -94,6 +95,7 @@ div.employee-accordion-desc.hidden dd {
     font-size: 1.4rem;
     margin-top: 0.5rem;
     margin-bottom: 0.5rem;
+    transition: font-weight $accordion-transition-speed;
 }
 
 .employee-accordion button:hover {
