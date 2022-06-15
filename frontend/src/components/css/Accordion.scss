@@ -51,7 +51,13 @@ div.schedule-accordion-desc.hidden dd {
     font-weight: bold;
 }
 
-.schedule-accordion li {
+.schedule-accordion-desc.shown h3 {
+    width: 85%;
+    text-align:left;
+    border-bottom: 1px solid $text-primary;
+}
+
+.schedule-accordion-desc li {
     list-style-type: none;
 }
 
@@ -102,6 +108,11 @@ div.employee-accordion-desc.hidden dd {
     font-weight: bold;
 }
 
-.employee-accordion li {
+.employee-accordion-desc.shown h3 {
+    text-align:left;
+    border-bottom: 1px solid $text-primary;
+}
+
+.employee-accordion-desc li {
     list-style-type: none;
 }
