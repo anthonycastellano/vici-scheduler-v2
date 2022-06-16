@@ -39,7 +39,7 @@ const Schedules = () => {
             {schedules.length ?
                 <ScheduleAccordion schedules={schedules} />
             :
-                <img src={LoadingDots} />
+                <img src={LoadingDots} alt='Loading...' />
             }
         </div>
     );
