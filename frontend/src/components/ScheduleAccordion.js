@@ -58,7 +58,7 @@ const ScheduleAccordion = ({ schedules }) => {
 
     return (
         <div>
-            <d1>{renderedSchedules}</d1>
+            {renderedSchedules}
         </div>
     );
 }
