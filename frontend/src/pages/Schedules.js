@@ -4,6 +4,9 @@ import { getSchedules } from '../apiHelpers/schedule';
 import { useDispatch } from 'react-redux';
 import CONSTANTS from '../store/constants'
 
+// loading image
+import LoadingDots from '../images/3-dots-moving.svg';
+
 // styling
 import './css/Schedules.scss';
 
@@ -36,7 +39,7 @@ const Schedules = () => {
             {schedules.length ?
                 <ScheduleAccordion schedules={schedules} />
             :
-                <p>Loading...</p>
+                <img src={LoadingDots} />
             }
         </div>
     );
