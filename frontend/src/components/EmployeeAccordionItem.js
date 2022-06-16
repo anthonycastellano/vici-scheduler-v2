@@ -1,18 +1,29 @@
-import classes from './css/AccordionItem.module.css';
-
-const LIST_CONTRAST_COLOR = '#3c424f';
+const scheduleList = (schedules) => schedules.map((schedule) => {
+    return (
+        <li>
+            <p>{schedule}</p>
+        </li>
+    );
+});
 
 const EmployeeAccordionItem = ({
     employee,
     index,
     showDescription,
-    onClick
+    onClick,
+    title
 }) => {
+    const buttonText = showDescription ? <b>{title}</b> : <span>{title}</span>
+
     return (
-        <div
-        className={classes.scheduleItem}
-        style={{backgroundColor: index % 2 === 0 ? LIST_CONTRAST_COLOR : ''}}>
-            <p>{employee.firstName} {employee.lastName}</p>
+        <div className={`employee-accordion ${index % 2 === 0 && 'alt'}`}>
+            <dt>
+                <button onClick={onClick}>{buttonText}</button>
+            </dt>
+
+            <div className={`employee-accordion-desc ${showDescription ? 'shown' : 'hidden'}`}>
+                <dd>{scheduleList([1,2,3])}</dd>
+            </div>
         </div>
     );
 };

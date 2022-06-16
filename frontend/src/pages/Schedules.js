@@ -4,11 +4,11 @@ import { getSchedules } from '../apiHelpers/schedule';
 import { useDispatch } from 'react-redux';
 import CONSTANTS from '../store/constants'
 
+// styling
+import './css/Schedules.scss';
+
 // components
 import ScheduleAccordion from '../components/ScheduleAccordion';
-
-// css
-import classes from './css/Schedules.module.css';
 
 const scheduleCompareFn = (schedule1, schedule2) => {
     return schedule1.year > schedule2.year ||  (schedule1.year === schedule2.year && schedule1.month > schedule2.month) ?  1 : -1;
@@ -30,7 +30,7 @@ const Schedules = () => {
 
     return (
         <div>
-            <div className={classes.header}>
+            <div className='schedule-header'>
                 <h1><b>Schedules</b></h1>
             </div>
             {schedules.length ?

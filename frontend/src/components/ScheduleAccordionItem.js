@@ -1,60 +1,67 @@
-import classes from './css/AccordionItem.module.css';
 
-const LIST_CONTRAST_COLOR = '#3c424f';
-
-const employeeList = (employees) => employees.map((employee) => {
-    return  (
-        <li>
-	        <p>{employee}</p>
-	    </li>
-    )
-});
-
-const getMonthString = (month) => {
-    const date = new Date();
-    date.setMonth(month - 1);
-    return date.toLocaleString('en-US', {
-        month: 'long'
-    });
-};
 
 const ScheduleAccordionItem = ({
     schedule,
     index,
     showDescription,
     onClick,
+    title,
     activeItem
-}) => (
-    <div
-        className={classes.scheduleItem}
-        style={{backgroundColor: index % 2 === 0 ? LIST_CONTRAST_COLOR : ''}}
-        ref={showDescription ? activeItem : null}>
-        <dt>
-            <button onClick={onClick}>
-                {`${getMonthString(schedule.month)} ${schedule.year}`}
-            </button>
-        </dt>
+}) => {
+    const buttonText = showDescription ? <b>{title}</b> : <span>{title}</span>;
 
-        <div class={classes.scheduleDesc} hidden={!showDescription}>
+    // create a <tr> for each weekend in a schedule to be rendered in item description
+    const renderEmployeeRows = () => {
+        const date = new Date(schedule.year, schedule.month - 1);
+        const tableRows = [];
+
+        for (let i = 0; i < schedule.leads.length; i++) {
+            tableRows.push(
+                <tr>
+                    <td>
+                        xx/xx
+                    </td>
+                    <td>
+                        {schedule.leads[i]}
+                    </td>
+                    <td>
+                        {schedule.backups[i]}
+                    </td>
+                </tr>
+            );
+        }
+
+        return tableRows;
+    }
+
+    return (
+        <div
+            className={`schedule-accordion ${index % 2 === 0 && 'alt'}`} // alternate styles for schedule list items
+            ref={showDescription ? activeItem : null}>
             <dt>
-                <h3>Leads</h3>
+                <button onClick={onClick}>{buttonText}</button>
             </dt>
-            <dd >
-                <ul>
-                    {employeeList(schedule.leads)}
-                </ul>
-            </dd>
-            
-            <dt>
-                <h3>Backups</h3>
-            </dt>
-            <dd>
-                <ul>
-                    {employeeList(schedule.backups)}
-                </ul>
-            </dd>
+    
+            <div className={`schedule-accordion-desc ${showDescription ? 'shown' : 'hidden'}`}>
+                <dd>
+                    <table>
+                        <tr>
+                            <th>
+                                <h3>Weekend</h3>
+                            </th>
+                            <th>
+                                <h3>Leads</h3>
+                            </th>
+                            <th>
+                                <h3>Backups</h3>
+                            </th>
+                        </tr>
+                        { renderEmployeeRows() }
+                    </table>
+                </dd>
+            </div>
         </div>
-    </div>
-);
+    );
+}
 
 export default ScheduleAccordionItem;

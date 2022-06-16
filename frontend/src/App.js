@@ -1,5 +1,7 @@
-import './App.css';
 import { Route, Switch, Redirect } from 'react-router-dom';
+
+// styling
+import './App.scss';
 
 // pages
 import Employees from './pages/Employees';
