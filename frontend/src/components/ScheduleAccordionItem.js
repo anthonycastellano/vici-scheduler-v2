@@ -12,7 +12,7 @@ const ScheduleAccordionItem = ({
 
     // create a <tr> for each weekend in a schedule to be rendered in item description
     const renderEmployeeRows = () => {
-        const date = new Date(schedule.year, schedule.month - 1);
+        // const date = new Date(schedule.year, schedule.month - 1);
         const tableRows = [];
 
         for (let i = 0; i < schedule.leads.length; i++) {
