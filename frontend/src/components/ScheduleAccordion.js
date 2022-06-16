@@ -1,8 +1,8 @@
 import React, { useState, useEffect, useRef } from 'react';
 import ScheduleAccordionItem from './ScheduleAccordionItem';
 
-// css
-import classes from './css/Accordion.module.css';
+// styling
+import './css/Accordion.scss';
 
 const ACTIVE_ACCORDION_OFFSET = 90;
 
@@ -20,6 +20,14 @@ const getCurrentMonthIndex = (schedules) => {
     }
     console.log(index);
     return 0;
+};
+
+const getMonthString = (month) => {
+    const date = new Date();
+    date.setMonth(month - 1);
+    return date.toLocaleString('en-US', {
+        month: 'long'
+    });
 };
 
 const ScheduleAccordion = ({ schedules }) => {
@@ -41,18 +49,16 @@ const ScheduleAccordion = ({ schedules }) => {
                 schedule={schedule}
                 index={index}
                 showDescription={showDescription}
-                onClick={() => {
-                    setActiveIndex(index);
-                }}
-                key={`${schedule.month}/${schedule.year}`}
+                onClick={() => { setActiveIndex(index) }}
+                title={`${getMonthString(schedule.month)} ${schedule.year}`}
                 activeItem={activeItem}
             />
         );
     });
 
     return (
-        <div className={classes.schedules}>
-            <d1>{renderedSchedules}</d1>
+        <div>
+            {renderedSchedules}
         </div>
     );
 }

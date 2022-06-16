@@ -2,14 +2,14 @@ version: '3'
 services:
   api:
     build:
-      dockerfile: Dockerfile.dev
+      dockerfile: Dockerfile
       context: ./backend
     volumes:
       - /app/node_modules
       - ./backend:/app
   client:
     build:
-      dockerfile: Dockerfile.dev
+      dockerfile: Dockerfile
       context: ./frontend
     volumes:
       - /app/node_modules
@@ -17,7 +17,7 @@ services:
   proxy:
     restart: always
     build:
-      dockerfile: Dockerfile.dev
+      dockerfile: Dockerfile
       context: ./nginx
     ports:
       - '3000:80'

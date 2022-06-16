@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import EmployeeAccordionItem from './EmployeeAccordionItem';
 
-// css
-import classes from './css/Accordion.module.css';
+// styling
+import './css/Accordion.scss';
 
 const EmployeeAccordion = ({employees}) => {
     const [activeIndex, setActiveIndex] = useState();
@@ -16,7 +16,7 @@ const EmployeeAccordion = ({employees}) => {
                 index={index}
                 showDescription={showDescription}
                 onClick={() => { setActiveIndex(index) }}
-                key={`${employee._id}-item`}
+                title={`${employee.firstName} ${employee.lastName}`}
             />
         );
     }));
@@ -25,7 +25,7 @@ const EmployeeAccordion = ({employees}) => {
     useEffect(() => { window.scrollTo(0, 0) }, []);
 
     return (
-        <div className={classes.employees}>
+        <div>
             <dl>{renderedEmployees}</dl>
         </div>
     )
