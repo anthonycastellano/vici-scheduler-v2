@@ -1,10 +1,9 @@
 import { useEffect } from 'react';
-import { useSelector } from 'react-redux';
+import { useSelector, useDispatch } from 'react-redux';
 import { getSchedules } from '../apiHelpers/schedule';
-import { useDispatch } from 'react-redux';
 import CONSTANTS from '../store/constants'
 
-// loading image
+// loading spinner
 import LoadingDots from '../images/3-dots-moving.svg';
 
 // styling
@@ -22,6 +21,9 @@ const Schedules = () => {
     const dispatch = useDispatch();
 
     useEffect(() => {
+        // set active tab
+        dispatch({ type: CONSTANTS.SET_ACTIVE_TAB_ACTION, activeTab: CONSTANTS.SCHEDULES_TAB });
+
         if (schedules.length) return;
 
         // fetch schedules and update state

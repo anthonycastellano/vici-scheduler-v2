@@ -4,9 +4,12 @@ $background-primary: #282c34;
 $background-alternate: #3c424f;
 $background-nav: #3e4b6b;
 
-$text-primary: white;
+$text-primary: #fff;
+$text-secondary: #d1c43c;
 
 // transitions
 
 $accordion-transition-speed: 150ms;
 $accordion-transition-curve: ease-out;
+
+$nav-transition-speed: 200ms;

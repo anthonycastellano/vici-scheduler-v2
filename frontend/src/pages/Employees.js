@@ -1,8 +1,10 @@
 import { useEffect } from 'react';
-import { useSelector } from 'react-redux';
+import { useSelector, useDispatch } from 'react-redux';
 import { getEmployees } from '../apiHelpers/employees';
-import { useDispatch } from 'react-redux';
 import CONSTANTS from '../store/constants';
+
+// loading spinner
+import LoadingDots from '../images/3-dots-moving.svg';
 
 // components
 import EmployeeAccordion from '../components/EmployeeAccordion';
@@ -15,6 +17,9 @@ const Employees = () => {
     const dispatch = useDispatch();
 
     useEffect(() => {
+        // set active tab
+        dispatch({ type: CONSTANTS.SET_ACTIVE_TAB_ACTION, activeTab: CONSTANTS.EMPLOYEES_TAB });
+
         if (employees.length) return;
 
         // fetch employees and update state
@@ -31,7 +36,7 @@ const Employees = () => {
             {employees.length ?
                 <EmployeeAccordion employees={employees} />
             :
-                <p>Loading...</p>
+                <img src={LoadingDots} alt='Loading...' />
             }
         </div>
     );
