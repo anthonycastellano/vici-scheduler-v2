@@ -1,7 +1,6 @@
 import { useEffect } from 'react';
-import { useSelector } from 'react-redux';
+import { useSelector, useDispatch } from 'react-redux';
 import { getEmployees } from '../apiHelpers/employees';
-import { useDispatch } from 'react-redux';
 import CONSTANTS from '../store/constants';
 
 // loading spinner
@@ -18,6 +17,9 @@ const Employees = () => {
     const dispatch = useDispatch();
 
     useEffect(() => {
+        // set active tab
+        dispatch({ type: CONSTANTS.SET_ACTIVE_TAB_ACTION, activeTab: CONSTANTS.EMPLOYEES_TAB });
+
         if (employees.length) return;
 
         // fetch employees and update state

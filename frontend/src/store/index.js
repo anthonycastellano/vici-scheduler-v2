@@ -3,7 +3,8 @@ import CONSTANTS from './constants';
 
 let initialState = {
     schedules: [],
-    employees: []
+    employees: [],
+    activeTab: CONSTANTS.SCHEDULES_TAB
 }
 
 const reducer = (state = initialState, action) => {
@@ -17,6 +18,11 @@ const reducer = (state = initialState, action) => {
             return {
                 ...state,
                 employees: action.employees
+            }
+        case CONSTANTS.SET_ACTIVE_TAB_ACTION:
+            return {
+                ...state,
+                activeTab: action.activeTab
             }
         default:
             break;
