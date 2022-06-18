@@ -4,7 +4,7 @@ import { getSchedules } from '../apiHelpers/schedule';
 import { useDispatch } from 'react-redux';
 import CONSTANTS from '../store/constants'
 
-// loading image
+// loading spinner
 import LoadingDots from '../images/3-dots-moving.svg';
 
 // styling

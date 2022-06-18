@@ -4,6 +4,9 @@ import { getEmployees } from '../apiHelpers/employees';
 import { useDispatch } from 'react-redux';
 import CONSTANTS from '../store/constants';
 
+// loading spinner
+import LoadingDots from '../images/3-dots-moving.svg';
+
 // components
 import EmployeeAccordion from '../components/EmployeeAccordion';
 
@@ -31,7 +34,7 @@ const Employees = () => {
             {employees.length ?
                 <EmployeeAccordion employees={employees} />
             :
-                <p>Loading...</p>
+                <img src={LoadingDots} alt='Loading...' />
             }
         </div>
     );
