@@ -1,8 +1,8 @@
 window.env = {
-  "npm_config_user_agent": "npm/8.5.5 node/v16.15.0 linux x64 workspaces/false",
-  "NODE_VERSION": "16.15.0",
-  "HOSTNAME": "4586691b8806",
-  "YARN_VERSION": "1.22.18",
+  "npm_config_user_agent": "npm/8.11.0 node/v16.15.1 linux x64 workspaces/false",
+  "NODE_VERSION": "16.15.1",
+  "HOSTNAME": "8e9fad8b561e",
+  "YARN_VERSION": "1.22.19",
   "npm_node_execpath": "/usr/local/bin/node",
   "SHLVL": "2",
   "npm_config_noproxy": "",
