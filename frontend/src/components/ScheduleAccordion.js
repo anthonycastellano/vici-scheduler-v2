@@ -18,7 +18,6 @@ const getCurrentMonthIndex = (schedules) => {
         }
         index++;
     }
-    console.log(index);
     return 0;
 };
 

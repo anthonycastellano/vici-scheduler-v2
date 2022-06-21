@@ -1,5 +1,3 @@
-
-
 const ScheduleAccordionItem = ({
     schedule,
     index,
@@ -12,14 +10,27 @@ const ScheduleAccordionItem = ({
 
     // create a <tr> for each weekend in a schedule to be rendered in item description
     const renderEmployeeRows = () => {
-        // const date = new Date(schedule.year, schedule.month - 1);
+        // get saturday dates for the month
+        const saturdays = [];
+        let day = 1;
+        let date = new Date(schedule.year, schedule.month - 1, day);
+        while (date.getMonth() === schedule.month - 1) {
+            if (date.getDay() === 6) {
+                saturdays.push(date.getDate());
+                day += 7;
+                date = new Date(schedule.year, schedule.month - 1, day);
+                continue;
+            }
+            date = new Date(schedule.year, schedule.month - 1, ++day);
+        }
+
         const tableRows = [];
 
         for (let i = 0; i < schedule.leads.length; i++) {
             tableRows.push(
                 <tr>
                     <td>
-                        xx/xx
+                        <p>{`${schedule.month}/${saturdays[i]}`}</p>
                     </td>
                     <td>
                         {schedule.leads[i]}
@@ -50,10 +61,10 @@ const ScheduleAccordionItem = ({
                                 <h3>Weekend</h3>
                             </th>
                             <th>
-                                <h3>Leads</h3>
+                                <h3>Primary</h3>
                             </th>
                             <th>
-                                <h3>Backups</h3>
+                                <h3>Secondary</h3>
                             </th>
                         </tr>
                         { renderEmployeeRows() }
