@@ -21,14 +21,6 @@ const getCurrentMonthIndex = (schedules) => {
     return 0;
 };
 
-const getMonthString = (month) => {
-    const date = new Date();
-    date.setMonth(month - 1);
-    return date.toLocaleString('en-US', {
-        month: 'long'
-    });
-};
-
 const ScheduleAccordion = ({ schedules }) => {
     const [activeIndex, setActiveIndex] = useState(getCurrentMonthIndex(schedules));
     const activeItem = useRef();
@@ -49,7 +41,6 @@ const ScheduleAccordion = ({ schedules }) => {
                 index={index}
                 showDescription={showDescription}
                 onClick={() => { setActiveIndex(index) }}
-                title={`${getMonthString(schedule.month)} ${schedule.year}`}
                 activeItem={activeItem}
             />
         );
@@ -57,7 +48,7 @@ const ScheduleAccordion = ({ schedules }) => {
 
     return (
         <div>
-            {renderedSchedules}
+            <dl>{renderedSchedules}</dl>
         </div>
     );
 }

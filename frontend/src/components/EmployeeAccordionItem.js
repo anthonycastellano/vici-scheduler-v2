@@ -1,4 +1,4 @@
-const scheduleList = (schedules) => schedules.map((schedule) => {
+const renderScheduleList = (employee) => employee.schedules.map((schedule) => {
     return (
         <li>
             <p>{schedule}</p>
@@ -22,7 +22,7 @@ const EmployeeAccordionItem = ({
             </dt>
 
             <div className={`employee-accordion-desc ${showDescription ? 'shown' : 'hidden'}`}>
-                <dd>{scheduleList([1,2,3])}</dd>
+                <dd>{renderScheduleList(employee)}</dd>
             </div>
         </div>
     );
