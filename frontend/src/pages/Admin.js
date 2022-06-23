@@ -7,7 +7,7 @@ const Admin = () => {
 
     useEffect(() => {
         dispatch({ type: CONSTANTS.SET_ACTIVE_TAB_ACTION, activeTab: CONSTANTS.ADMIN_TAB });
-    });
+    }, []);
 
     return <h1>Admin</h1>;
 };
