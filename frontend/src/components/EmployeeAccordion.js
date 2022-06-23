@@ -6,7 +6,7 @@ import EmployeeAccordionItem from './EmployeeAccordionItem';
 import './css/Accordion.scss';
 
 const EmployeeAccordion = ({employees}) => {
-    const schedules = useSelector(state => state.schedules);
+    // const schedules = useSelector(state => state.schedules);
     const [activeIndex, setActiveIndex] = useState();
 
     const renderedEmployees = employees.map(((employee, index) => {
