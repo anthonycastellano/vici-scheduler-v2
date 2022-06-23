@@ -10,6 +10,9 @@ const EmployeeAccordion = ({employees}) => {
     const renderedEmployees = employees.map(((employee, index) => {
         const showDescription = index === activeIndex;
 
+        //temp
+        employee.schedules = [1,2,4];
+
         return (
             <EmployeeAccordionItem 
                 employee={employee}
