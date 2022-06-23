@@ -26,7 +26,7 @@ const Employees = () => {
         getEmployees().then(({ data }) => {
             dispatch({ type: CONSTANTS.SET_EMPLOYEES_ACTION, employees: data });
         });
-    });
+    }, []);
 
     return (
         <div>
