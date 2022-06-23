@@ -1,4 +1,5 @@
 @import 'config';
+@import url('https://fonts.googleapis.com/css?family=Roboto:300,400,500&display=swap');
 
 .App {
   text-align: center;
@@ -13,4 +14,6 @@
   font-size: calc(10px + 2vmin);
 }
 
-@import url('https://fonts.googleapis.com/css?family=Roboto:300,400,500&display=swap');
+div.content {
+  padding-top: 6rem;
+}

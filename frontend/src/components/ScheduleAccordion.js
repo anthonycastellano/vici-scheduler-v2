@@ -4,7 +4,7 @@ import ScheduleAccordionItem from './ScheduleAccordionItem';
 // styling
 import './css/Accordion.scss';
 
-const ACTIVE_ACCORDION_OFFSET = 90;
+const ACTIVE_ACCORDION_OFFSET = 100;
 
 const getCurrentMonthIndex = (schedules) => {
     const date = new Date();

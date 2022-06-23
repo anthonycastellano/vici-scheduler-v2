@@ -15,23 +15,25 @@ function App() {
   return (
     <div className='App'>
       <Nav />
-      <Switch>
-        <Route exact path='/'>
-          <Schedules />
-        </Route>
+      <div className='content'>
+        <Switch>
+          <Route exact path='/'>
+            <Schedules />
+          </Route>
 
-        <Route exact path='/employees'>
-          <Employees />
-        </Route>
+          <Route exact path='/employees'>
+            <Employees />
+          </Route>
 
-        <Route exact path='/admin'>
-          <Admin />
-        </Route>
+          <Route exact path='/admin'>
+            <Admin />
+          </Route>
 
-        <Route path='*'>
-          <Redirect to='/' />
-        </Route>
-      </Switch>
+          <Route path='*'>
+            <Redirect to='/' />
+          </Route>
+        </Switch>
+      </div>
     </div>
   );
 }

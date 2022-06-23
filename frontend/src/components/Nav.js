@@ -10,6 +10,7 @@ const Nav = () => {
 
     return (
         <header className='nav-header'>
+            <p id='title'>Vici</p>
             <nav>
                 <ul>
                     <li>
