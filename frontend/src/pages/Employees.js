@@ -30,9 +30,6 @@ const Employees = () => {
 
     return (
         <div>
-            <div className='employee-header'>
-                <h1><b>Employees</b></h1>
-            </div>
             {employees.length ?
                 <EmployeeAccordion employees={employees} />
             :

@@ -2,7 +2,7 @@
 
 .nav-header {
     width: 100%;
-    height: 5rem;
+    height: fit-content;
     background-color: $background-nav;
     position: fixed;
     top: 0px;
@@ -22,7 +22,7 @@
     height: 100%;
     list-style: none;
     display: flex;
-    padding: 0;
+    padding: 1rem;
     margin: 0;
     align-items: center;
     justify-content: center;
@@ -30,11 +30,21 @@
 
 .nav-header li {
     margin: 0 1rem;
-    width: 5rem;
+}
+
+.nav-header li span {
+    padding: 0.2rem;
 }
 
 .active-tab {
     color: $text-secondary;
-    font-weight: 900;
-    transition: font-weight $nav-transition-speed;
+    border-bottom: 2px solid $text-secondary;
+}
+
+#title {
+    margin: 0;
+    font-size: 2rem;
+    text-align: center;
+    padding-left: 1rem;
+    color: $text-secondary
 }

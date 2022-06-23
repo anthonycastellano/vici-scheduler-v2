@@ -4,7 +4,7 @@ import ScheduleAccordionItem from './ScheduleAccordionItem';
 // styling
 import './css/Accordion.scss';
 
-const ACTIVE_ACCORDION_OFFSET = 90;
+const ACTIVE_ACCORDION_OFFSET = 100;
 
 const getCurrentMonthIndex = (schedules) => {
     const date = new Date();
@@ -19,14 +19,6 @@ const getCurrentMonthIndex = (schedules) => {
         index++;
     }
     return 0;
-};
-
-const getMonthString = (month) => {
-    const date = new Date();
-    date.setMonth(month - 1);
-    return date.toLocaleString('en-US', {
-        month: 'long'
-    });
 };
 
 const ScheduleAccordion = ({ schedules }) => {
@@ -49,7 +41,6 @@ const ScheduleAccordion = ({ schedules }) => {
                 index={index}
                 showDescription={showDescription}
                 onClick={() => { setActiveIndex(index) }}
-                title={`${getMonthString(schedule.month)} ${schedule.year}`}
                 activeItem={activeItem}
             />
         );
@@ -57,7 +48,7 @@ const ScheduleAccordion = ({ schedules }) => {
 
     return (
         <div>
-            {renderedSchedules}
+            <dl>{renderedSchedules}</dl>
         </div>
     );
 }

@@ -39,6 +39,7 @@ div.schedule-accordion-desc.hidden dd {
 .schedule-accordion-desc table {
     width: 100%;
     height: 100%;
+    padding: 5%;
 }
 
 .schedule-accordion button {
@@ -80,6 +81,7 @@ div.employee-accordion-desc.shown {
 
 div.employee-accordion-desc dd {
     transition: font-size $accordion-transition-speed $accordion-transition-curve;
+    margin-inline-start: 0;
 }
 
 div.employee-accordion-desc.hidden dd {

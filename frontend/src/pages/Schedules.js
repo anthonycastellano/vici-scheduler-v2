@@ -35,9 +35,6 @@ const Schedules = () => {
 
     return (
         <div>
-            <div className='schedule-header'>
-                <h1><b>Schedules</b></h1>
-            </div>
             {schedules.length ?
                 <ScheduleAccordion schedules={schedules} />
             :
