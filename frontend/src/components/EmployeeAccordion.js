@@ -1,10 +1,12 @@
 import React, { useState, useEffect } from 'react';
+import { useSelector } from 'react-redux';
 import EmployeeAccordionItem from './EmployeeAccordionItem';
 
 // styling
 import './css/Accordion.scss';
 
 const EmployeeAccordion = ({employees}) => {
+    const schedules = useSelector(state => state.schedules);
     const [activeIndex, setActiveIndex] = useState();
 
     const renderedEmployees = employees.map(((employee, index) => {
