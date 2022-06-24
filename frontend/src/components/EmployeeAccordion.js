@@ -5,6 +5,15 @@ import EmployeeAccordionItem from './EmployeeAccordionItem';
 // styling
 import './css/Accordion.scss';
 
+// map each employee ID to a list of weekends
+const getEmployeeUpcomingSchedules = (schedules) => {
+    const employeeUpcomingScheduleMap = {};
+
+    for (const schedule of schedules) {
+
+    }
+};
+
 const EmployeeAccordion = ({employees}) => {
     // const schedules = useSelector(state => state.schedules);
     const [activeIndex, setActiveIndex] = useState();
@@ -21,7 +30,6 @@ const EmployeeAccordion = ({employees}) => {
                 index={index}
                 showDescription={showDescription}
                 onClick={() => { setActiveIndex(index) }}
-                title={`${employee.firstName} ${employee.lastName}`}
             />
         );
     }));
