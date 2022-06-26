@@ -2,11 +2,8 @@ const employeeHelpers = require('../helpers/employeeHelpers.js');
 const validateHelpers = require('../helpers/validateHelpers');
 
 // return list of all employees
-exports.index = async (req, res) => {
-    const withSchedules = req.query.withSchedules;
-
-    const employees = req.query.withSchedules ? await employeeHelpers.getEmployeesWithSchedules()
-                                                : await employeeHelpers.getEmployees();
+exports.get = async (req, res) => {
+    const employees = await employeeHelpers.getEmployees();
     res.send(employees);
 };
 
