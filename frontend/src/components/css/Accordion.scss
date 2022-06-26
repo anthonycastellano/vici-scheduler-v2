@@ -103,11 +103,12 @@ div.employee-accordion-desc.hidden dd {
     font-weight: bold;
 }
 
-.employee-accordion-desc.shown h3 {
-    text-align:left;
-    border-bottom: 1px solid $text-primary;
-}
-
 .employee-accordion-desc li {
     list-style-type: none;
+}
+
+.employee-accordion-desc table {
+    width: 100%;
+    height: 100%;
+    padding: 5%;
 }

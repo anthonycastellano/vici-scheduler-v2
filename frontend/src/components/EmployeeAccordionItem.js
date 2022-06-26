@@ -1,10 +1,9 @@
 const renderScheduleList = (employee) => employee.schedules.map((schedule) => {
-    // <tr> with two cells
-    // m/y role
     return (
-        <li>
-            <p>{schedule}</p>
-        </li>
+        <tr>
+            <td><p>{schedule[0]}</p></td>
+            <td><p>{schedule[1]}</p></td>
+        </tr>
     );
 });
 
@@ -24,12 +23,16 @@ const EmployeeAccordionItem = ({
 
             <div className={`employee-accordion-desc ${showDescription ? 'shown' : 'hidden'}`}>
                 <dd>
-                    <table>
-                        <tr>
-                            <td>Weekend</td><td>Role</td>
-                        </tr>
-                        {renderScheduleList(employee)}
-                    </table>
+                    {
+                        employee.schedules &&
+                        <table>
+                            <tr>
+                                <td><h3>Weekend</h3></td><td><h3>Role</h3></td>
+                            </tr>
+                            {renderScheduleList(employee)}
+                        </table>
+                    }
+                    {!employee.schedules && <p>No upcoming dates.</p>}
                 </dd>
             </div>
         </div>
