@@ -1,5 +1,5 @@
 // get month name from index
-exports.getMonthString = (month) => {
+export function getMonthString(month) {
     const date = new Date();
     date.setMonth(month - 1);
     return date.toLocaleString('en-US', {
@@ -8,7 +8,7 @@ exports.getMonthString = (month) => {
 };
 
 // get saturday dates for the month
-exports.getSaturdays = (year, month) => {
+export function getSaturdays(year, month) {
     const saturdays = [];
     let day = 1;
     let date = new Date(year, month - 1, day);
@@ -25,7 +25,7 @@ exports.getSaturdays = (year, month) => {
 };
 
 // return index of current month in list of monthly schedules
-exports.getCurrentMonthIndex = (schedules) => {
+export function getCurrentMonthIndex(schedules) {
     const date = new Date();
     const currentMonth = date.getMonth() + 1;
     const currentYear = date.getFullYear();
