@@ -1,37 +1,57 @@
 import React, { useState, useEffect } from 'react';
-import { useSelector } from 'react-redux';
 import EmployeeAccordionItem from './EmployeeAccordionItem';
-// import { getSaturdays } from '../helpers/calendarHelpers';
+import { getSaturdays } from '../helpers/calendarHelpers';
+import { getCurrentMonthIndex } from '../helpers/calendarHelpers';
 
 // styling
 import './css/Accordion.scss';
 
+const PRIMARY = 'Primary';
+const SECONDARY = 'Secondary';
+
 // map each employee ID to a list of weekends and roles
 const buildEmployeeUpcomingSchedules = (schedules) => {
+    // trim past schedules
+    const currentMonthIndex = getCurrentMonthIndex(schedules);
+    schedules = schedules.slice(currentMonthIndex);
+    console.log(schedules);
+
     const employeeUpcomingScheduleMap = {};
 
-    // for (const schedule of schedules) {
-    //     // get saturday dates for current month
-    //     const saturdayDates = getSaturdays(schedule.year, schedule.month);
+    for (const schedule of schedules) {
+        // get saturday dates for current month
+        const saturdayDates = getSaturdays(schedule.year, schedule.month);
 
-    //     for (let i = 0; i < schedule.leads.length; i++) {
-    //         const currentEmployees = [schedule.leads[i], schedule.backups[i]];
-            
-    //     }
-    // }
+        for (let i = 0; i < schedule.leads.length; i++) {
+            const currentLead = schedule.leads[i];
+            const currentBackup = schedule.backups[i];
+
+            const leadWeekElement = [`${schedule.month}/${saturdayDates[i]}`, PRIMARY];
+            const backupWeekElement = [`${schedule.month}/${saturdayDates[i]}`, SECONDARY];
+
+            employeeUpcomingScheduleMap[currentLead] ?
+                employeeUpcomingScheduleMap[currentLead].push(leadWeekElement)
+                :
+                employeeUpcomingScheduleMap[currentLead] = [leadWeekElement];
+
+            employeeUpcomingScheduleMap[currentBackup] ?
+                employeeUpcomingScheduleMap[currentBackup].push(backupWeekElement)
+                :
+                employeeUpcomingScheduleMap[currentBackup] = [backupWeekElement];
+        }
+    }
 
     return employeeUpcomingScheduleMap;
 };
 
-const EmployeeAccordion = ({ employees }) => {
-    const schedules = useSelector(state => state.schedules);
+const EmployeeAccordion = ({ employees, schedules }) => {
     const employeeUpcomingSchedules = buildEmployeeUpcomingSchedules(schedules);
     const [activeIndex, setActiveIndex] = useState();
 
     const renderedEmployees = employees.map(((employee, index) => {
         const showDescription = index === activeIndex;
 
-        employee.schedules = employeeUpcomingSchedules[employee._id];
+        employee.upcomingSchedules = employeeUpcomingSchedules[employee._id];
 
         return (
             <div key={`${employee._id}-item`}>
