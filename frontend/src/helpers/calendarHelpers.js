@@ -24,6 +24,17 @@ exports.getSaturdays = (year, month) => {
     return saturdays;
 };
 
-exports.trimPastSchedules = (schedules) => {
+exports.getCurrentMonthIndex = (schedules) => {
+    const date = new Date();
+    const currentMonth = date.getMonth() + 1;
+    const currentYear = date.getFullYear();
 
+    let index = 0;
+    for (const schedule of schedules) {
+        if (parseInt(schedule.month) === currentMonth && parseInt(schedule.year) === currentYear) {
+            return index;
+        }
+        index++;
+    }
+    return 0;
 };

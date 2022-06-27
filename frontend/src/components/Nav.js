@@ -10,7 +10,7 @@ const Nav = () => {
 
     return (
         <header className='nav-header'>
-            <p id='title'>Vici</p>
+            <p id='title'>Vici Surgical</p>
             <nav>
                 <ul>
                     <li>

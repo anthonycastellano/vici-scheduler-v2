@@ -1,4 +1,4 @@
-const renderScheduleList = (employee) => employee.schedules.map((schedule) => {
+const renderScheduleList = (employee) => employee.upcomingSchedules.map((schedule) => {
     return (
         <tr key={`${schedule[0] + schedule[1]}-row`}>
             <td><p>{schedule[0]}</p></td>
@@ -24,7 +24,7 @@ const EmployeeAccordionItem = ({
             <div className={`employee-accordion-desc ${showDescription ? 'shown' : 'hidden'}`}>
                 <dd>
                     {
-                        employee.schedules &&
+                        employee.upcomingSchedules &&
                         <table>
                             <thead>
                                 <tr>
@@ -36,7 +36,7 @@ const EmployeeAccordionItem = ({
                             </tbody>
                         </table>
                     }
-                    {!employee.schedules && <p>No upcoming dates.</p>}
+                    {!employee.upcomingSchedules && <p>No upcoming dates.</p>}
                 </dd>
             </div>
         </div>
