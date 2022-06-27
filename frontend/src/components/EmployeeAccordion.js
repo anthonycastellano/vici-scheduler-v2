@@ -1,10 +1,11 @@
 import React, { useState, useEffect } from 'react';
-import EmployeeAccordionItem from './EmployeeAccordionItem';
-import { getSaturdays } from '../helpers/calendarHelpers';
-import { getCurrentMonthIndex } from '../helpers/calendarHelpers';
+import { getSaturdays, getCurrentMonthIndex } from '../helpers/calendarHelpers';
 
 // styling
 import './css/Accordion.scss';
+
+// components
+import EmployeeAccordionItem from './EmployeeAccordionItem';
 
 const PRIMARY = 'Primary';
 const SECONDARY = 'Secondary';

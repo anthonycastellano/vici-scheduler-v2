@@ -1,14 +1,14 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { getCurrentMonthIndex } from '../helpers/calendarHelpers';
 
-// components
-import ScheduleAccordionItem from './ScheduleAccordionItem';
-
 // styling
 import './css/Accordion.scss';
 
-const ACTIVE_ACCORDION_OFFSET = 100;
+// components
+import ScheduleAccordionItem from './ScheduleAccordionItem';
 
+
+const ACTIVE_ACCORDION_OFFSET = 100;
 
 
 const ScheduleAccordion = ({ schedules, employees }) => {
@@ -66,6 +66,6 @@ const ScheduleAccordion = ({ schedules, employees }) => {
             <dl>{renderedSchedules}</dl>
         </div>
     );
-}
+};
 
 export default ScheduleAccordion;

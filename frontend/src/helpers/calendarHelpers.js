@@ -24,6 +24,7 @@ exports.getSaturdays = (year, month) => {
     return saturdays;
 };
 
+// return index of current month in list of monthly schedules
 exports.getCurrentMonthIndex = (schedules) => {
     const date = new Date();
     const currentMonth = date.getMonth() + 1;
