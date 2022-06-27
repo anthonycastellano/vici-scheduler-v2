@@ -14,7 +14,6 @@ const buildEmployeeUpcomingSchedules = (schedules) => {
     // trim past schedules
     const currentMonthIndex = getCurrentMonthIndex(schedules);
     schedules = schedules.slice(currentMonthIndex);
-    console.log(schedules);
 
     const employeeUpcomingScheduleMap = {};
 
