@@ -8,7 +8,7 @@ const renderEmployeeRows = (schedule) => {
 
     for (let i = 0; i < schedule.leads.length; i++) {
         tableRows.push(
-            <tr>
+            <tr key={`${schedule._id}-${saturdays[i]}`}>
                 <td>
                     <p>{`${schedule.month}/${saturdays[i]}`}</p>
                 </td>
@@ -45,18 +45,22 @@ const ScheduleAccordionItem = ({
             <div className={`schedule-accordion-desc ${showDescription ? 'shown' : 'hidden'}`}>
                 <dd>
                     <table>
-                        <tr>
-                            <th>
-                                <h3>Weekend</h3>
-                            </th>
-                            <th>
-                                <h3>Primary</h3>
-                            </th>
-                            <th>
-                                <h3>Secondary</h3>
-                            </th>
-                        </tr>
-                        { renderEmployeeRows(schedule) }
+                        <thead>
+                            <tr>
+                                <th>
+                                    <h3>Weekend</h3>
+                                </th>
+                                <th>
+                                    <h3>Primary</h3>
+                                </th>
+                                <th>
+                                    <h3>Secondary</h3>
+                                </th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            { renderEmployeeRows(schedule) }
+                        </tbody>
                     </table>
                 </dd>
             </div>

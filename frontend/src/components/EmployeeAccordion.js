@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { useSelector } from 'react-redux';
 import EmployeeAccordionItem from './EmployeeAccordionItem';
+// import { getSaturdays } from '../helpers/calendarHelpers';
 
 // styling
 import './css/Accordion.scss';
@@ -9,9 +10,15 @@ import './css/Accordion.scss';
 const buildEmployeeUpcomingSchedules = (schedules) => {
     const employeeUpcomingScheduleMap = {};
 
-    for (const schedule of schedules) {
+    // for (const schedule of schedules) {
+    //     // get saturday dates for current month
+    //     const saturdayDates = getSaturdays(schedule.year, schedule.month);
 
-    }
+    //     for (let i = 0; i < schedule.leads.length; i++) {
+    //         const currentEmployees = [schedule.leads[i], schedule.backups[i]];
+            
+    //     }
+    // }
 
     return employeeUpcomingScheduleMap;
 };
@@ -27,12 +34,14 @@ const EmployeeAccordion = ({ employees }) => {
         employee.schedules = employeeUpcomingSchedules[employee._id];
 
         return (
-            <EmployeeAccordionItem 
-                employee={employee}
-                index={index}
-                showDescription={showDescription}
-                onClick={() => { setActiveIndex(index) }}
-            />
+            <div key={`${employee._id}-item`}>
+                <EmployeeAccordionItem 
+                    employee={employee}
+                    index={index}
+                    showDescription={showDescription}
+                    onClick={() => { setActiveIndex(index) }}
+                />
+            </div>
         );
     }));
 

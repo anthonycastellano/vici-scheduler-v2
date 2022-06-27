@@ -1,6 +1,6 @@
 const renderScheduleList = (employee) => employee.schedules.map((schedule) => {
     return (
-        <tr>
+        <tr key={`${schedule[0] + schedule[1]}-row`}>
             <td><p>{schedule[0]}</p></td>
             <td><p>{schedule[1]}</p></td>
         </tr>
@@ -26,10 +26,14 @@ const EmployeeAccordionItem = ({
                     {
                         employee.schedules &&
                         <table>
-                            <tr>
-                                <td><h3>Weekend</h3></td><td><h3>Role</h3></td>
-                            </tr>
-                            {renderScheduleList(employee)}
+                            <thead>
+                                <tr>
+                                    <td><h3>Weekend</h3></td><td><h3>Role</h3></td>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                {renderScheduleList(employee)}
+                            </tbody>
                         </table>
                     }
                     {!employee.schedules && <p>No upcoming dates.</p>}

@@ -54,13 +54,15 @@ const ScheduleAccordion = ({ schedules }) => {
         const showDescription = index === activeIndex;
 
         return (
-            <ScheduleAccordionItem
-                schedule={convertEmployees(schedule)}
-                index={index}
-                showDescription={showDescription}
-                onClick={() => { setActiveIndex(index) }}
-                activeItem={activeItem}
-            />
+            <div key={`${schedule._id}-item`}>
+                <ScheduleAccordionItem
+                    schedule={convertEmployees(schedule)}
+                    index={index}
+                    showDescription={showDescription}
+                    onClick={() => { setActiveIndex(index) }}
+                    activeItem={activeItem}
+                />
+            </div>
         );
     });
 
