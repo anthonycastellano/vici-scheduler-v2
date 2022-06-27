@@ -3,23 +3,12 @@ const validateHelpers = require('../helpers/validateHelpers');
 const { convertEmployeeIdsToNames } = require('../helpers/employeeHelpers');
 
 // return one or all schedules
-exports.index = async (req, res) => {
+exports.get = async (req, res) => {
     const params = req.query && (req.query.month || req.query.year) ? {
         month: parseInt(req.query.month),
         year: parseInt(req.query.year)
     } : {};
     const schedules = await scheduleHelpers.getSchedules(params);
-
-    // convert employee lists from IDs to names
-    for (let i = 0; i < schedules.length; i++) {
-        const currentSchedule = schedules[i];
-
-        // convert leads
-        currentSchedule.leads = await convertEmployeeIdsToNames(currentSchedule.leads);
-        
-        // convert backups
-        currentSchedule.backups = await convertEmployeeIdsToNames(currentSchedule.backups);
-    }
 
     res.send(schedules);
 };

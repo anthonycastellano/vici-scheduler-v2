@@ -1,8 +1,9 @@
 const renderScheduleList = (employee) => employee.schedules.map((schedule) => {
     return (
-        <li>
-            <p>{schedule}</p>
-        </li>
+        <tr key={`${schedule[0] + schedule[1]}-row`}>
+            <td><p>{schedule[0]}</p></td>
+            <td><p>{schedule[1]}</p></td>
+        </tr>
     );
 });
 
@@ -10,10 +11,9 @@ const EmployeeAccordionItem = ({
     employee,
     index,
     showDescription,
-    onClick,
-    title
+    onClick
 }) => {
-    const buttonText = showDescription ? <b>{title}</b> : <span>{title}</span>
+    const buttonText = showDescription ? <b>{`${employee.firstName} ${employee.lastName}`}</b> : <span>{`${employee.firstName} ${employee.lastName}`}</span>
 
     return (
         <div className={`employee-accordion ${index % 2 === 0 && 'alt'}`}>
@@ -22,7 +22,22 @@ const EmployeeAccordionItem = ({
             </dt>
 
             <div className={`employee-accordion-desc ${showDescription ? 'shown' : 'hidden'}`}>
-                <dd>{renderScheduleList(employee)}</dd>
+                <dd>
+                    {
+                        employee.schedules &&
+                        <table>
+                            <thead>
+                                <tr>
+                                    <td><h3>Weekend</h3></td><td><h3>Role</h3></td>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                {renderScheduleList(employee)}
+                            </tbody>
+                        </table>
+                    }
+                    {!employee.schedules && <p>No upcoming dates.</p>}
+                </dd>
             </div>
         </div>
     );

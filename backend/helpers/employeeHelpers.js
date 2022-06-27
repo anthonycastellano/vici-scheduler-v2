@@ -8,19 +8,6 @@ exports.getEmployees = () => {
     return employeeCollection.find({}).toArray();
 };
 
-exports.getEmployeesWithSchedules = async () => {
-    const employeeCollection = getDB().collection(EMPLOYEE_COLLECTION_NAME);
-    const employees = await employeeCollection.find({}).toArray();
-
-    // get schedules
-    const schedules = await scheduleHelpers.getSchedules();
-
-    // for each employee, populate weekends from schedule
-    employees.forEach((employee) => {
-        
-    });
-};
-
 exports.exists = async (employee) => {
     const employeeCollection = getDB().collection(EMPLOYEE_COLLECTION_NAME);
     if (!employee.lastName) employee.lastName = null;
