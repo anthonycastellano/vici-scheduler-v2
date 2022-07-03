@@ -1,4 +1,5 @@
 const validateHelpers = require('../helpers/validateHelpers');
+const jwt = require('jsonwebtoken');
 
 // verify admin credentials and return jwt
 exports.login = async (req, res) => {
@@ -21,9 +22,16 @@ exports.login = async (req, res) => {
 
     // compare to env admin password
     if (process.env.ADMIN_CREDS_B64 === b64Creds) {
-        return res.send('Success');
+        const token = jwt.sign(
+            { user_id: req.body.username },
+            process.env.TOKEN_KEY,
+            {
+                expiresIn: "3h"
+            }
+        );
+
+        return res.status(200).json(token);
     }
 
-    res.status(401);
-    res.send('Bad credentials');
+    res.status(401).send('Bad credentials');
 };

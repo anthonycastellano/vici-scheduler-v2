@@ -25,7 +25,7 @@ app.put('/employees', authMiddleware, (req, res) => employeeController.update(re
 app.delete('/employees', authMiddleware, (req, res) => employeeController.delete(req, res));
 
 // auth
-app.post('/auth', (req, res) => authController.login(req, res));
+app.post('/auth/login', (req, res) => authController.login(req, res));
 
 mongoConnect(() => {
     app.listen(PORT, () => {
