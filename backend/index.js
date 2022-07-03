@@ -3,6 +3,7 @@ const express = require('express');
 const { mongoConnect } = require('./helpers/cosmosHelpers');
 const scheduleController = require('./controllers/scheduleController');
 const employeeController = require('./controllers/employeeController');
+const authController = require('./controllers/authController');
 
 const PORT = process.env.PORT || '3001';
 const app = express();
@@ -21,6 +22,9 @@ app.get('/employees', (req, res) => employeeController.get(req, res));
 app.post('/employees', (req, res) => employeeController.create(req, res));
 app.put('/employees', (req, res) => employeeController.update(req, res));
 app.delete('/employees', (req, res) => employeeController.delete(req, res));
+
+// auth
+app.post('/auth', (req, res) => authController.login(req, res));
 
 app.get('/*', (req, res) => {
     res.send('hello');

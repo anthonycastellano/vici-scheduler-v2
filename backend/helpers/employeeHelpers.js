@@ -40,18 +40,3 @@ exports.deleteEmployee = async (employee) => {
     if (!foundEmployees.length) return {};
     return employeeCollection.deleteMany({ _id: foundEmployees[0]._id });
 };
-
-exports.convertEmployeeIdsToNames = async (employeeList) => {
-    const convertedEmployees = [];
-    for (const employeeId of employeeList) {
-        const convertedEmployee = await getEmployeeById(employeeId);
-        if (!convertedEmployee.length) continue;
-        convertedEmployees.push(`${convertedEmployee[0].firstName} ${convertedEmployee[0].lastName}`);
-    }
-    return convertedEmployees;
-};
-
-const getEmployeeById = (id) => {
-    const employeeCollection = getDB().collection(EMPLOYEE_COLLECTION_NAME);
-    return employeeCollection.find({ _id: id }).toArray();
-};

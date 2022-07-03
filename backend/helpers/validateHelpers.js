@@ -49,7 +49,7 @@ const scheduleValidationRules = {
     ]
 };
 
-
+// remove html tags
 const scheduleSanitizationRules = {
     month: [
         sanitizations.stripTags(),
@@ -69,10 +69,34 @@ const scheduleSanitizationRules = {
     ]
 };
 
-exports.validateEmployee = (data) => validate(data, employeeValidationRules);
+// authentication
+const authValidationRules = {
+    username: [
+        validations.required(),
+        validations.alphaNumeric()
+    ],
+    password: [
+        validations.required(),
+        validations.alphaNumeric()
+    ]
+};
 
+const authSanitizationRules = {
+    username: [
+        sanitizations.stripTags(),
+        sanitizations.trim()
+    ],
+    password: [
+        sanitizations.stripTags(),
+        sanitizations.trim()
+    ]
+};
+
+exports.validateEmployee = (data) => validate(data, employeeValidationRules);
 exports.sanitizeEmployee = (data) => sanitize(data, employeeSanitizationRules);
 
 exports.validateSchedule = (data) => validate(data, scheduleValidationRules);
-
 exports.sanitizeSchedule = (data) => sanitize(data, scheduleSanitizationRules);
+
+exports.validateAuth = (data) => validate(data, authValidationRules);
+exports.sanitizeAuth = (data) => sanitize(data, authSanitizationRules);

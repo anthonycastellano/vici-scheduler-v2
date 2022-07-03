@@ -1,6 +1,5 @@
 const scheduleHelpers = require('../helpers/scheduleHelpers');
 const validateHelpers = require('../helpers/validateHelpers');
-const { convertEmployeeIdsToNames } = require('../helpers/employeeHelpers');
 
 // return one or all schedules
 exports.get = async (req, res) => {
