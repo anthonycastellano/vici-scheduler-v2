@@ -45,7 +45,6 @@ const ScheduleAccordion = ({ schedules, employees }) => {
             <div key={`${schedule._id}-item`}>
                 <ScheduleAccordionItem
                     schedule={convertEmployees(schedule)}
-                    index={index}
                     showDescription={showDescription}
                     onClick={() => { setActiveIndex(index) }}
                     activeItem={activeItem}
