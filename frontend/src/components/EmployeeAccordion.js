@@ -57,7 +57,6 @@ const EmployeeAccordion = ({ employees, schedules }) => {
             <div key={`${employee._id}-item`}>
                 <EmployeeAccordionItem 
                     employee={employee}
-                    index={index}
                     showDescription={showDescription}
                     onClick={() => { setActiveIndex(index) }}
                 />

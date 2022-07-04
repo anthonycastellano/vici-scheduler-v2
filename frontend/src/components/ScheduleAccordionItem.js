@@ -27,7 +27,6 @@ const renderEmployeeRows = (schedule) => {
 
 const ScheduleAccordionItem = ({
     schedule,
-    index,
     showDescription,
     onClick,
     activeItem
@@ -36,7 +35,7 @@ const ScheduleAccordionItem = ({
 
     return (
         <div
-            className={`schedule-accordion ${index % 2 === 0 && 'alt'}`} // alternate styles for schedule list items
+            className={`schedule-accordion`}
             ref={showDescription ? activeItem : null}>
             <dt>
                 <button onClick={onClick}>{buttonText}</button>

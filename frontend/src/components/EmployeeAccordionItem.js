@@ -9,14 +9,13 @@ const renderScheduleList = (employee) => employee.upcomingSchedules.map((schedul
 
 const EmployeeAccordionItem = ({
     employee,
-    index,
     showDescription,
     onClick
 }) => {
     const buttonText = showDescription ? <b>{`${employee.firstName} ${employee.lastName}`}</b> : <span>{`${employee.firstName} ${employee.lastName}`}</span>
 
     return (
-        <div className={`employee-accordion ${index % 2 === 0 && 'alt'}`}>
+        <div className={`employee-accordion`}>
             <dt>
                 <button onClick={onClick}>{buttonText}</button>
             </dt>

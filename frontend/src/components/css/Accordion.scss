@@ -1,10 +1,5 @@
 @import '../../config';
 
-div.alt {
-    background-color: $background-alternate;
-}
-
-
 // schedule accordion
 
 div.schedule-accordion {
@@ -13,6 +8,7 @@ div.schedule-accordion {
     margin-bottom: 1rem;
     box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.5);
     border-radius: 15px;
+    background-color: $background-alternate;
 }
 
 div.schedule-accordion-desc {
@@ -65,6 +61,7 @@ div.employee-accordion {
     margin-bottom: 1rem;
     box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.5);
     border-radius: 15px;
+    background-color: $background-alternate;
 }
 
 div.employee-accordion-desc {
