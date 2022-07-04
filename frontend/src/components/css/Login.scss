@@ -1,0 +1,34 @@
+@import '../../config';
+
+.error-alert {
+    color: darkred;
+}
+
+form {
+    margin-left: 10%;
+    margin-right: 10%;
+    margin-bottom: 1rem;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.5);
+    border-radius: 15px;
+    background-color: $background-alternate;
+}
+
+form label {
+
+}
+
+form input[type=text] {
+    
+}
+
+form input[type=password] {
+
+}
+
+form input[type=submit] {
+    
+}
+
+form input[type=submit]:hover {
+    color: $text-primary;
+}

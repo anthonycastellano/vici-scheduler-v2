@@ -16,7 +16,7 @@ app.use(express.json());
 app.get('/schedules', (req, res) => scheduleController.get(req, res));
 app.post('/schedules', authMiddleware, (req, res) => scheduleController.create(req, res));
 app.put('/schedules', authMiddleware, (req, res) => scheduleController.update(req, res));
-app.delete('/schedules', authMiddleware, (req, res) => scheduleController.delete(req, res)); 
+app.delete('/schedules', authMiddleware, (req, res) => scheduleController.delete(req, res));
 
 // employees
 app.get('/employees', (req, res) => employeeController.get(req, res));
