@@ -7,7 +7,8 @@ import { composeWithDevTools } from 'redux-devtools-extension';
 let initialState = {
     schedules: [],
     employees: [],
-    activeTab: CONSTANTS.SCHEDULES_TAB
+    activeTab: CONSTANTS.SCHEDULES_TAB,
+    loggedIn: false
 }
 
 const reducer = (state = initialState, action) => {
@@ -26,6 +27,11 @@ const reducer = (state = initialState, action) => {
             return {
                 ...state,
                 activeTab: action.activeTab
+            }
+        case CONSTANTS.SET_LOGGED_IN_ACTION:
+            return {
+                ...state,
+                loggedIn: action.loggedIn
             }
         default:
             break;

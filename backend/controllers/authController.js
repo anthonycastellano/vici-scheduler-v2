@@ -26,11 +26,11 @@ exports.login = async (req, res) => {
             { user_id: req.body.username },
             process.env.TOKEN_KEY,
             {
-                expiresIn: "3h"
+                expiresIn: "12h"
             }
         );
 
-        return res.status(200).json(token);
+        return res.status(200).json({ token} );
     }
 
     res.status(401).send('Bad credentials');

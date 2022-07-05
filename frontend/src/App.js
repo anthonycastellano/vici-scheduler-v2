@@ -37,6 +37,11 @@ function App() {
     getEmployees().then(({ data }) => {
       dispatch({ type: CONSTANTS.SET_EMPLOYEES_ACTION, employees: data });
     });
+
+    // update login state
+    if (localStorage.getItem('token')) {
+      dispatch({ type: CONSTANTS.SET_LOGGED_IN_ACTION, loggedIn: true });
+    }
   }, []);
 
   return (
