@@ -13,22 +13,28 @@ form {
     background-color: $background-alternate;
 }
 
-form label {
-
+form input {
+    background: transparent;
+    margin: 5%;
+    color: white;
 }
 
-form input[type=text] {
-    
-}
-
-form input[type=password] {
-
+form input {
+    border-bottom: 1px solid white;
+    border-top: none;
+    border-left: none;
+    border-right: none;
+    padding: 1%;
+    font-size: 18px;
+    width: 50%;
 }
 
 form input[type=submit] {
-    
-}
-
-form input[type=submit]:hover {
-    color: $text-primary;
+    background-color: $text-secondary;
+    color: black;
+    border: none;
+    font-size: 20px;
+    border-radius: 10px;
+    padding: 3%;
+    width: 30%;
 }
