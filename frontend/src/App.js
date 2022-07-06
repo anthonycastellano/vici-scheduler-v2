@@ -18,6 +18,11 @@ import Admin from './pages/Admin';
 // components
 import Nav from './components/Nav';
 
+// constants
+const LOGIN_EXPIRATION = 12;
+const LOCAL_TOKEN = 'token';
+const LOCAL_LOGIN_TIME = 'loginTime';
+
 const scheduleCompareFn = (schedule1, schedule2) => {
   return schedule1.year > schedule2.year ||  (schedule1.year === schedule2.year && schedule1.month > schedule2.month) ?  1 : -1;
 };
@@ -39,8 +44,15 @@ function App() {
     });
 
     // update login state
-    if (localStorage.getItem('token')) {
-      dispatch({ type: CONSTANTS.SET_LOGGED_IN_ACTION, loggedIn: true });
+    if (localStorage.getItem(LOCAL_TOKEN)) {
+      const expirationTime = new Date(parseInt(localStorage.getItem(LOCAL_LOGIN_TIME)) + LOGIN_EXPIRATION * 60 * 60 * 1000);
+
+      if (Date.now() < expirationTime) {
+        dispatch({ type: CONSTANTS.SET_LOGGED_IN_ACTION, loggedIn: true });
+      } else {
+        localStorage.removeItem(LOCAL_TOKEN);
+        localStorage.removeItem(LOCAL_LOGIN_TIME);
+      }
     }
   }, []);
 
