@@ -28,6 +28,7 @@ const Login = () => {
 
         dispatch({type: CONSTANTS.SET_LOGGED_IN_ACTION, loggedIn: true});
         localStorage.setItem('token', res.data.token);
+        localStorage.setItem('loginTime', Date.now());
     };
 
     return (
