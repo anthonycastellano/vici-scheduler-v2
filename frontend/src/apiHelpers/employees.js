@@ -14,5 +14,6 @@ const deleteEmployee = (employeeID) => {
 
 export {
     getEmployees,
-    getEmployeesWithSchedules
+    getEmployeesWithSchedules,
+    deleteEmployee
 };
