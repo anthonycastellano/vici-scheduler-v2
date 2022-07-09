@@ -1,4 +1,5 @@
 import { getMonthString, getSaturdays } from "../helpers/calendarHelpers";
+import { MdDelete, MdEditCalendar } from 'react-icons/md';
 
 // create a <tr> for each weekend in a schedule to be rendered in item description
 const renderEmployeeRows = (schedule) => {
@@ -29,7 +30,8 @@ const ScheduleAccordionItem = ({
     schedule,
     showDescription,
     onClick,
-    activeItem
+    activeItem,
+    loggedIn
 }) => {
     const buttonText = showDescription ? <b>{`${getMonthString(schedule.month)} ${schedule.year}`}</b> : <span>{`${getMonthString(schedule.month)} ${schedule.year}`}</span>;
 
@@ -39,6 +41,23 @@ const ScheduleAccordionItem = ({
             ref={showDescription ? activeItem : null}>
             <dt>
                 <button onClick={onClick}>{buttonText}</button>
+
+                {showDescription && loggedIn &&
+                    <MdEditCalendar
+                        className='edit-icon'
+                        title='Edit schedule'
+                        size={'2em'}
+                        onClick={() => console.log('edit')}
+                    />
+                }
+                {showDescription && loggedIn &&
+                    <MdDelete
+                        className='delete-icon'
+                        title='Delete schedule'
+                        size={'2em'}
+                        onClick={() => console.log('delete')}
+                    />
+                }
             </dt>
     
             <div className={`schedule-accordion-desc ${showDescription ? 'shown' : 'hidden'}`}>

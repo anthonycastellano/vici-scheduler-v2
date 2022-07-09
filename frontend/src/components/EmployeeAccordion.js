@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { getSaturdays, getCurrentMonthIndex } from '../helpers/calendarHelpers';
+import { useSelector } from 'react-redux';
 
 // styling
 import './css/Accordion.scss';
@@ -47,6 +48,7 @@ const buildEmployeeUpcomingSchedules = (schedules) => {
 const EmployeeAccordion = ({ employees, schedules }) => {
     const employeeUpcomingSchedules = buildEmployeeUpcomingSchedules(schedules);
     const [activeIndex, setActiveIndex] = useState();
+    const loggedIn = useSelector(state => state.loggedIn);
 
     const renderedEmployees = employees.map(((employee, index) => {
         const showDescription = index === activeIndex;
@@ -59,6 +61,7 @@ const EmployeeAccordion = ({ employees, schedules }) => {
                     employee={employee}
                     showDescription={showDescription}
                     onClick={() => { setActiveIndex(index) }}
+                    loggedIn={loggedIn}
                 />
             </div>
         );
