@@ -67,9 +67,6 @@ const EmployeeAccordion = ({ employees, schedules }) => {
         );
     }));
 
-    // negate scroll from schedule page
-    useEffect(() => { window.scrollTo(0, 0) }, []);
-
     return (
         <div>
             <dl>{renderedEmployees}</dl>

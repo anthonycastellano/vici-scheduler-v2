@@ -19,6 +19,9 @@ const Employees = () => {
     useEffect(() => {
         // set active tab
         dispatch({ type: CONSTANTS.SET_ACTIVE_TAB_ACTION, activeTab: CONSTANTS.EMPLOYEES_TAB });
+
+        // negate scroll from other pages
+        window.scrollTo(0, 0);
     }, []);
 
     return (

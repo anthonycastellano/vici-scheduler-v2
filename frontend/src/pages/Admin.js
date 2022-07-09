@@ -10,7 +10,11 @@ const Admin = () => {
     const loggedIn = useSelector(state => state.loggedIn);
 
     useEffect(() => {
+        // set active tab
         dispatch({ type: CONSTANTS.SET_ACTIVE_TAB_ACTION, activeTab: CONSTANTS.ADMIN_TAB });
+
+        // negate scroll from other pages
+        window.scrollTo(0, 0);
     }, []);
 
     return (
