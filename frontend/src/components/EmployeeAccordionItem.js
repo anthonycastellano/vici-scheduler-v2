@@ -1,3 +1,5 @@
+import { MdDelete, MdModeEdit } from 'react-icons/md';
+
 const renderScheduleList = (employee) => employee.upcomingSchedules.map((schedule) => {
     return (
         <tr key={`${schedule[0] + schedule[1]}-row`}>
@@ -10,7 +12,8 @@ const renderScheduleList = (employee) => employee.upcomingSchedules.map((schedul
 const EmployeeAccordionItem = ({
     employee,
     showDescription,
-    onClick
+    onClick,
+    loggedIn
 }) => {
     const buttonText = showDescription ? <b>{`${employee.firstName} ${employee.lastName}`}</b> : <span>{`${employee.firstName} ${employee.lastName}`}</span>
 
@@ -18,6 +21,22 @@ const EmployeeAccordionItem = ({
         <div className={`employee-accordion`}>
             <dt>
                 <button onClick={onClick}>{buttonText}</button>
+                {showDescription && loggedIn &&
+                    <MdModeEdit
+                        className='edit-icon'
+                        title='Edit employee'
+                        size={'2em'}
+                        onClick={() => console.log('edit')}
+                    />
+                }
+                {showDescription && loggedIn &&
+                    <MdDelete
+                        className='delete-icon'
+                        title='Delete employee'
+                        size={'2em'}
+                        onClick={() => console.log('delete')}
+                    />
+                }
             </dt>
 
             <div className={`employee-accordion-desc ${showDescription ? 'shown' : 'hidden'}`}>

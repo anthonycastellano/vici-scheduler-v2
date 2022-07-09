@@ -1,5 +1,6 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { getCurrentMonthIndex } from '../helpers/calendarHelpers';
+import { useSelector } from 'react-redux';
 
 // styling
 import './css/Accordion.scss';
@@ -14,6 +15,7 @@ const ACTIVE_ACCORDION_OFFSET = 100;
 const ScheduleAccordion = ({ schedules, employees }) => {
     const [activeIndex, setActiveIndex] = useState(getCurrentMonthIndex(schedules));
     const activeItem = useRef();
+    const loggedIn = useSelector(state => state.loggedIn);
 
     const getEmployeeNameFromID = (employeeID) => {
         const targetEmployee = employees.find((employee) => employee._id === employeeID);
@@ -48,6 +50,7 @@ const ScheduleAccordion = ({ schedules, employees }) => {
                     showDescription={showDescription}
                     onClick={() => { setActiveIndex(index) }}
                     activeItem={activeItem}
+                    loggedIn={loggedIn}
                 />
             </div>
         );
