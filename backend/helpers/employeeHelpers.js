@@ -33,10 +33,7 @@ exports.updateEmployee = async (employee, updatedEmployee) => {
     return await employeeCollection.find(updatedEmployee).toArray();
 };
 
-exports.deleteEmployee = async (employee) => {
+exports.deleteEmployee = (id) => {
     const employeeCollection = getDB().collection(EMPLOYEE_COLLECTION_NAME);
-    if (!employee.lastName) employee.lastName = null;
-    const foundEmployees = await employeeCollection.find(employee).toArray();
-    if (!foundEmployees.length) return {};
-    return employeeCollection.deleteMany({ _id: foundEmployees[0]._id });
+    return employeeCollection.deleteMany({ _id: id });
 };

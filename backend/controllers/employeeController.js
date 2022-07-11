@@ -87,7 +87,7 @@ exports.delete = async (req, res) => {
         return res.send(e);
     }
 
-    const result = await employeeHelpers.deleteEmployee(req.body);
+    const result = await employeeHelpers.deleteEmployee(req.body._id);
     if (result.deletedCount) {
         return res.json({ msg: 'Successfully deleted employee' });
     }
