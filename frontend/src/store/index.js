@@ -8,7 +8,10 @@ let initialState = {
     schedules: [],
     employees: [],
     activeTab: CONSTANTS.SCHEDULES_TAB,
-    loggedIn: false
+    loggedIn: false,
+    modal: {
+        modalOpen: false
+    }
 }
 
 const reducer = (state = initialState, action) => {
@@ -32,6 +35,15 @@ const reducer = (state = initialState, action) => {
             return {
                 ...state,
                 loggedIn: action.loggedIn
+            }
+        case CONSTANTS.SET_MODAL_OPEN_ACTION:
+            return {
+                ...state,
+                modal: {
+                    modalOpen: action.modalOpen,
+                    modalType: action.modalType,
+                    data: action.data
+                }
             }
         default:
             break;

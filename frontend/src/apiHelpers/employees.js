@@ -4,16 +4,11 @@ const getEmployees = () => {
     return axios.get('/api/employees');
 };
 
-const getEmployeesWithSchedules = () => {
-    return axios.get('/api/employees?withSchedules=true');
-};
-
-const deleteEmployee = (employeeID) => {
-
+const deleteEmployee = (id, token) => {
+    return axios.delete('/api/employees', { data: { _id: id, token } });
 };
 
 export {
     getEmployees,
-    getEmployeesWithSchedules,
     deleteEmployee
 };

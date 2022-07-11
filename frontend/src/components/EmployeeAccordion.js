@@ -8,9 +8,6 @@ import './css/Accordion.scss';
 // components
 import EmployeeAccordionItem from './EmployeeAccordionItem';
 
-const PRIMARY = 'Primary';
-const SECONDARY = 'Secondary';
-
 // map each employee ID to a list of weekends and roles
 const buildEmployeeUpcomingSchedules = (schedules) => {
     // trim past schedules
@@ -27,8 +24,8 @@ const buildEmployeeUpcomingSchedules = (schedules) => {
             const currentLead = schedule.leads[i];
             const currentBackup = schedule.backups[i];
 
-            const leadWeekElement = [`${schedule.month}/${saturdayDates[i]}`, PRIMARY];
-            const backupWeekElement = [`${schedule.month}/${saturdayDates[i]}`, SECONDARY];
+            const leadWeekElement = [`${schedule.month}/${saturdayDates[i]}`, 'Primary'];
+            const backupWeekElement = [`${schedule.month}/${saturdayDates[i]}`, 'Secondary'];
 
             employeeUpcomingScheduleMap[currentLead] ?
                 employeeUpcomingScheduleMap[currentLead].push(leadWeekElement)
