@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import { getSaturdays, getCurrentMonthIndex } from '../helpers/calendarHelpers';
 import { useSelector } from 'react-redux';
 
