@@ -10,7 +10,7 @@ exports.getEmployees = () => {
 
 exports.exists = async (employee) => {
     const employeeCollection = getDB().collection(EMPLOYEE_COLLECTION_NAME);
-    if (!employee.lastName) employee.lastName = null;
+    if (!employee.lastName) employee.lastName = '';
     const employees = await employeeCollection.find(employee).toArray();
     return employees.length;
 };

@@ -10,9 +10,8 @@ exports.login = async (req, res) => {
     try {
         await validateHelpers.validateAuth(req.body);
     } catch (e) {
-        res.status(400);
         e[0].error = 'Validation failed';
-        return res.send(e);
+        return res.status(400).send(e);
     }
 
     // b64 encode auth credentials

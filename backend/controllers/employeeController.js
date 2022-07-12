@@ -16,29 +16,27 @@ exports.create = async (req, res) => {
     try {
         await validateHelpers.validateEmployee(req.body);
     } catch (e) {
-        res.status(400);
         e[0].error = 'Validation failed';
-        return res.send(e);
+        return res.status(400).send(e);
     }
 
     // check for duplicate employee
     if (await employeeHelpers.exists(req.body)) {
-        res.status(400);
-        return res.send({ error: 'Employee already exists' });
+        return res.status(400).send({ error: 'Employee already exists' });
     }
 
     // create employee
     const employee = await employeeHelpers.createEmployee({
         firstName: req.body.firstName,
-        lastName: req.body.lastName ? req.body.lastName : null
+        lastName: req.body.lastName ? req.body.lastName : ''
     });
 
 
     if (employee && employee.length) {
         return res.json(employee[0]);
     }
-    res.status(500);
-    return res.json({ error: 'Error creating employee' });
+    
+    return res.status(500).json({ error: 'Error creating employee' });
 };
 
 // modify existing employee
@@ -52,15 +50,13 @@ exports.update = async (req, res) => {
         await validateHelpers.validateEmployee(req.body.employeeOld);
         await validateHelpers.validateEmployee(req.body.employeeNew);
     } catch (e) {
-        res.status(400);
         e[0].error = 'Validation failed';
-        return res.send(e);
+        return res.status(400).send(e);
     }
 
     // check for duplicate employee
     if (await employeeHelpers.exists(req.body.employeeNew)) {
-        res.status(400);
-        return res.send({ error: 'Employee already exists' });
+        return res.status(400).send({ error: 'Employee already exists' });
     }
 
     // update employee in collection
@@ -69,8 +65,7 @@ exports.update = async (req, res) => {
     if (employee && employee.length) {
         return res.json(employee[0]);
     }
-    res.status(500);
-    return res.json({ error: 'Error updating employee' });
+    return res.status(500).json({ error: 'Error updating employee' });
 };
 
 // delete employee
@@ -82,15 +77,13 @@ exports.delete = async (req, res) => {
     try {
         await validateHelpers.validateEmployee(req.body);
     } catch (e) {
-        res.status(400);
         e[0].error = 'Validation failed';
-        return res.send(e);
+        return res.status(400).send(e);
     }
 
     const result = await employeeHelpers.deleteEmployee(req.body._id);
     if (result.deletedCount) {
         return res.json({ msg: 'Successfully deleted employee' });
     }
-    res.status(500);
-    res.json({ error: 'Error deleting employee' });
+    res.status(500).json({ error: 'Error deleting employee' });
 };
