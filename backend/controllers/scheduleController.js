@@ -64,7 +64,7 @@ exports.delete = async (req, res) => {
         return res.status(400).send(e);
     }
 
-    const result = await scheduleHelpers.deleteSchedule(req.body.month, req.body.year);
+    const result = await scheduleHelpers.deleteSchedule(req.body._id);
     if (result.deletedCount) {
         return res.json({ msg: 'Successfully deleted schedule' });
     }

@@ -5,7 +5,7 @@ import CONSTANTS from './store/constants'
 
 // api
 import { getSchedules } from './apiHelpers/schedule';
-import { getEmployees } from './apiHelpers/employees';
+import { getEmployees } from './apiHelpers/employee';
 
 // styling
 import './App.scss';

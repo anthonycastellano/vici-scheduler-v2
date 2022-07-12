@@ -4,4 +4,11 @@ const getSchedules = () => {
     return axios.get(`/api/schedules`);
 };
 
-export { getSchedules };
+const deleteSchedule = (id, token) => {
+    return axios.delete('/api/schedules', { data: { _id: id, token } });
+};
+
+export {
+    getSchedules,
+    deleteSchedule
+};

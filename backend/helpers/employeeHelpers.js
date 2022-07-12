@@ -1,5 +1,5 @@
 const { getDB } = require('./cosmosHelpers');
-const scheduleHelpers = require('./scheduleHelpers');
+const ObjectId = require('mongodb').ObjectID;
 
 const EMPLOYEE_COLLECTION_NAME = 'employees';
 
@@ -35,5 +35,5 @@ exports.updateEmployee = async (employee, updatedEmployee) => {
 
 exports.deleteEmployee = (id) => {
     const employeeCollection = getDB().collection(EMPLOYEE_COLLECTION_NAME);
-    return employeeCollection.deleteMany({ _id: id });
+    return employeeCollection.deleteOne({ _id: ObjectId(id) });
 };
