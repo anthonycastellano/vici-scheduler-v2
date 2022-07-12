@@ -1,20 +1,33 @@
 import { useDispatch, useSelector } from "react-redux";
 import CONSTANTS from "../store/constants";
-import { deleteEmployee } from "../apiHelpers/employees";
+import { useState } from "react";
+
+// api helpers
+import { deleteEmployee, getEmployees } from "../apiHelpers/employees";
 
 // styling
 import './css/Modal.scss';
 
-// TODO: error handling
 const Modal = () => {
     const type = useSelector(state => state.modal.modalType);
     const data = useSelector(state => state.modal.data);
     const dispatch = useDispatch();
     const authToken = localStorage.getItem('token');
+    const [errMessage, setErrMessage] = useState();
 
     const deleteSelectedEmployee = async () => {
-        const res = await deleteEmployee(data._id, authToken);
-        // if successful, remove employee from store
+        // delete employee
+        try {
+            await deleteEmployee(data._id, authToken);
+        } catch(err) {
+            setErrMessage('An error occurred. Refresh and try again.');
+            return;
+        }
+
+        // refetch employees
+        getEmployees().then(({ data }) => {
+            dispatch({ type: CONSTANTS.SET_EMPLOYEES_ACTION, employees: data });
+        });
 
         closeModal();
     }
@@ -61,6 +74,7 @@ const Modal = () => {
     return (
         <div className='modalBackground'>
             <div className='modalContainer'>
+                {errMessage && <p>{errMessage}</p>}
                 {renderModal()}
             </div>
         </div>
