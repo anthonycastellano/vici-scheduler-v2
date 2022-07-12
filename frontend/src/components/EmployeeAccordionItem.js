@@ -1,4 +1,6 @@
 import { MdDelete, MdModeEdit } from 'react-icons/md';
+import { useDispatch } from 'react-redux';
+import CONSTANTS from '../store/constants';
 
 const renderScheduleList = (employee) => employee.upcomingSchedules.map((schedule) => {
     return (
@@ -16,6 +18,16 @@ const EmployeeAccordionItem = ({
     loggedIn
 }) => {
     const buttonText = showDescription ? <b>{`${employee.firstName} ${employee.lastName}`}</b> : <span>{`${employee.firstName} ${employee.lastName}`}</span>
+    const dispatch = useDispatch();
+
+    const openModal = (modalType) => {
+        dispatch({
+            type: CONSTANTS.SET_MODAL_OPEN_ACTION,
+            modalOpen: true,
+            modalType,
+            data: employee
+        });
+    };
 
     return (
         <div className={`employee-accordion`}>
@@ -26,7 +38,7 @@ const EmployeeAccordionItem = ({
                         className='edit-icon'
                         title='Edit employee'
                         size={'2em'}
-                        onClick={() => console.log('edit')}
+                        onClick={() => openModal(CONSTANTS.MODAL_UPDATE_EMPLOYEE)}
                     />
                 }
                 {showDescription && loggedIn &&
@@ -34,7 +46,7 @@ const EmployeeAccordionItem = ({
                         className='delete-icon'
                         title='Delete employee'
                         size={'2em'}
-                        onClick={() => console.log('delete')}
+                        onClick={() => openModal(CONSTANTS.MODAL_DELETE_EMPLOYEE)}
                     />
                 }
             </dt>

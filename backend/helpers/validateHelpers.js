@@ -4,7 +4,6 @@ const { sanitize, sanitizations } = require('indicative/sanitizer');
 // employees
 const employeeValidationRules = {
     firstName: [
-        validations.required(),
         validations.alpha()
     ],
     lastName: [
@@ -14,6 +13,10 @@ const employeeValidationRules = {
 
 // remove html tags
 const employeeSanitizationRules = {
+    _id: [
+        sanitizations.stripTags(),
+        sanitizations.trim()
+    ],
     firstName: [
         sanitizations.stripTags(),
         sanitizations.trim()
@@ -28,11 +31,9 @@ const employeeSanitizationRules = {
 // schedules
 const scheduleValidationRules = {
     month: [
-        validations.required(),
         validations.number()
     ],
     year: [
-        validations.required(),
         validations.number()
     ],
     leads: [
@@ -51,6 +52,10 @@ const scheduleValidationRules = {
 
 // remove html tags
 const scheduleSanitizationRules = {
+    _id: [
+        sanitizations.stripTags(),
+        sanitizations.trim()
+    ],
     month: [
         sanitizations.stripTags(),
         sanitizations.trim()

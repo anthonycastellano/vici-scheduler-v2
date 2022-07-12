@@ -1,5 +1,5 @@
 const { getDB } = require('./cosmosHelpers');
-const scheduleHelpers = require('./scheduleHelpers');
+const ObjectId = require('mongodb').ObjectID;
 
 const EMPLOYEE_COLLECTION_NAME = 'employees';
 
@@ -10,7 +10,7 @@ exports.getEmployees = () => {
 
 exports.exists = async (employee) => {
     const employeeCollection = getDB().collection(EMPLOYEE_COLLECTION_NAME);
-    if (!employee.lastName) employee.lastName = null;
+    if (!employee.lastName) employee.lastName = '';
     const employees = await employeeCollection.find(employee).toArray();
     return employees.length;
 };
@@ -33,10 +33,7 @@ exports.updateEmployee = async (employee, updatedEmployee) => {
     return await employeeCollection.find(updatedEmployee).toArray();
 };
 
-exports.deleteEmployee = async (employee) => {
+exports.deleteEmployee = (id) => {
     const employeeCollection = getDB().collection(EMPLOYEE_COLLECTION_NAME);
-    if (!employee.lastName) employee.lastName = null;
-    const foundEmployees = await employeeCollection.find(employee).toArray();
-    if (!foundEmployees.length) return {};
-    return employeeCollection.deleteMany({ _id: foundEmployees[0]._id });
+    return employeeCollection.deleteOne({ _id: ObjectId(id) });
 };

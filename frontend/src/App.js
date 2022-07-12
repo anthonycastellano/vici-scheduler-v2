@@ -1,11 +1,11 @@
 import { Route, Switch, Redirect } from 'react-router-dom';
 import { useEffect } from 'react';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import CONSTANTS from './store/constants'
 
 // api
 import { getSchedules } from './apiHelpers/schedule';
-import { getEmployees } from './apiHelpers/employees';
+import { getEmployees } from './apiHelpers/employee';
 
 // styling
 import './App.scss';
@@ -17,6 +17,7 @@ import Admin from './pages/Admin';
 
 // components
 import Nav from './components/Nav';
+import Modal from './components/Modal';
 
 // constants
 const LOGIN_EXPIRATION = 12;
@@ -29,6 +30,7 @@ const scheduleCompareFn = (schedule1, schedule2) => {
 
 function App() {
   const dispatch = useDispatch();
+  const modalOpen = useSelector(state => state.modal.modalOpen);
 
   // fetch schedules and employees
   useEffect(() => {
@@ -59,6 +61,7 @@ function App() {
   return (
     <div className='App'>
       <Nav />
+      {modalOpen && <Modal />}
       <div className='content'>
         <Switch>
           <Route exact path='/'>

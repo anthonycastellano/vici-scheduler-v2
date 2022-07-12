@@ -21,9 +21,8 @@ exports.create = async (req, res) => {
     try {
         await validateHelpers.validateSchedule(req.body);
     } catch (e) {
-        res.status(400);
         e[0].error = 'Validation failed';
-        return res.send(e);
+        return res.status(400).send(e);
     }
 
     const newSchedule = await scheduleHelpers.createSchedule(req.body.month, req.body.year);
@@ -39,9 +38,8 @@ exports.update = async (req, res) => {
     try {
         await validateHelpers.validateSchedule(req.body);
     } catch (e) {
-        res.status(400);
         e[0].error = 'Validation failed';
-        return res.send(e);
+        return res.status(400).send(e);
     }
 
     // update schedule in collection
@@ -50,8 +48,7 @@ exports.update = async (req, res) => {
     if (schedule && schedule.length) {
         return res.json(schedule[0]);
     }
-    res.status(500);
-    return res.json({ error: 'Error updating schedule' });
+    return res.status(500).json({ error: 'Error updating schedule' });
 };
 
 // delete schedule
@@ -63,15 +60,13 @@ exports.delete = async (req, res) => {
     try {
         await validateHelpers.validateSchedule(req.body);
     } catch (e) {
-        res.status(400);
         e[0].error = 'Validation failed';
-        return res.send(e);
+        return res.status(400).send(e);
     }
 
-    const result = await scheduleHelpers.deleteSchedule(req.body.month, req.body.year);
+    const result = await scheduleHelpers.deleteSchedule(req.body._id);
     if (result.deletedCount) {
         return res.json({ msg: 'Successfully deleted schedule' });
     }
-    res.status(500);
-    res.json({ error: 'Error deleting schedule' });
+    res.status(500).json({ error: 'Error deleting schedule' });
 };
