@@ -64,23 +64,37 @@ const Modal = () => {
             case CONSTANTS.MODAL_DELETE_EMPLOYEE:
                 return (
                     <div>
-                        <p>Are you sure you want to remove <b>{`${data.firstName} ${data.lastName}`}</b> from the system?</p>
-                        <button className='delete-button' onClick={deleteSelectedEmployee}>Yes</button>
-                        <button className='close-button' onClick={closeModal}>No</button>
+                        <p className='prompt'>Remove <b>{`${data.firstName} ${data.lastName}`}</b> from the system?</p>
+                        {errMessage && <p className='error-message'>{errMessage}</p>}
+                        <div className='confirm-buttons'>
+                            <button className='delete-button' onClick={deleteSelectedEmployee}>Yes</button>
+                            <button onClick={closeModal}>Cancel</button>
+                        </div>
                     </div>
                 )
             case CONSTANTS.MODAL_DELETE_SCHEDULE:
                 return (
                     <div>
-                        <p>Are you sure you want to remove the <b>{`${data.month}/${data.year}`}</b> schedule from the system?</p>
-                        <button className='delete-button' onClick={deleteSelectedSchedule}>Yes</button>
-                        <button className='close-button' onClick={closeModal}>No</button>
+                        <p className='prompt'>Remove the <b>{`${data.month}/${data.year}`}</b> schedule from the system?</p>
+                        {errMessage && <p className='error-message'>{errMessage}</p>}
+                        <div className='confirm-buttons'>
+                            <button className='delete-button' onClick={deleteSelectedSchedule}>Yes</button>
+                            <button onClick={closeModal}>Cancel</button>
+                        </div>
                     </div>
                 )
             case CONSTANTS.MODAL_UPDATE_EMPLOYEE:
                 return (
                     <div>
-                        
+                        <p className='prompt'>Update {`${data.firstName} ${data.lastName} to`}:</p>
+                        <div className='name-fields'>
+                            <input defaultValue={data.firstName}/>
+                            <input defaultValue={data.lastName}/>
+                        </div>
+                        <div className='confirm-buttons'>
+                            <button className='delete-button' onClick={() => {}}>Submit</button>
+                            <button onClick={closeModal}>Cancel</button>
+                        </div>
                     </div>
                 )
             case CONSTANTS.MODAL_UPDATE_SCHEDULE:
@@ -99,7 +113,6 @@ const Modal = () => {
     return (
         <div className='modalBackground'>
             <div className='modalContainer'>
-                {errMessage && <p style={{color: 'red'}}>{errMessage}</p>}
                 {renderModal()}
             </div>
         </div>

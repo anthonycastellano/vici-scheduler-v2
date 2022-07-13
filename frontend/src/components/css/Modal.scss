@@ -12,4 +12,40 @@
 
 .modalContainer {
     margin: 10%;
+    width: 20rem;
+}
+
+.error-message {
+    color: red;
+}
+
+.prompt {
+    font-size: 20px;
+}
+
+.confirm-buttons {
+    display: flex;
+    justify-content: space-between;
+}
+
+.confirm-buttons button {
+    background-color: $text-secondary;
+    padding: 4%;
+    width: 6rem;
+    margin: 10%; 
+    border-style: none;
+    border-radius: 7%;
+}
+
+.delete-button {
+    font-weight: bold;
+}
+
+.name-fields {
+    display: flex;
+    justify-content: space-between;
+}
+
+.name-fields input {
+    width: 5rem;
 }
