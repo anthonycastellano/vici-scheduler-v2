@@ -2,16 +2,13 @@ import { useDispatch, useSelector } from "react-redux";
 import CONSTANTS from "../store/constants";
 import { useState } from "react";
 
-// api helpers
-import { deleteEmployee, getEmployees } from "../apiHelpers/employee";
+// helpers
+import { deleteEmployee, getEmployees, updateEmployee } from "../apiHelpers/employee";
 import { deleteSchedule, getSchedules } from "../apiHelpers/schedule";
+import { scheduleCompareFn } from "../helpers/helpers";
 
 // styling
 import './css/Modal.scss';
-
-const scheduleCompareFn = (schedule1, schedule2) => {
-    return schedule1.year > schedule2.year ||  (schedule1.year === schedule2.year && schedule1.month > schedule2.month) ?  1 : -1;
-};
 
 const Modal = () => {
     const type = useSelector(state => state.modal.modalType);
@@ -19,6 +16,22 @@ const Modal = () => {
     const dispatch = useDispatch();
     const authToken = localStorage.getItem('token');
     const [errMessage, setErrMessage] = useState();
+    const [firstName, setFirstName] = useState(data.firstName);
+    const [lastName, setLastName] = useState(data.lastName);
+
+    const refreshEmployees = () => {
+        // refetch employees
+        getEmployees().then(({ data }) => {
+            dispatch({ type: CONSTANTS.SET_EMPLOYEES_ACTION, employees: data });
+        });
+    };
+
+    const refreshSchedules = () => {
+        getSchedules().then(({ data }) => {
+            data.sort(scheduleCompareFn);
+            dispatch({ type: CONSTANTS.SET_SCHEDULES_ACTION, schedules: data });
+        });
+    };
 
     const deleteSelectedEmployee = async () => {
         // delete employee
@@ -29,11 +42,7 @@ const Modal = () => {
             return;
         }
 
-        // refetch employees
-        getEmployees().then(({ data }) => {
-            dispatch({ type: CONSTANTS.SET_EMPLOYEES_ACTION, employees: data });
-        });
-
+        refreshEmployees();
         closeModal();
     }
 
@@ -46,13 +55,25 @@ const Modal = () => {
             return;
         }
 
-        // refetch schedules
-        getSchedules().then(({ data }) => {
-            data.sort(scheduleCompareFn);
-            dispatch({ type: CONSTANTS.SET_SCHEDULES_ACTION, schedules: data });
-        });
-
+        refreshSchedules();
         closeModal();
+    };
+
+    const updateSelectedEmployee = async () => {
+        // update employee
+        try {
+            await updateEmployee(data._id, authToken, firstName, lastName);
+        } catch (err) {
+            setErrMessage('An error occurred. Refresh and try again.');
+            return;
+        }
+
+        refreshEmployees();
+        closeModal();
+    };
+
+    const updateSelectedSchedule = async () => {
+
     };
 
     const closeModal = () => {
@@ -86,13 +107,14 @@ const Modal = () => {
             case CONSTANTS.MODAL_UPDATE_EMPLOYEE:
                 return (
                     <div>
-                        <p className='prompt'>Update {`${data.firstName} ${data.lastName} to`}:</p>
+                        <p className='prompt'>Update <b>{`${data.firstName} ${data.lastName}`}</b> to:</p>
                         <div className='name-fields'>
-                            <input defaultValue={data.firstName}/>
-                            <input defaultValue={data.lastName}/>
+                            <input value={firstName} onChange={e => setFirstName(e.target.value)}/>
+                            <input value={lastName} onChange={e => setLastName(e.target.value)}/>
                         </div>
+                        {errMessage && <p className='error-message'>{errMessage}</p>}
                         <div className='confirm-buttons'>
-                            <button className='delete-button' onClick={() => {}}>Submit</button>
+                            <button className='delete-button' onClick={updateSelectedEmployee}>Submit</button>
                             <button onClick={closeModal}>Cancel</button>
                         </div>
                     </div>

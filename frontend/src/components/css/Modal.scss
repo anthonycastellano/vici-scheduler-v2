@@ -20,7 +20,7 @@
 }
 
 .prompt {
-    font-size: 20px;
+    font-size: 25px;
 }
 
 .confirm-buttons {
@@ -44,8 +44,18 @@
 .name-fields {
     display: flex;
     justify-content: space-between;
+    margin-top: 3rem;
+    margin-bottom: 3rem;
 }
 
 .name-fields input {
-    width: 5rem;
+    width: 7rem;
+    border-bottom: 1px solid white;
+    border-top: none;
+    border-left: none;
+    border-right: none;
+    border-radius: 0px;
+    background-color: $background-modal;
+    color: white;
+    font-size: 15px;
 }
