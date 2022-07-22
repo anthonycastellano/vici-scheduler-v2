@@ -4,11 +4,13 @@ import { useState } from "react";
 
 // helpers
 import { deleteEmployee, getEmployees, updateEmployee } from "../apiHelpers/employee";
-import { deleteSchedule, getSchedules } from "../apiHelpers/schedule";
+import { deleteSchedule, getSchedules, updateSchedule } from "../apiHelpers/schedule";
 import { scheduleCompareFn } from "../helpers/helpers";
 
 // styling
 import './css/Modal.scss';
+
+const ERROR_MSG = 'An error has occurred. Refresh and try again.';
 
 const Modal = () => {
     const type = useSelector(state => state.modal.modalType);
@@ -18,6 +20,8 @@ const Modal = () => {
     const [errMessage, setErrMessage] = useState();
     const [firstName, setFirstName] = useState(data.firstName);
     const [lastName, setLastName] = useState(data.lastName);
+    const [leads, setLeads] = useState(data.leads);
+    const [backups, setBackups] = useState(data.backups);
 
     const refreshEmployees = () => {
         // refetch employees
@@ -38,7 +42,7 @@ const Modal = () => {
         try {
             await deleteEmployee(data._id, authToken);
         } catch (err) {
-            setErrMessage('An error occurred. Refresh and try again.');
+            setErrMessage(ERROR_MSG);
             return;
         }
 
@@ -51,7 +55,7 @@ const Modal = () => {
         try {
             await deleteSchedule(data._id, authToken);
         } catch (err) {
-            setErrMessage('An error occurred. Refresh and try again.');
+            setErrMessage(ERROR_MSG);
             return;
         }
 
@@ -64,7 +68,7 @@ const Modal = () => {
         try {
             await updateEmployee(data._id, authToken, firstName, lastName);
         } catch (err) {
-            setErrMessage('An error occurred. Refresh and try again.');
+            setErrMessage(ERROR_MSG);
             return;
         }
 
@@ -73,7 +77,16 @@ const Modal = () => {
     };
 
     const updateSelectedSchedule = async () => {
+        // update schedule
+        try {
+            await updateSchedule(data._id, authToken, leads, backups);
+        } catch (err) {
+            setErrMessage(ERROR_MSG)
+            return;
+        }
 
+        refreshSchedules();
+        closeModal();
     };
 
     const closeModal = () => {
@@ -122,7 +135,12 @@ const Modal = () => {
             case CONSTANTS.MODAL_UPDATE_SCHEDULE:
                 return (
                     <div>
-                        
+                        <p className='prompt'>Update <b>{`${data.month}/${data.year}`}</b> schedule to:</p>
+                        {errMessage && <p className='error-message'>{errMessage}</p>}
+                        <div className='confirm-buttons'>
+                            <button className='delete-button' onClick={updateSelectedSchedule}>Submit</button>
+                            <button onClick={closeModal}>Cancel</button>
+                        </div>
                     </div>
                 )
             default:

@@ -1,5 +1,5 @@
 const scheduleHelpers = require('../helpers/scheduleHelpers');
-const validateHelpers = require('../helpers/validateHelpers');
+const { sanitizeSchedule, validateSchedule, validateScheduleWithID } = require('../helpers/validateHelpers');
 
 // return one or all schedules
 exports.get = async (req, res) => {
@@ -15,11 +15,11 @@ exports.get = async (req, res) => {
 // generate a new schedule
 exports.create = async (req, res) => {
     // sanitize body
-    validateHelpers.sanitizeSchedule(req.body);
+    sanitizeSchedule(req.body);
 
     // validate body
     try {
-        await validateHelpers.validateSchedule(req.body);
+        await validateSchedule(req.body);
     } catch (e) {
         e[0].error = 'Validation failed';
         return res.status(400).send(e);
@@ -32,21 +32,21 @@ exports.create = async (req, res) => {
 // modify existing schedule
 exports.update = async (req, res) => {
     // sanitize body
-    validateHelpers.sanitizeSchedule(req.body);
+    sanitizeSchedule(req.body);
 
     // validate body
     try {
-        await validateHelpers.validateSchedule(req.body);
+        await validateScheduleWithID(req.body);
     } catch (e) {
         e[0].error = 'Validation failed';
         return res.status(400).send(e);
     }
 
     // update schedule in collection
-    const schedule = await scheduleHelpers.updateSchedule(req.body);
+    const updateResonse = await scheduleHelpers.updateSchedule(req.body);
 
-    if (schedule && schedule.length) {
-        return res.json(schedule[0]);
+    if (updateResonse.modifiedCount > 0) {
+        return res.status(204).json({ msg: 'Schedule updated successfully' });
     }
     return res.status(500).json({ error: 'Error updating schedule' });
 };
@@ -54,11 +54,11 @@ exports.update = async (req, res) => {
 // delete schedule
 exports.delete = async (req, res) => {
     // sanitize body
-    validateHelpers.sanitizeSchedule(req.body);
+    sanitizeSchedule(req.body);
 
     // validate body
     try {
-        await validateHelpers.validateSchedule(req.body);
+        await validateScheduleWithID(req.body);
     } catch (e) {
         e[0].error = 'Validation failed';
         return res.status(400).send(e);

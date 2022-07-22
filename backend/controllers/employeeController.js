@@ -51,7 +51,7 @@ exports.update = async (req, res) => {
     const updateResonse = await employeeHelpers.updateEmployee(req.body);
 
     if (updateResonse.modifiedCount > 0) {
-        return res.json({ msg: 'Employee updated successfully' });
+        return res.status(204).json({ msg: 'Employee updated successfully' });
     }
     return res.status(500).json({ error: 'Error updating employee' });
 };
