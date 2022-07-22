@@ -3,9 +3,10 @@ import { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import CONSTANTS from './store/constants'
 
-// api
+// helpers
 import { getSchedules } from './apiHelpers/schedule';
 import { getEmployees } from './apiHelpers/employee';
+import { scheduleCompareFn } from './helpers/helpers';
 
 // styling
 import './App.scss';
@@ -23,10 +24,6 @@ import Modal from './components/Modal';
 const LOGIN_EXPIRATION = 12;
 const LOCAL_TOKEN = 'token';
 const LOCAL_LOGIN_TIME = 'loginTime';
-
-const scheduleCompareFn = (schedule1, schedule2) => {
-  return schedule1.year > schedule2.year ||  (schedule1.year === schedule2.year && schedule1.month > schedule2.month) ?  1 : -1;
-};
 
 function App() {
   const dispatch = useDispatch();

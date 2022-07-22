@@ -11,6 +11,19 @@ const employeeValidationRules = {
     ]
 };
 
+const employeeWithIDValidationRules = {
+    firstName: [
+        validations.alpha()
+    ],
+    lastName: [
+        validations.alpha()
+    ],
+    _id: [
+        validations.alphaNumeric(),
+        validations.required()
+    ]
+}
+
 // remove html tags
 const employeeSanitizationRules = {
     _id: [
@@ -26,7 +39,6 @@ const employeeSanitizationRules = {
         sanitizations.trim()
     ]
 };
-
 
 // schedules
 const scheduleValidationRules = {
@@ -98,6 +110,7 @@ const authSanitizationRules = {
 };
 
 exports.validateEmployee = (data) => validate(data, employeeValidationRules);
+exports.validateEmployeeWithID = (data) => validate(data, employeeWithIDValidationRules);
 exports.sanitizeEmployee = (data) => sanitize(data, employeeSanitizationRules);
 
 exports.validateSchedule = (data) => validate(data, scheduleValidationRules);

@@ -12,4 +12,50 @@
 
 .modalContainer {
     margin: 10%;
+    width: 20rem;
+}
+
+.error-message {
+    color: red;
+}
+
+.prompt {
+    font-size: 25px;
+}
+
+.confirm-buttons {
+    display: flex;
+    justify-content: space-between;
+}
+
+.confirm-buttons button {
+    background-color: $text-secondary;
+    padding: 4%;
+    width: 6rem;
+    margin: 10%; 
+    border-style: none;
+    border-radius: 7%;
+}
+
+.delete-button {
+    font-weight: bold;
+}
+
+.name-fields {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 3rem;
+    margin-bottom: 3rem;
+}
+
+.name-fields input {
+    width: 7rem;
+    border-bottom: 1px solid white;
+    border-top: none;
+    border-left: none;
+    border-right: none;
+    border-radius: 0px;
+    background-color: $background-modal;
+    color: white;
+    font-size: 15px;
 }

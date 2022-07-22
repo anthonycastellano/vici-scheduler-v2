@@ -1,5 +1,5 @@
 const employeeHelpers = require('../helpers/employeeHelpers.js');
-const validateHelpers = require('../helpers/validateHelpers');
+const { sanitizeEmployee, validateEmployee, validateEmployeeWithID } = require('../helpers/validateHelpers');
 
 // return list of all employees
 exports.get = async (req, res) => {
@@ -10,19 +10,14 @@ exports.get = async (req, res) => {
 // add new employee to db
 exports.create = async (req, res) => {
     // sanitize body
-    validateHelpers.sanitizeEmployee(req.body);
+    sanitizeEmployee(req.body);
 
     // validate body
     try {
-        await validateHelpers.validateEmployee(req.body);
+        await validateEmployee(req.body);
     } catch (e) {
         e[0].error = 'Validation failed';
         return res.status(400).send(e);
-    }
-
-    // check for duplicate employee
-    if (await employeeHelpers.exists(req.body)) {
-        return res.status(400).send({ error: 'Employee already exists' });
     }
 
     // create employee
@@ -42,28 +37,21 @@ exports.create = async (req, res) => {
 // modify existing employee
 exports.update = async (req, res) => {
     // sanitize body
-    validateHelpers.sanitizeEmployee(req.body.employeeOld);
-    validateHelpers.sanitizeEmployee(req.body.employeeNew);
+    sanitizeEmployee(req.body);
 
     // validate body
     try {
-        await validateHelpers.validateEmployee(req.body.employeeOld);
-        await validateHelpers.validateEmployee(req.body.employeeNew);
+        await validateEmployeeWithID(req.body);
     } catch (e) {
         e[0].error = 'Validation failed';
         return res.status(400).send(e);
     }
 
-    // check for duplicate employee
-    if (await employeeHelpers.exists(req.body.employeeNew)) {
-        return res.status(400).send({ error: 'Employee already exists' });
-    }
-
     // update employee in collection
-    const employee = await employeeHelpers.updateEmployee(req.body.employeeOld, req.body.employeeNew);
+    const updateResonse = await employeeHelpers.updateEmployee(req.body);
 
-    if (employee && employee.length) {
-        return res.json(employee[0]);
+    if (updateResonse.modifiedCount > 0) {
+        return res.json({ msg: 'Employee updated successfully' });
     }
     return res.status(500).json({ error: 'Error updating employee' });
 };
@@ -71,11 +59,11 @@ exports.update = async (req, res) => {
 // delete employee
 exports.delete = async (req, res) => {
     // sanitize body
-    validateHelpers.sanitizeEmployee(req.body);
+    sanitizeEmployee(req.body);
 
     // validate body
     try {
-        await validateHelpers.validateEmployee(req.body);
+        await validateEmployeeWithID(req.body);
     } catch (e) {
         e[0].error = 'Validation failed';
         return res.status(400).send(e);
