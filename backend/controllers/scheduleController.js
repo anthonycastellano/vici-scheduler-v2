@@ -43,9 +43,9 @@ exports.update = async (req, res) => {
     }
 
     // update schedule in collection
-    const updateResonse = await scheduleHelpers.updateSchedule(req.body);
+    const updateResponse = await scheduleHelpers.updateSchedule(req.body);
 
-    if (updateResonse.modifiedCount > 0) {
+    if (updateResponse.modifiedCount > 0) {
         return res.status(204).json({ msg: 'Schedule updated successfully' });
     }
     return res.status(500).json({ error: 'Error updating schedule' });

@@ -17,15 +17,13 @@ exports.createSchedule = async (month, year) => {
     const generatedMonth = schedule.createNewSchedule(month, year);
 };
 
-exports.updateSchedule = async (schedule) => {
+exports.updateSchedule = (schedule) => {
     const scheduleCollection = getDB().collection(SCHEDULE_COLLECTION_NAME);
 
-    const searchParams = { month: schedule.month, year: schedule.year };
-    await scheduleCollection.updateOne(searchParams, { $set: {
+    return scheduleCollection.updateOne({ _id: ObjectId(schedule._id) }, { $set: {
         leads: schedule.leads,
         backups: schedule.backups
     }});
-    return await scheduleCollection.find(schedule).toArray();
 };
 
 exports.deleteSchedule = (id) => {
