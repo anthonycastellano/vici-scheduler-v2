@@ -6,6 +6,7 @@ import { useState } from "react";
 import { deleteEmployee, getEmployees, updateEmployee } from "../apiHelpers/employee";
 import { deleteSchedule, getSchedules, updateSchedule } from "../apiHelpers/schedule";
 import { scheduleCompareFn } from "../helpers/helpers";
+import { getSaturdays } from "../helpers/calendarHelpers";
 
 // styling
 import './css/Modal.scss';
@@ -35,6 +36,7 @@ const Modal = () => {
     };
 
     const refreshSchedules = () => {
+        // refetch and sort schedules
         getSchedules().then(({ data }) => {
             data.sort(scheduleCompareFn);
             dispatch({ type: CONSTANTS.SET_SCHEDULES_ACTION, schedules: data });
@@ -166,10 +168,18 @@ const Modal = () => {
                     <div>
                         <p className='prompt'>Update <b>{`${data.month}/${data.year}`}</b> schedule to:</p>
 
-                        <div className='employee-selectors'>
-                            {renderEmployeeSelectors(leads, updateLead)}
-                            <br></br>
-                            {renderEmployeeSelectors(backups, updateBackup)}
+                        <div className='employee-selectors-container' >
+                            <div className='employee-selectors'>
+                                {getSaturdays(data.year, data.month).map((date) => <p>{data.month}/{date}</p>)}
+                            </div>
+
+                            <div className='employee-selectors'>
+                                {renderEmployeeSelectors(leads, updateLead)}
+                            </div>
+
+                            <div className='employee-selectors'>
+                                {renderEmployeeSelectors(backups, updateBackup)}
+                            </div>
                         </div>
 
                         {errMessage && <p className='error-message'>{errMessage}</p>}
