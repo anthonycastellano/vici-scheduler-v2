@@ -15,13 +15,17 @@ const ERROR_MSG = 'An error has occurred. Refresh and try again.';
 const Modal = () => {
     const type = useSelector(state => state.modal.modalType);
     const data = useSelector(state => state.modal.data);
+    const employees = useSelector(state => state.employees);
+
     const dispatch = useDispatch();
     const authToken = localStorage.getItem('token');
     const [errMessage, setErrMessage] = useState();
+
     const [firstName, setFirstName] = useState(data.firstName);
     const [lastName, setLastName] = useState(data.lastName);
-    const [leads, setLeads] = useState(data.leads);
-    const [backups, setBackups] = useState(data.backups);
+
+    const [leads, setLeads] = useState(data.leadIds);
+    const [backups, setBackups] = useState(data.backupIds);
 
     const refreshEmployees = () => {
         // refetch employees
@@ -89,6 +93,24 @@ const Modal = () => {
         closeModal();
     };
 
+    const updateLead = (e, index) => {
+        let tempLeads = [...leads];
+        tempLeads[index] = e.target.value;
+        setLeads(tempLeads);
+    };
+
+    const updateBackup = (e, index) => {
+        let tempBackups = [...backups];
+        tempBackups[index] = e.target.value;
+        setBackups(tempBackups);
+    };
+
+    const renderEmployeeSelectors = (employeeList, updateListFn) => employeeList.map((employee, index) =>
+        <select key={`${updateListFn.name}-${index}-selector`} value={employee} onChange={(e) => updateListFn(e, index)}>
+            {employees.map((employeeOption) => <option key={`${updateListFn.name}-${employeeOption._id}-option`} value={employeeOption._id}>{`${employeeOption.firstName} ${employeeOption.lastName}`}</option>)}
+        </select>
+    );
+
     const closeModal = () => {
         dispatch({ type: CONSTANTS.SET_MODAL_OPEN_ACTION, modalOpen: false });
     };
@@ -99,7 +121,9 @@ const Modal = () => {
                 return (
                     <div>
                         <p className='prompt'>Remove <b>{`${data.firstName} ${data.lastName}`}</b> from the system?</p>
+                        
                         {errMessage && <p className='error-message'>{errMessage}</p>}
+                        
                         <div className='confirm-buttons'>
                             <button className='delete-button' onClick={deleteSelectedEmployee}>Yes</button>
                             <button onClick={closeModal}>Cancel</button>
@@ -110,7 +134,9 @@ const Modal = () => {
                 return (
                     <div>
                         <p className='prompt'>Remove the <b>{`${data.month}/${data.year}`}</b> schedule from the system?</p>
+                        
                         {errMessage && <p className='error-message'>{errMessage}</p>}
+                        
                         <div className='confirm-buttons'>
                             <button className='delete-button' onClick={deleteSelectedSchedule}>Yes</button>
                             <button onClick={closeModal}>Cancel</button>
@@ -121,11 +147,14 @@ const Modal = () => {
                 return (
                     <div>
                         <p className='prompt'>Update <b>{`${data.firstName} ${data.lastName}`}</b> to:</p>
+
                         <div className='name-fields'>
                             <input value={firstName} onChange={e => setFirstName(e.target.value)}/>
                             <input value={lastName} onChange={e => setLastName(e.target.value)}/>
                         </div>
+
                         {errMessage && <p className='error-message'>{errMessage}</p>}
+
                         <div className='confirm-buttons'>
                             <button className='delete-button' onClick={updateSelectedEmployee}>Submit</button>
                             <button onClick={closeModal}>Cancel</button>
@@ -136,7 +165,15 @@ const Modal = () => {
                 return (
                     <div>
                         <p className='prompt'>Update <b>{`${data.month}/${data.year}`}</b> schedule to:</p>
+
+                        <div className='employee-selectors'>
+                            {renderEmployeeSelectors(leads, updateLead)}
+                            <br></br>
+                            {renderEmployeeSelectors(backups, updateBackup)}
+                        </div>
+
                         {errMessage && <p className='error-message'>{errMessage}</p>}
+
                         <div className='confirm-buttons'>
                             <button className='delete-button' onClick={updateSelectedSchedule}>Submit</button>
                             <button onClick={closeModal}>Cancel</button>
@@ -145,7 +182,7 @@ const Modal = () => {
                 )
             default:
                 return (
-                    <button onClick={closeModal}>If you see this, something went wrong. Click to go back.</button>
+                    <button onClick={closeModal}>If you see this, something has gone wrong. Click to go back.</button>
                 )
         }
     }

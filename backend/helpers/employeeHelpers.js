@@ -16,10 +16,13 @@ exports.createEmployee = async (employee) => {
     }
 };
 
-exports.updateEmployee = async (employee) => {
+exports.updateEmployee = (employee) => {
     const employeeCollection = getDB().collection(EMPLOYEE_COLLECTION_NAME);
+
+    // store empty last name if none provided
     if (!employee.lastName) employee.lastName = "";
-    return employeeCollection.updateOne({ _id: employee._id }, { $set: {
+
+    return employeeCollection.updateOne({ _id: ObjectId(employee._id) }, { $set: {
         firstName: employee.firstName,
         lastName: employee.lastName
     }});
