@@ -12,10 +12,6 @@ import './css/Modal.scss';
 
 const ERROR_MSG = 'An error has occurred. Refresh and try again.';
 
-const renderEmployeeSelectors = (employeeList, updateListFn) => {
-
-};
-
 const Modal = () => {
     const type = useSelector(state => state.modal.modalType);
     const data = useSelector(state => state.modal.data);
@@ -28,8 +24,6 @@ const Modal = () => {
     const [firstName, setFirstName] = useState(data.firstName);
     const [lastName, setLastName] = useState(data.lastName);
 
-    // const [leads, setLeads] = useState(data.leads);
-    // const [backups, setBackups] = useState(data.backups);
     const [leads, setLeads] = useState(data.leadIds);
     const [backups, setBackups] = useState(data.backupIds);
 
@@ -111,6 +105,12 @@ const Modal = () => {
         setBackups(tempBackups);
     };
 
+    const renderEmployeeSelectors = (employeeList, updateListFn) => employeeList.map((employee, index) =>
+        <select key={`${updateListFn.name}-${index}-selector`} value={employee} onChange={(e) => updateListFn(e, index)}>
+            {employees.map((employeeOption) => <option key={`${updateListFn.name}-${employeeOption._id}-option`} value={employeeOption._id}>{`${employeeOption.firstName} ${employeeOption.lastName}`}</option>)}
+        </select>
+    );
+
     const closeModal = () => {
         dispatch({ type: CONSTANTS.SET_MODAL_OPEN_ACTION, modalOpen: false });
     };
@@ -166,18 +166,10 @@ const Modal = () => {
                     <div>
                         <p className='prompt'>Update <b>{`${data.month}/${data.year}`}</b> schedule to:</p>
 
-                        <div className='employee-select'>
-                            {leads.map((employee, index) =>
-                                <select value={employee} onChange={(e) => updateLead(e, index)}>
-                                    {employees.map((employeeOption) => <option value={employeeOption._id}>{`${employeeOption.firstName} ${employeeOption.lastName}`}</option>)}
-                                </select>
-                            )}
+                        <div className='employee-selectors'>
+                            {renderEmployeeSelectors(leads, updateLead)}
                             <br></br>
-                            {backups.map((employee, index) =>
-                                <select value={employee} onChange={(e) => updateBackup(e, index)}>
-                                    {employees.map((employeeOption) => <option value={employeeOption._id}>{`${employeeOption.firstName} ${employeeOption.lastName}`}</option>)}
-                                </select>
-                            )}
+                            {renderEmployeeSelectors(backups, updateBackup)}
                         </div>
 
                         {errMessage && <p className='error-message'>{errMessage}</p>}
