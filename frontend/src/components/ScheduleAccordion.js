@@ -36,7 +36,9 @@ const ScheduleAccordion = ({ schedules, employees }) => {
         return {
             ...schedule,
             leads: convertedLeads,
-            backups: convertedBackups
+            backups: convertedBackups,
+            leadIds: schedule.leads,
+            backupIds: schedule.backups
         };
     };
 
