@@ -170,7 +170,7 @@ const Modal = () => {
 
                         <div className='employee-selectors-container' >
                             <div className='employee-selectors'>
-                                {getSaturdays(data.year, data.month).map((date) => <p>{data.month}/{date}</p>)}
+                                {getSaturdays(data.year, data.month).map((date) => <span>{data.month}/{date}</span>)}
                             </div>
 
                             <div className='employee-selectors'>
