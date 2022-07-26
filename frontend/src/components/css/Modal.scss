@@ -36,6 +36,7 @@
     margin: 10%; 
     border-style: none;
     border-radius: 7%;
+    color: black;
 }
 
 .delete-button {
@@ -59,4 +60,26 @@
     background-color: $background-modal;
     color: white;
     font-size: 15px;
+}
+
+.employee-selectors-container {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+}
+
+.employee-selectors {
+    display: flex;
+    flex-direction: column;
+    margin: 1rem;
+    justify-content: space-between;
+}
+
+.employee-selectors select, .employee-selectors span {
+    margin: 0.5rem;
+    font-size: 14px;
+}
+
+.employee-selectors select {
+    color: black;
 }
