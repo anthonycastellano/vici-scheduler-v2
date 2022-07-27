@@ -118,7 +118,7 @@ const Modal = () => {
     };
 
     const renderModal = () => {
-        switch(type) {
+        switch (type) {
             case CONSTANTS.MODAL_DELETE_EMPLOYEE:
                 return (
                     <div>

@@ -10,7 +10,11 @@ const CONSTANTS = {
     MODAL_DELETE_EMPLOYEE: 'delemp',
     MODAL_DELETE_SCHEDULE: 'delsch',
     MODAL_UPDATE_EMPLOYEE: 'updemp',
-    MODAL_UPDATE_SCHEDULE: 'updsch'
+    MODAL_UPDATE_SCHEDULE: 'updsch',
+    ADMIN_MODE_MENU: 'menu',
+    ADMIN_MODE_EMPLOYEE: 'employee',
+    ADMIN_MODE_SCHEDULE: 'schedule',
+    ADMIN_MODE_STATS: 'stats'
 };
 
 export default CONSTANTS; 
