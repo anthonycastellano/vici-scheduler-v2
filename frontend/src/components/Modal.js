@@ -118,7 +118,7 @@ const Modal = () => {
     };
 
     const renderModal = () => {
-        switch(type) {
+        switch (type) {
             case CONSTANTS.MODAL_DELETE_EMPLOYEE:
                 return (
                     <div>
@@ -170,7 +170,7 @@ const Modal = () => {
 
                         <div className='employee-selectors-container' >
                             <div className='employee-selectors'>
-                                {getSaturdays(data.year, data.month).map((date) => <span>{data.month}/{date}</span>)}
+                                {getSaturdays(data.year, data.month).map((date) => <span key={`${data.month}-${date}-text`}>{data.month}/{date}</span>)}
                             </div>
 
                             <div className='employee-selectors'>
