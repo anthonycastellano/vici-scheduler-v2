@@ -15,6 +15,7 @@ const Admin = () => {
     const dispatch = useDispatch();
     const loggedIn = useSelector(state => state.loggedIn);
     const [mode, setMode] = useState(CONSTANTS.ADMIN_MODE_MENU);
+    const [msg, setMsg] = useState();
 
     useEffect(() => {
         // set active tab
@@ -27,7 +28,7 @@ const Admin = () => {
     const renderMenu = () => {
         switch (mode) {
             case CONSTANTS.ADMIN_MODE_EMPLOYEE:
-                return <NewEmployeeMenu setMode={setMode}/>
+                return <NewEmployeeMenu setMode={setMode} setMsg={setMsg}/>
             case CONSTANTS.ADMIN_MODE_SCHEDULE:
                 return <NewScheduleMenu setMode={setMode}/>
             case CONSTANTS.ADMIN_MODE_STATS:
@@ -49,6 +50,7 @@ const Admin = () => {
             {loggedIn ?
             <div>
                 {renderMenu()}
+                {msg && <p>{msg}</p>}
             </div>
             :
             <div>

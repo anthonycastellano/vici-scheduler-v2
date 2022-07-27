@@ -14,8 +14,13 @@ const updateEmployee = (id, token, firstName, lastName) => {
     return axios.put(EMPLOYEES_ENDPOINT, { _id: id, token, firstName, lastName });
 };
 
+const createEmployee = (token, firstName, lastName) => {
+    return axios.post(EMPLOYEES_ENDPOINT, { token, firstName, lastName });
+};
+
 export {
     getEmployees,
     deleteEmployee,
-    updateEmployee
+    updateEmployee,
+    createEmployee
 };
