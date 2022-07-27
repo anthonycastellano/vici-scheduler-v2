@@ -28,9 +28,8 @@ const NewEmployeeMenu = ({ setMode, setMsg }) => {
 
         if (!firstName.length && !lastName.length) return setError('Employee must have a first name');
 
-        let res;
         try {
-            res = await createEmployee(token, firstName, lastName);
+            await createEmployee(token, firstName, lastName);
         } catch {
             return setError('Employee creation failed');
         }
