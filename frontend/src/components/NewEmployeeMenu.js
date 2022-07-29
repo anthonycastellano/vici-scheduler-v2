@@ -53,13 +53,7 @@ const NewEmployeeMenu = ({ setMode, setMsg }) => {
                 }
 
                 <input type='text' placeholder='First Name' value={firstName} onChange={e => setFirstName(e.target.value)}/>
-
-                <br/>
-
                 <input type='text' placeholder='Last Name' value={lastName} onChange={e => setLastName(e.target.value)}/>
-                
-                <br/>
-
                 <input type='submit' value='Submit' />
             </form>
         </div>

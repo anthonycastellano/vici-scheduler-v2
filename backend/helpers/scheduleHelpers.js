@@ -9,12 +9,11 @@ exports.getSchedules = (params) => {
     return scheduleCollection.find(params).toArray();
 };
 
-exports.createSchedule = async (month, year) => {
-    const scheduleCollection = getDB().collection(SCHEDULE_COLLECTION_NAME);
-    const schedules = await scheduleCollection.find(params).toArray();
+exports.createSchedule = async (month, year, employees) => {
+    const schedules = await exports.getSchedules();
 
     const schedule = ScheduleGenerator(schedules);
-    const generatedMonth = schedule.createNewSchedule(month, year);
+    // const generatedMonth = schedule.createNewSchedule(month, year, employees);
 };
 
 exports.updateSchedule = (schedule) => {

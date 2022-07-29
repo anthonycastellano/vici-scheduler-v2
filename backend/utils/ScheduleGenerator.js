@@ -39,7 +39,7 @@ class ScheduleGenerator {
     }
 
     // Generate a schedule given a month and year using scheduling probabilities, updating probabilities between weeks
-    createNewSchedule(month, year) {
+    createNewSchedule(month, year, employees) {
         const indexToInsert = _.sortedIndexBy(this.schedules, { month, year }, sortingFunction);
         this.schedules = _.slice(this.schedules, 0, indexToInsert).concat([{
             month,
