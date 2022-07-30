@@ -10,15 +10,26 @@ import { scheduleCompareFn } from '../helpers/helpers';
 // styling
 import './css/AdminMenu.scss';
 
+const getYearOptions = (year) => {
+    const yearOptions = [];
+    for (let i = year; i < year+10; i++) {
+        yearOptions.push(i);
+    }
+    return yearOptions;
+};
+
 const NewScheduleMenu = ({ setMsg, setMode }) => {
     const [error, setError] = useState('');
-    const [month, setMonth] = useState();
-    const [year, setYear] = useState();
-    const [employees, setEmployees] = useState([]);
+    const currentDate = new Date();
+    const [month, setMonth] = useState(currentDate.getMonth() + 1);
+    const [year, setYear] = useState(currentDate.getFullYear());
+    const yearOptions = getYearOptions(currentDate.getFullYear());
+    const [selectedEmployees, setSelectedEmployees] = useState([]);
     const [confirmMode, setConfirmMode] = useState(false);
     const [newSchedule, setNewSchedule] = useState();
     const token = localStorage.getItem('token');
     const dispatch = useDispatch();
+    const employees = useSelector(state => state.employees);
 
     const refreshSchedules = () => {
         // refetch and sort schedules
@@ -31,19 +42,43 @@ const NewScheduleMenu = ({ setMsg, setMode }) => {
     const handleSubmit = async (e) => {
         e.preventDefault();
 
-        let schedule;
         try {
-           schedule = await createSchedule(token, month, year, employees);
+           setNewSchedule(await createSchedule(token, month, year, selectedEmployees));
         } catch {
             return setError('Schedule creation failed');
         }
 
-        // TODO: confirm step after displaying new schedule, prompt for regeneration
+        setConfirmMode(true);
+    };
+
+    const handleConfirm = async (e) => {
 
         setMsg(`${month}/${year} schedule was added to the system`);
         refreshSchedules();
         setMode(CONSTANTS.ADMIN_MODE_MENU);
     };
+
+    const renderMonthSelector = () => (
+        <select value={month} onChange={(e) => setMonth(e.target.value)}>
+            {CONSTANTS.MONTH_OPTIONS.map((monthOption, index) =>
+                <option key={`${monthOption}-selector`} value={index + 1}>{monthOption}</option>
+            )}
+        </select>
+    );
+
+    const renderYearSelector = () => (
+        <select value={year} onChange={(e) => setYear(e.target.value)}>
+            {yearOptions.map((yearOption) =>
+                <option key={`${yearOption}-selector`} value={yearOption}>{yearOption}</option>
+            )}
+        </select>
+    );
+
+    const renderEmployeeSelector = () => (
+        <select>
+
+        </select>
+    );
 
     return (
         <div>
@@ -52,22 +87,30 @@ const NewScheduleMenu = ({ setMsg, setMode }) => {
             {
                 !confirmMode ?
                     <form className='new-employee-form' onSubmit={handleSubmit}>
-                    <h2>Create Schedule:</h2>
+                        <h2>Create Schedule:</h2>
 
-                    {error &&
-                        <div className='error-alert'>
-                            <p>{error}</p>
-                        </div>
-                    }
+                        {error &&
+                            <div className='error-alert'>
+                                <p>{error}</p>
+                            </div>
+                        }
 
-                    <input type='submit' value='Submit' />
-                </form>
+                        {renderMonthSelector()}
+                        {renderYearSelector()}
+                        {renderEmployeeSelector()}
+
+                        <input type='submit' value='Submit' />
+                    </form>
                 :
-                <div>
-                    Confirm?
-                </div>
+                    <div>
+                        <h2>Confirm schedule:</h2>
+
+                        <select>
+                            
+                        </select>
+                        
+                    </div>
             }
-            
         </div>
     );
 };
