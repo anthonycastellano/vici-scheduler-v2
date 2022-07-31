@@ -9,6 +9,8 @@ const Stats = ({ setMode }) => {
     return (
         <div>
             <button className='back-btn' onClick={() => setMode(CONSTANTS.ADMIN_MODE_MENU)}><MdOutlineNavigateBefore/></button>
+
+            <p>Coming soon...</p>
         </div>
     );
 };

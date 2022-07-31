@@ -11,3 +11,23 @@
 h2 {
     padding-top: 1rem;
 }
+
+div.date-selectors {
+    display: flex;
+    justify-content: center;
+}
+
+.date-selectors select {
+    margin: 1rem;
+    width: 5rem;
+    height: 2rem;
+    font-size: 1rem;
+    border-radius: 1rem;
+}
+
+div.employee-selector select{
+    margin: 1rem;
+    width: 10rem;
+    text-align: center;
+    border-radius: 1rem;
+}

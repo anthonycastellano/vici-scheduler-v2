@@ -50,14 +50,9 @@ const NewScheduleMenu = ({ setMsg, setMode }) => {
         }
 
         setNewSchedule(res.data);
-        setConfirmMode(true);
-    };
-
-    const handleConfirm = async (e) => {
-
         setMsg(`${month}/${year} schedule was added to the system`);
         refreshSchedules();
-        setMode(CONSTANTS.ADMIN_MODE_MENU);
+        setConfirmMode(true);
     };
 
     const updateSelectedEmployees = (e) => {
@@ -98,7 +93,7 @@ const NewScheduleMenu = ({ setMsg, setMode }) => {
 
             {
                 !confirmMode ?
-                    <form className='new-employee-form' onSubmit={handleSubmit}>
+                    <form onSubmit={handleSubmit}>
                         <h2>Create Schedule:</h2>
 
                         {error &&
@@ -107,18 +102,21 @@ const NewScheduleMenu = ({ setMsg, setMode }) => {
                             </div>
                         }
 
-                        {renderMonthSelector()}
-                        {renderYearSelector()}
-                        {renderEmployeeSelector()}
+                        <div className='date-selectors'>
+                            {renderMonthSelector()}
+                            {renderYearSelector()}
+                        </div>
+                        
+                        <div className='employee-selector'>
+                            {renderEmployeeSelector()}
+                        </div>
 
                         <input type='submit' value='Submit' />
                     </form>
                 :
-                    <form onSubmit={handleConfirm}>
-                        <h2>Confirm schedule:</h2>
-
-                        <input type='submit' value='Confirm' />
-                    </form>
+                    <div>
+                        <h2>{`${month}/${year} schedule:`}</h2>
+                    </div>
             }
         </div>
     );

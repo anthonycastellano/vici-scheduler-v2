@@ -43,7 +43,7 @@ const NewEmployeeMenu = ({ setMode, setMsg }) => {
         <div>
             <button className='back-btn' onClick={() => setMode(CONSTANTS.ADMIN_MODE_MENU)}><MdOutlineNavigateBefore/></button>
 
-            <form className='new-employee-form' onSubmit={handleSubmit}>
+            <form onSubmit={handleSubmit}>
                 <h2>Create Employee:</h2>
 
                 {error &&
