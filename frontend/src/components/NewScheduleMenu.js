@@ -42,12 +42,14 @@ const NewScheduleMenu = ({ setMsg, setMode }) => {
     const handleSubmit = async (e) => {
         e.preventDefault();
 
+        let res;
         try {
-           setNewSchedule(await createSchedule(token, month, year, selectedEmployees));
+            res = await createSchedule(token, month, year, selectedEmployees);
         } catch {
             return setError('Schedule creation failed');
         }
 
+        setNewSchedule(res.data);
         setConfirmMode(true);
     };
 
@@ -57,6 +59,14 @@ const NewScheduleMenu = ({ setMsg, setMode }) => {
         refreshSchedules();
         setMode(CONSTANTS.ADMIN_MODE_MENU);
     };
+
+    const updateSelectedEmployees = (e) => {
+        const employeeList = [];
+        for (const employee of e.target.selectedOptions) {
+            employeeList.push(employee.value);
+        }
+        setSelectedEmployees(employeeList);
+    }
 
     const renderMonthSelector = () => (
         <select value={month} onChange={(e) => setMonth(e.target.value)}>
@@ -75,8 +85,10 @@ const NewScheduleMenu = ({ setMsg, setMode }) => {
     );
 
     const renderEmployeeSelector = () => (
-        <select>
-
+        <select multiple={true} onChange={updateSelectedEmployees}>
+            {employees.map((employee) =>
+                <option key={`${employee._id}-option`} value={employee._id}>{`${employee.firstName} ${employee.lastName}`}</option>
+            )}
         </select>
     );
 
@@ -102,14 +114,11 @@ const NewScheduleMenu = ({ setMsg, setMode }) => {
                         <input type='submit' value='Submit' />
                     </form>
                 :
-                    <div>
+                    <form onSubmit={handleConfirm}>
                         <h2>Confirm schedule:</h2>
 
-                        <select>
-                            
-                        </select>
-                        
-                    </div>
+                        <input type='submit' value='Confirm' />
+                    </form>
             }
         </div>
     );

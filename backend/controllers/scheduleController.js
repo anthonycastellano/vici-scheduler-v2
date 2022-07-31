@@ -25,8 +25,8 @@ exports.create = async (req, res) => {
         return res.status(400).send(e);
     }
 
-    const newSchedule = await scheduleHelpers.createSchedule(req.body.month, req.body.year, req.body.employees);
-    res.send('hello');
+    // const newSchedule = await scheduleHelpers.createSchedule(req.body.month, req.body.year, req.body.employees);
+    res.json(req.body);
 };
 
 // modify existing schedule
