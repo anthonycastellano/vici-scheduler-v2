@@ -4,66 +4,78 @@ const dummySchedules = [
     {
         month: 1,
         year: 2022,
-        leads: ["6240b97df411b90a47bfe4d3",
-		"6240b985f411b90a47bfe4d4",
-		"6240b989f411b90a47bfe4d5",
-		"6240b98df411b90a47bfe4d6"],
-        backups: ["6240b98df411b90a47bfe4d6",
-		"6240b991f411b90a47bfe4d7",
-		"6240b97df411b90a47bfe4d3",
-		"6240b989f411b90a47bfe4d5"]
+        leads: ["1","2","7","2"],
+        backups: ["4","5","2","1"]
     },
     {
-        month: 3,
+        month: 4,
         year: 2022,
-        leads: [],
-        backups: []
+        leads: ['3','2','1','4','1'],
+        backups: ['1','1','2','3','4']
     },
     {
         month: 2,
         year: 2022,
-        leads: [],
-        backups: []
+        leads: ['1','1','2','3','4'],
+        backups: ['3','2','1','4','1']
     }
 ]
 
-const sortingFunction = (s) => s.month + s.year * 12;
+const ALPHA_INIT = 100;
+const ALPHA_GROWTH_RATE = 1.2;
+const LEAD_COEF = 0.5;
+const BACKUP_COEF = 0.8;
+
+const sortingFunction = (s) => s.month + (s.year * 12);
 
 class ScheduleGenerator {
     constructor(schedules) {
         this.schedules = _.sortBy(schedules, [sortingFunction]);
     }
 
-    getSchedules() {
-        return this.schedules;
-    }
-
-    // Generate a schedule given a month and year using scheduling probabilities, updating probabilities between weeks
+    // generate a schedule given month, year, and list of employees
     createNewSchedule(month, year, employees) {
         const indexToInsert = _.sortedIndexBy(this.schedules, { month, year }, sortingFunction);
-        this.schedules = _.slice(this.schedules, 0, indexToInsert).concat([{
+        this.schedules = _.slice(this.schedules, 0, indexToInsert);
+
+        // get num of Saturdays in month
+        const sats = 4;
+
+        // schedule employees using probabilities for each weekend, update probability after selection
+        const leads = [];
+        const backups = [];
+        for (let i = 0; i < sats; i++) {
+
+        }
+
+        return {
             month,
             year,
-            leads: [],
-            backups: []
-        }]).concat();
-        console.log(this.schedules);
+            leads,
+            backups
+        }
     }
 
-    // get 4 previous weeks
-    // get full list of employees
-    // traverse months backwards building queue of employees
-    // queue used when scheduling
-    buildRecentObject(month, year) {
-        const recents = {};
-        let runningWeeks = 0;
+    buildEmployeeRecentScores(employees) {
+        const scores = {};
+        let alpha = ALPHA_INIT;
         for (let i = this.schedules.length - 1; i >= 0; i--) {
-            for (let j = this.schedules[i].leads.length - 1; i > 0; i--) {
-                let empObj = this.schedules[i].leads
+            currentSchedule = this.schedules[i];
+            for (let j = currentSchedule.leads.length - 1; j > 0; j--) {
+                // increment score for lead
+                currentLead = currentSchedule.leads[j];
+                if (scores[currentLead]) {
+                    scores[currentLead] 
+                } else {
+                    scores[currentLead] 
+                }
+
+                currentBackup = currentSchedule.backups[j];
             }
+            alpha *= ALPHA_GROWTH_RATE;
         }
     }
 }
 
 const g = new ScheduleGenerator(dummySchedules);
-// g.createNewSchedule(4, 2022);
+console.log(g.createNewSchedule(3, 2022, ['1','2','3','4','5']));

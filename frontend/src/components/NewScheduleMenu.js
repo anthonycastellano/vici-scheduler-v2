@@ -102,11 +102,13 @@ const NewScheduleMenu = ({ setMsg, setMode }) => {
                             </div>
                         }
 
+                        <p>Month/year:</p>
                         <div className='date-selectors'>
                             {renderMonthSelector()}
                             {renderYearSelector()}
                         </div>
                         
+                        <p>Included employees:</p>
                         <div className='employee-selector'>
                             {renderEmployeeSelector()}
                         </div>

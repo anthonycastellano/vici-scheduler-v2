@@ -10,10 +10,11 @@ exports.getSchedules = (params) => {
 };
 
 exports.createSchedule = async (month, year, employees) => {
+    const scheduleCollection = getDB().collection(SCHEDULE_COLLECTION_NAME);
     const schedules = await exports.getSchedules();
 
-    const schedule = ScheduleGenerator(schedules);
-    // const generatedMonth = schedule.createNewSchedule(month, year, employees);
+    const generator = ScheduleGenerator(schedules);
+    return(generator.createNewSchedule(month, year, employees));
 };
 
 exports.updateSchedule = (schedule) => {
@@ -28,4 +29,9 @@ exports.updateSchedule = (schedule) => {
 exports.deleteSchedule = (id) => {
     const scheduleCollection = getDB().collection(SCHEDULE_COLLECTION_NAME);
     return scheduleCollection.deleteOne({ _id: ObjectId(id) });
+};
+
+exports.exists = (month, year) => {
+    const scheduleCollection = getDB().collection(SCHEDULE_COLLECTION_NAME);
+    return scheduleCollection.find({ month, year }.toArray().length)
 };
