@@ -38,62 +38,75 @@ class ScheduleGenerator {
     createNewSchedule(month, year, employees) {
         const indexToInsert = _.sortedIndexBy(this.schedules, { month, year }, sortingFunction);
         this.schedules = _.slice(this.schedules, 0, indexToInsert);
+        this.schedules.push({
+            month,
+            year,
+            leads: [],
+            backups: []
+        });
+        const newSchedule = this.schedules[indexToInsert];
 
         // TODO: get num of Saturdays in month
-        const sats = 4;
+        const saturdays = 4;
 
-        // schedule employees using probabilities for each weekend, update probability after selection
-        const leads = [];
-        const backups = [];
-        for (let i = 0; i < sats; i++) {
+        for (let i = 0; i < saturdays; i++) {
+            const employeeProbabilities = this.buildEmployeeProbabilities(employees);
 
+            // choose lead
+            const newLead = this.chooseEmployee(employees, employeeProbabilities);
+            newSchedule.leads.push(newLead);
+
+            // set lead probability to 0 (unless only 1 employee)
+            if (employees.length >  1) employeeProbabilities[newLead] = 0;
+
+            // choose backup
+            const newBackup = this.chooseEmployee(employees, employeeProbabilities);
+            newSchedule.backups.push(newBackup);
         }
-	return this.buildEmployeeRecentScores(employees);
-        //return {
-        //    month,
-        //    year,
-        //    leads,
-        //    backups
-        //}
+
+        return newSchedule;
     }
 
-    buildEmployeeRecentScores(employees) {
+    buildEmployeeProbabilities(employees) {
         const scores = {};
         let alpha = ALPHA_INIT;
-	let maxScore = 0;
+        let maxScore = 0;
+
         for (let i = this.schedules.length - 1; i >= 0; i--) {
             const currentSchedule = this.schedules[i];
             for (let j = currentSchedule.leads.length - 1; j > 0; j--) {
                 const currentLead = currentSchedule.leads[j];
-		if (employees.includes(currentLead)) {
-		    // increment score for lead
+    	        if (employees.includes(currentLead)) {
+                    // increment score for lead
                     if (!scores[currentLead]) {
                         scores[currentLead] = alpha * LEAD_COEF; 
                     }
-		    maxScore = Math.max(maxScore, scores[currentLead]);
-		}
+                    maxScore = Math.max(maxScore, scores[currentLead]);
+                }
 
                 const currentBackup = currentSchedule.backups[j];
-		if (employees.includes(currentBackup)) {
-		    // increment score for backup
-		    if (!scores[currentBackup]) {
-		        scores[currentBackup] = alpha * BACKUP_COEF;
-		    } 
-		    maxScore = Math.max(maxScore, scores[currentBackup]);
-		}
+                if (employees.includes(currentBackup)) {
+                    // increment score for backup
+                    if (!scores[currentBackup]) {
+                        scores[currentBackup] = alpha * BACKUP_COEF;
+                    } 
+                    maxScore = Math.max(maxScore, scores[currentBackup]);
+                }
 
-		// increase alpha value
-           	alpha *= ALPHA_GROWTH_RATE;
-	    }
+                // increase alpha value
+                alpha *= ALPHA_GROWTH_RATE;
+            }
         }
-		
-	// set scores for unscheduled employees
-	for (const employee of employees) {
-		if (!scores[employee]) {
-			scores[employee] = maxScore * UNSCHEDULED_MULTIPLIER;
-		}
-	}
-	return scores;
+
+        // set scores for unscheduled employees
+        for (const employee of employees) {
+            if (!scores[employee]) scores[employee] = maxScore * UNSCHEDULED_MULTIPLIER;
+        }
+        return scores;
+    }
+
+    chooseEmployee(employees, probabilities) {
+        return employees[0];
     }
 }
 
