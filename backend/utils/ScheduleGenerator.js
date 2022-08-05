@@ -21,12 +21,6 @@ const dummySchedules = [
     }
 ]
 
-const ALPHA_INIT = 1;
-const ALPHA_GROWTH_RATE = 1.2;
-const LEAD_COEF = 0.5;
-const BACKUP_COEF = 1;
-const UNSCHEDULED_MULTIPLIER = 3;
-
 const sortingFunction = (s) => s.month + (s.year * 12);
 
 class ScheduleGenerator {
@@ -50,80 +44,18 @@ class ScheduleGenerator {
         const saturdays = 4;
 
         for (let i = 0; i < saturdays; i++) {
-            const employeeProbabilities = this.buildEmployeeProbabilities(employees);
-
             // choose lead
-            const newLead = this.chooseEmployee(employees, employeeProbabilities);
+            let newLead = _.sample(employees);
+            // decrease probability of getting chosen 2 times in a schedule
+            if (newSchedule.leads.includes(newLead)) newLead = _.sample(employees);
             newSchedule.leads.push(newLead);
 
-            // set lead probability to 0 (unless only 1 employee)
-            if (employees.length >  1) employeeProbabilities[newLead] = 0;
-
             // choose backup
-            const newBackup = this.chooseEmployee(employees, employeeProbabilities);
+            const newBackup = _.sample(employees.filter(e => e != newLead));
             newSchedule.backups.push(newBackup);
         }
 
         return newSchedule;
-    }
-
-    buildEmployeeProbabilities(employees) {
-        const scores = {};
-        let alpha = ALPHA_INIT;
-        let maxScore = 0;
-
-        for (let i = this.schedules.length - 1; i >= 0; i--) {
-            const currentSchedule = this.schedules[i];
-            for (let j = currentSchedule.leads.length - 1; j > 0; j--) {
-                const currentLead = currentSchedule.leads[j];
-    	        if (employees.includes(currentLead)) {
-                    // increment score for lead
-                    if (!scores[currentLead]) {
-                        scores[currentLead] = alpha * LEAD_COEF; 
-                    }
-                    maxScore = Math.max(maxScore, scores[currentLead]);
-                }
-
-                const currentBackup = currentSchedule.backups[j];
-                if (employees.includes(currentBackup)) {
-                    // increment score for backup
-                    if (!scores[currentBackup]) {
-                        scores[currentBackup] = alpha * BACKUP_COEF;
-                    } 
-                    maxScore = Math.max(maxScore, scores[currentBackup]);
-                }
-
-                // increase alpha value
-                alpha *= ALPHA_GROWTH_RATE;
-            }
-        }
-
-        // set scores for unscheduled employees
-        for (const employee of employees) {
-            if (!scores[employee]) scores[employee] = maxScore * UNSCHEDULED_MULTIPLIER;
-        }
-        return scores;
-    }
-
-    chooseEmployee(employees, probabilities) {
-        // transform probability object into array
-        const employeeProbabilities = [];
-        for (const employee of employees) {
-            employeeProbabilities.push(probabilities[employee]);
-        }
-
-        // add previous num in array to each element
-        for (let i = 1; i < employeeProbabilities.length; i++) {
-            employeeProbabilities[i] += employeeProbabilities[i-1];
-        }
-
-        // choose random number within [0, last value in probability array)
-        const random = Math.random() * employeeProbabilities[employeeProbabilities.length - 1];
-        
-        // iterate through array and return first nubmer greater than random
-        for (let i = 0; i < employeeProbabilities.length; i++) {
-            if (employeeProbabilities[i] > random) return employees[i];
-        }
     }
 }
 
@@ -132,7 +64,6 @@ const g = new ScheduleGenerator(dummySchedules);
 let count = 0;
 for (let i = 0; i < 1000; i++) {
     let s = g.createNewSchedule(3, 2022, ['1','2','3','4','5','10']);
-console.log(s);
     let obj = {};
     for (const e of s.leads) {
         if (obj[e]) {
