@@ -115,7 +115,6 @@ const NewScheduleMenu = ({ setMsg, setMode }) => {
 
     const renderNewSchedule = () => {
         const saturdays = getSaturdays(year, month);
-        // TODO: convert employees
         return saturdays.map((day, index) =>
             <tr key={`${day}-row`}>
                 <td>{`${month}/${day}`}</td>
@@ -154,20 +153,22 @@ const NewScheduleMenu = ({ setMsg, setMode }) => {
                         <input type='submit' value='Submit' />
                     </form>
                 :
-                    <div>
-                        <h2>{`${month}/${year} schedule:`}</h2>
-                        <table>
-                            <thead>
-                                <tr>
-                                    <td>Weekend</td>
-                                    <td>Primary</td>
-                                    <td>Secondary</td>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                {renderNewSchedule()}
-                            </tbody>
-                        </table>
+                    <div className='new-schedule-item'>
+                        <h1>{`${month}/${year} Schedule:`}</h1>
+                        <div className='new-schedule-item-table'>
+                            <table>
+                                <thead>
+                                    <tr>
+                                        <td><p>Weekend</p></td>
+                                        <td><p>Primary</p></td>
+                                        <td><p>Secondary</p></td>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    {renderNewSchedule()}
+                                </tbody>
+                            </table>
+                        </div>
                     </div>
             }
         </div>
