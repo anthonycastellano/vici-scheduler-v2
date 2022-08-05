@@ -41,24 +41,18 @@ const employeeSanitizationRules = {
 };
 
 // schedules
-const scheduleValidationRules = {
+const createScheduleValidationRules = {
     month: [
-        validations.number()
+        validations.number(),
+        validations.required()
     ],
     year: [
-        validations.number()
+        validations.number(),
+        validations.required()
     ],
-    leads: [
-        validations.array()
-    ],
-    'leads.*': [
-        validations.alphaNumeric()
-    ],
-    backups: [
-        validations.array()
-    ],
-    'backups.*': [
-        validations.alphaNumeric()
+    employees: [
+        validations.array(),
+        validations.required()
     ]
 };
 
@@ -108,6 +102,10 @@ const scheduleSanitizationRules = {
     'backups.*': [
         sanitizations.stripTags(),
         sanitizations.trim()
+    ],
+    'employees.*': [
+        sanitizations.stripTags(),
+        sanitizations.trim()
     ]
 };
 
@@ -138,8 +136,8 @@ exports.validateEmployee = (data) => validate(data, employeeValidationRules);
 exports.validateEmployeeWithID = (data) => validate(data, employeeWithIDValidationRules);
 exports.sanitizeEmployee = (data) => sanitize(data, employeeSanitizationRules);
 
-exports.validateSchedule = (data) => validate(data, scheduleValidationRules);
 exports.validateScheduleWithID = (data) => validate(data, scheduleWithIDValidationRules);
+exports.validateCreateSchedule = (data) => validate(data, createScheduleValidationRules);
 exports.sanitizeSchedule = (data) => sanitize(data, scheduleSanitizationRules);
 
 exports.validateAuth = (data) => validate(data, authValidationRules);

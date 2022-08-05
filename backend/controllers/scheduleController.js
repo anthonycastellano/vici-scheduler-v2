@@ -1,5 +1,5 @@
 const scheduleHelpers = require('../helpers/scheduleHelpers');
-const { sanitizeSchedule, validateSchedule, validateScheduleWithID } = require('../helpers/validateHelpers');
+const { sanitizeSchedule, validateScheduleWithID, validateCreateSchedule } = require('../helpers/validateHelpers');
 
 // return one or all schedules
 exports.get = async (req, res) => {
@@ -19,14 +19,20 @@ exports.create = async (req, res) => {
 
     // validate body
     try {
-        await validateSchedule(req.body);
+        await validateCreateSchedule(req.body);
     } catch (e) {
         e[0].error = 'Validation failed';
         return res.status(400).send(e);
     }
 
-    const newSchedule = await scheduleHelpers.createSchedule(req.body.month, req.body.year);
-    
+    // TODO: check if already exists
+    if (await scheduleHelpers.exists(req.body.month, req.body.year)) return res.status(400).json({ error: 'Schedule already exists for selected month' });
+
+    const newSchedule = await scheduleHelpers.createSchedule(req.body.month, req.body.year, req.body.employees);
+
+    if (newSchedule) return res.status(201).json(newSchedule[0]);
+
+    return res.status(500).json({ error: 'Error creating schedule' });
 };
 
 // modify existing schedule

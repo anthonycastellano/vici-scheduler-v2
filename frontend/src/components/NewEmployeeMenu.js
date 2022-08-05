@@ -43,7 +43,7 @@ const NewEmployeeMenu = ({ setMode, setMsg }) => {
         <div>
             <button className='back-btn' onClick={() => setMode(CONSTANTS.ADMIN_MODE_MENU)}><MdOutlineNavigateBefore/></button>
 
-            <form className='new-employee-form' onSubmit={handleSubmit}>
+            <form onSubmit={handleSubmit}>
                 <h2>Create Employee:</h2>
 
                 {error &&
@@ -53,13 +53,7 @@ const NewEmployeeMenu = ({ setMode, setMsg }) => {
                 }
 
                 <input type='text' placeholder='First Name' value={firstName} onChange={e => setFirstName(e.target.value)}/>
-
-                <br/>
-
                 <input type='text' placeholder='Last Name' value={lastName} onChange={e => setLastName(e.target.value)}/>
-                
-                <br/>
-
                 <input type='submit' value='Submit' />
             </form>
         </div>

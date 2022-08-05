@@ -30,7 +30,7 @@ const Admin = () => {
             case CONSTANTS.ADMIN_MODE_EMPLOYEE:
                 return <NewEmployeeMenu setMode={setMode} setMsg={setMsg}/>
             case CONSTANTS.ADMIN_MODE_SCHEDULE:
-                return <NewScheduleMenu setMode={setMode}/>
+                return <NewScheduleMenu setMode={setMode} setMsg={setMsg}/>
             case CONSTANTS.ADMIN_MODE_STATS:
                 return <Stats setMode={setMode}/>
             default:
@@ -50,7 +50,7 @@ const Admin = () => {
             {loggedIn ?
             <div>
                 {renderMenu()}
-                {msg && <p>{msg}</p>}
+                {mode === CONSTANTS.ADMIN_MODE_MENU && msg && <p>{msg}</p>}
             </div>
             :
             <div>
