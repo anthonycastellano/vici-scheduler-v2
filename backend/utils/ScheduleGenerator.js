@@ -25,7 +25,7 @@ const ALPHA_INIT = 1;
 const ALPHA_GROWTH_RATE = 1.2;
 const LEAD_COEF = 0.5;
 const BACKUP_COEF = 1;
-const UNSCHEDULED_MULTIPLIER = 2;
+const UNSCHEDULED_MULTIPLIER = 3;
 
 const sortingFunction = (s) => s.month + (s.year * 12);
 
@@ -106,9 +106,40 @@ class ScheduleGenerator {
     }
 
     chooseEmployee(employees, probabilities) {
-        return employees[0];
+        // transform probability object into array
+        const employeeProbabilities = [];
+        for (const employee of employees) {
+            employeeProbabilities.push(probabilities[employee]);
+        }
+
+        // add previous num in array to each element
+        for (let i = 1; i < employeeProbabilities.length; i++) {
+            employeeProbabilities[i] += employeeProbabilities[i-1];
+        }
+
+        // choose random number within [0, last value in probability array)
+        const random = Math.random() * employeeProbabilities[employeeProbabilities.length - 1];
+        
+        // iterate through array and return first nubmer greater than random
+        for (let i = 0; i < employeeProbabilities.length; i++) {
+            if (employeeProbabilities[i] > random) return employees[i];
+        }
     }
 }
 
 const g = new ScheduleGenerator(dummySchedules);
-console.log(g.createNewSchedule(3, 2022, ['1','2','3','4','5','10']));
+
+let count = 0;
+for (let i = 0; i < 1000; i++) {
+    let s = g.createNewSchedule(3, 2022, ['1','2','3','4','5','10']);
+console.log(s);
+    let obj = {};
+    for (const e of s.leads) {
+        if (obj[e]) {
+            count++;
+            break;
+        }
+        else obj[e] = true;
+    }
+}
+console.log(count/1000);
