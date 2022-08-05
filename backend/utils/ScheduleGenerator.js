@@ -23,54 +23,34 @@ const dummySchedules = [
 
 const sortingFunction = (s) => s.month + (s.year * 12);
 
-class ScheduleGenerator {
-    constructor(schedules) {
-        this.schedules = _.sortBy(schedules, [sortingFunction]);
+// generate a schedule given month, year, and list of employees
+exports.createNewSchedule = (schedules, month, year, employees) => {
+    schedules = _.sortBy(schedules, [sortingFunction]);
+    
+    const indexToInsert = _.sortedIndexBy(schedules, { month, year }, sortingFunction);
+    schedules = _.slice(schedules, 0, indexToInsert);
+    schedules.push({
+        month,
+        year,
+        leads: [],
+        backups: []
+    });
+    const newSchedule = schedules[indexToInsert];
+    
+    // TODO: get num of Saturdays in month
+    const saturdays = 4;
+
+    for (let i = 0; i < saturdays; i++) {
+        // choose lead
+        let newLead = _.sample(employees);
+        // decrease probability of getting chosen 2 times in a schedule
+        if (newSchedule.leads.includes(newLead)) newLead = _.sample(employees);
+        newSchedule.leads.push(newLead);
+
+        // choose backup
+        const newBackup = _.sample(employees.filter(e => e != newLead));
+        newSchedule.backups.push(newBackup);
     }
 
-    // generate a schedule given month, year, and list of employees
-    createNewSchedule(month, year, employees) {
-        const indexToInsert = _.sortedIndexBy(this.schedules, { month, year }, sortingFunction);
-        this.schedules = _.slice(this.schedules, 0, indexToInsert);
-        this.schedules.push({
-            month,
-            year,
-            leads: [],
-            backups: []
-        });
-        const newSchedule = this.schedules[indexToInsert];
-
-        // TODO: get num of Saturdays in month
-        const saturdays = 4;
-
-        for (let i = 0; i < saturdays; i++) {
-            // choose lead
-            let newLead = _.sample(employees);
-            // decrease probability of getting chosen 2 times in a schedule
-            if (newSchedule.leads.includes(newLead)) newLead = _.sample(employees);
-            newSchedule.leads.push(newLead);
-
-            // choose backup
-            const newBackup = _.sample(employees.filter(e => e != newLead));
-            newSchedule.backups.push(newBackup);
-        }
-
-        return newSchedule;
-    }
+    return newSchedule;
 }
-
-const g = new ScheduleGenerator(dummySchedules);
-
-let count = 0;
-for (let i = 0; i < 1000; i++) {
-    let s = g.createNewSchedule(3, 2022, ['1','2','3','4','5','10']);
-    let obj = {};
-    for (const e of s.leads) {
-        if (obj[e]) {
-            count++;
-            break;
-        }
-        else obj[e] = true;
-    }
-}
-console.log(count/1000);
