@@ -29,7 +29,10 @@ exports.create = async (req, res) => {
     if (await scheduleHelpers.exists(req.body.month, req.body.year)) return res.status(400).json({ error: 'Schedule already exists for selected month' });
 
     const newSchedule = await scheduleHelpers.createSchedule(req.body.month, req.body.year, req.body.employees);
-    res.status(201).json(newSchedule);
+
+    if (newSchedule) return res.status(201).json(newSchedule);
+
+    return res.status(500).json({ error: 'Error creating schedule' });
 };
 
 // modify existing schedule

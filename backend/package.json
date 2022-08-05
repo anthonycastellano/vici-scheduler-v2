@@ -14,7 +14,6 @@
     "express": "^4.17.3",
     "indicative": "^7.4.4",
     "jsonwebtoken": "^8.5.1",
-    "lodash": "^4.17.21",
     "mongodb": "^4.4.1"
   },
   "devDependencies": {
