@@ -30,7 +30,7 @@ exports.create = async (req, res) => {
 
     const newSchedule = await scheduleHelpers.createSchedule(req.body.month, req.body.year, req.body.employees);
 
-    if (newSchedule) return res.status(201).json(newSchedule);
+    if (newSchedule) return res.status(201).json(newSchedule[0]);
 
     return res.status(500).json({ error: 'Error creating schedule' });
 };

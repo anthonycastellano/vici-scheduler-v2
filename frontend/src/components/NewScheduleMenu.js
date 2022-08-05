@@ -6,6 +6,7 @@ import { MdOutlineNavigateBefore } from 'react-icons/md';
 // helpers
 import { getSchedules, createSchedule } from '../apiHelpers/schedule';
 import { scheduleCompareFn } from '../helpers/helpers';
+import { getSaturdays } from '../helpers/calendarHelpers';
 
 // styling
 import './css/AdminMenu.scss';
@@ -87,6 +88,18 @@ const NewScheduleMenu = ({ setMsg, setMode }) => {
         </select>
     );
 
+    const renderNewSchedule = () => {
+        const saturdays = getSaturdays(year, month);
+        // TODO: convert employees
+        return saturdays.map((day, index) =>
+            <tr key={`${day}-row`}>
+                <td>{`${month}/${day}`}</td>
+                <td>{newSchedule.leads[index]}</td>
+                <td>{newSchedule.backups[index]}</td>
+            </tr>
+        );
+    };
+
     return (
         <div>
             <button className='back-btn' onClick={() => setMode(CONSTANTS.ADMIN_MODE_MENU)}><MdOutlineNavigateBefore/></button>
@@ -118,6 +131,18 @@ const NewScheduleMenu = ({ setMsg, setMode }) => {
                 :
                     <div>
                         <h2>{`${month}/${year} schedule:`}</h2>
+                        <table>
+                            <thead>
+                                <tr>
+                                    <td>Weekend</td>
+                                    <td>Primary</td>
+                                    <td>Secondary</td>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                {renderNewSchedule()}
+                            </tbody>
+                        </table>
                     </div>
             }
         </div>
