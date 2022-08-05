@@ -50,7 +50,7 @@ const NewScheduleMenu = ({ setMsg, setMode }) => {
             return setError('Schedule creation failed');
         }
 
-        setNewSchedule(res.data);
+        setNewSchedule(convertEmployees(res.data));
         setMsg(`${month}/${year} schedule was added to the system`);
         refreshSchedules();
         setConfirmMode(true);
@@ -87,6 +87,31 @@ const NewScheduleMenu = ({ setMsg, setMode }) => {
             )}
         </select>
     );
+
+    const getEmployeeNameFromID = (employeeID) => {
+        const targetEmployee = employees.find((employee) => employee._id === employeeID);
+        if (!targetEmployee) return 'Unknown';
+        else return `${targetEmployee.firstName} ${targetEmployee.lastName}`
+    };
+
+    // convert employee IDs to full names
+    const convertEmployees = (schedule) => {
+        const convertedLeads = [];
+        const convertedBackups = [];
+
+        for (let i = 0; i < schedule.leads.length; i++) {
+            convertedLeads.push(getEmployeeNameFromID(schedule.leads[i]));
+            convertedBackups.push(getEmployeeNameFromID(schedule.backups[i]));
+        }
+
+        return {
+            ...schedule,
+            leads: convertedLeads,
+            backups: convertedBackups,
+            leadIds: schedule.leads,
+            backupIds: schedule.backups
+        };
+    };
 
     const renderNewSchedule = () => {
         const saturdays = getSaturdays(year, month);
