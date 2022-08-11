@@ -15,7 +15,9 @@ const CONSTANTS = {
     ADMIN_MODE_EMPLOYEE: 'employee',
     ADMIN_MODE_SCHEDULE: 'schedule',
     ADMIN_MODE_STATS: 'stats',
-    MONTH_OPTIONS: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec']
+    MONTH_OPTIONS: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'],
+    PRIMARY: 'Primary',
+    SECONDARY: 'Secondary'
 };
 
 export default CONSTANTS; 

@@ -160,8 +160,8 @@ const NewScheduleMenu = ({ setMsg, setMode }) => {
                                 <thead>
                                     <tr>
                                         <td><p>Weekend</p></td>
-                                        <td><p>Primary</p></td>
-                                        <td><p>Secondary</p></td>
+                                        <td><p>{CONSTANTS.PRIMARY}</p></td>
+                                        <td><p>{CONSTANTS.SECONDARY}</p></td>
                                     </tr>
                                 </thead>
                                 <tbody>

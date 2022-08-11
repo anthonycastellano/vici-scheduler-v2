@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { getSaturdays, getCurrentMonthIndex } from '../helpers/calendarHelpers';
 import { useSelector } from 'react-redux';
+import CONSTANTS from '../store/constants';
 
 // styling
 import './css/Accordion.scss';
@@ -24,8 +25,8 @@ const buildEmployeeUpcomingSchedules = (schedules) => {
             const currentLead = schedule.leads[i];
             const currentBackup = schedule.backups[i];
 
-            const leadWeekElement = [`${schedule.month}/${saturdayDates[i]}`, 'Primary'];
-            const backupWeekElement = [`${schedule.month}/${saturdayDates[i]}`, 'Secondary'];
+            const leadWeekElement = [`${schedule.month}/${saturdayDates[i]}`, CONSTANTS.PRIMARY];
+            const backupWeekElement = [`${schedule.month}/${saturdayDates[i]}`, CONSTANTS.SECONDARY];
 
             employeeUpcomingScheduleMap[currentLead] ?
                 employeeUpcomingScheduleMap[currentLead].push(leadWeekElement)

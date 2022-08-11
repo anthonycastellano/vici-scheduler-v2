@@ -81,10 +81,10 @@ const ScheduleAccordionItem = ({
                                     <h3>Weekend</h3>
                                 </th>
                                 <th>
-                                    <h3>Primary</h3>
+                                    <h3>{CONSTANTS.PRIMARY}</h3>
                                 </th>
                                 <th>
-                                    <h3>Secondary</h3>
+                                    <h3>{CONSTANTS.SECONDARY}</h3>
                                 </th>
                             </tr>
                         </thead>
