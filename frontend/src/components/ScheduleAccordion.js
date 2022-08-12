@@ -13,7 +13,8 @@ const ACTIVE_ACCORDION_OFFSET = 100;
 
 
 const ScheduleAccordion = ({ schedules, employees }) => {
-    const [activeIndex, setActiveIndex] = useState(getCurrentMonthIndex(schedules));
+    const currentMonthIdx = getCurrentMonthIndex(schedules);
+    const [activeIndex, setActiveIndex] = useState(currentMonthIdx);
     const activeItem = useRef();
     const loggedIn = useSelector(state => state.loggedIn);
 
@@ -44,7 +45,6 @@ const ScheduleAccordion = ({ schedules, employees }) => {
 
     const renderedSchedules = schedules.map((schedule, index) => {
         const showDescription = index === activeIndex;
-
         return (
             <div key={`${schedule._id}-item`}>
                 <ScheduleAccordionItem
@@ -53,6 +53,7 @@ const ScheduleAccordion = ({ schedules, employees }) => {
                     onClick={() => { setActiveIndex(index) }}
                     activeItem={activeItem}
                     loggedIn={loggedIn}
+                    isCurrentMonth={currentMonthIdx === index}
                 />
             </div>
         );

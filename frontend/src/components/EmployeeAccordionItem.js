@@ -6,7 +6,7 @@ const renderScheduleList = (employee) => employee.upcomingSchedules.map((schedul
     return (
         <tr key={`${schedule[0] + schedule[1]}-row`}>
             <td><p>{schedule[0]}</p></td>
-            <td><p className={schedule[1] === CONSTANTS.PRIMARY && 'highlight'}>{schedule[1]}</p></td>
+            <td><p className={schedule[1] === CONSTANTS.PRIMARY ? 'highlight' : null}>{schedule[1]}</p></td>
         </tr>
     );
 });

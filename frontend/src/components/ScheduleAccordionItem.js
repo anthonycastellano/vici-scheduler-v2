@@ -33,11 +33,11 @@ const ScheduleAccordionItem = ({
     showDescription,
     onClick,
     activeItem,
-    loggedIn
+    loggedIn,
+    isCurrentMonth
 }) => {
     const buttonText = showDescription ? <b>{`${getMonthString(schedule.month)} ${schedule.year}`}</b> : <span>{`${getMonthString(schedule.month)} ${schedule.year}`}</span>;
     const dispatch = useDispatch();
-
     const openModal = (modalType) => {
         dispatch({
             type: CONSTANTS.SET_MODAL_OPEN_ACTION,
@@ -52,7 +52,7 @@ const ScheduleAccordionItem = ({
             className={`schedule-accordion`}
             ref={showDescription ? activeItem : null}>
             <dt>
-                <button onClick={onClick}>{buttonText}</button>
+                <button onClick={onClick} className={isCurrentMonth ? 'current-month' : null}>{buttonText}</button>
 
                 {showDescription && loggedIn &&
                     <MdEditCalendar
