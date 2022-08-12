@@ -63,6 +63,10 @@ div.schedule-accordion-desc.hidden dd {
     margin-bottom: 0.5rem;
 }
 
+.schedule-accordion button.current-month {
+    color: $text-secondary;
+}
+
 // employee accordion
 
 div.employee-accordion {
