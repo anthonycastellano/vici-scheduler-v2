@@ -14,13 +14,13 @@ const Nav = () => {
             <nav>
                 <ul>
                     <li>
-                        <Link to="/"><span className={activeTab === CONSTANTS.SCHEDULES_TAB ? 'active-tab' : ''} >Schedules</span></Link>
+                        <Link to="/"><span className={activeTab === CONSTANTS.SCHEDULES_TAB ? 'active-tab' : null} >Schedules</span></Link>
                     </li>
                     <li>
-                        <Link to='/employees'><span className={activeTab === CONSTANTS.EMPLOYEES_TAB ? 'active-tab' : ''} >Employees</span></Link>
+                        <Link to='/employees'><span className={activeTab === CONSTANTS.EMPLOYEES_TAB ? 'active-tab' : null} >Employees</span></Link>
                     </li>
                     <li>
-                        <Link to='/admin'><span className={activeTab === CONSTANTS.ADMIN_TAB ? 'active-tab' : ''} >Admin</span></Link>
+                        <Link to='/admin'><span className={activeTab === CONSTANTS.ADMIN_TAB ? 'active-tab' : null} >Admin</span></Link>
                     </li>
                 </ul>
             </nav>
