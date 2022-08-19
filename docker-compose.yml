@@ -7,6 +7,8 @@ services:
     volumes:
       - /app/node_modules
       - ./backend:/app
+    depends_on:
+      - mongo
   client:
     build:
       dockerfile: Dockerfile
@@ -24,3 +26,11 @@ services:
     depends_on:
       - api
       - client
+  mongo:
+    image: mongo
+    restart: always
+    environment:
+      - MONGO_INITDB_ROOT_USERNAME=mongo
+      - MONGO_INITDB_ROOT_PASSWORD=mongo
+    ports:
+      - '27017:27017'
