@@ -19,9 +19,8 @@ const Login = () => {
 
         if (!username.length || !password.length) return setError('Must enter username and password')
 
-        let res;
         try {
-            res = await login(username, password);
+            await login(username, password);
         } catch {
             return setError('Authentication failed');
         }
