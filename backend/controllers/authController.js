@@ -1,6 +1,9 @@
 const validateHelpers = require('../helpers/validateHelpers');
 const jwt = require('jsonwebtoken');
 
+const COOKIE_EXP_STR = '12h';
+const COOKIE_EXP_MS = 43200000;
+
 // verify admin credentials and return jwt
 exports.login = async (req, res) => {
     // sanitize body
@@ -25,11 +28,11 @@ exports.login = async (req, res) => {
             { user_id: req.body.username },
             process.env.TOKEN_KEY,
             {
-                expiresIn: "12h"
+                expiresIn: COOKIE_EXP_STR
             }
         );
 
-        return res.status(200).cookie('token', token, { httpOnly: true }).send('Success');
+        return res.status(200).cookie('token', token, { httpOnly: true, maxAge: COOKIE_EXP_MS }).send('Success');
     }
 
     res.status(401).send('Bad credentials');
