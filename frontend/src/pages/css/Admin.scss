@@ -18,3 +18,11 @@ div.admin-menu {
     box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.5);
     color: black;
 }
+
+// desktop
+@media (min-width: 768px){
+    .admin-menu button {
+        width: 30rem;
+        height: 4rem;
+    }
+}
