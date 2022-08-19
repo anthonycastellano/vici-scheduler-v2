@@ -29,7 +29,7 @@ exports.login = async (req, res) => {
             }
         );
 
-        return res.status(200).json({ token} );
+        return res.status(200).cookie('token', token, { httpOnly: true }).send('Success');
     }
 
     res.status(401).send('Bad credentials');

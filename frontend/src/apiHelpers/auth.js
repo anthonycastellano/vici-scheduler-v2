@@ -7,6 +7,11 @@ const login = (username, password) => {
     });
 };
 
+const checkAuth = () => {
+    return axios.get('/api/auth');
+};
+
 export {
-    login
+    login,
+    checkAuth
 };

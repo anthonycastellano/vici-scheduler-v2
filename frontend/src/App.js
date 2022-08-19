@@ -7,6 +7,7 @@ import CONSTANTS from './store/constants'
 import { getSchedules } from './apiHelpers/schedule';
 import { getEmployees } from './apiHelpers/employee';
 import { scheduleCompareFn } from './helpers/helpers';
+import { checkAuth } from './apiHelpers/auth';
 
 // styling
 import './App.scss';
@@ -20,17 +21,12 @@ import Admin from './pages/Admin';
 import Nav from './components/Nav';
 import Modal from './components/Modal';
 
-// constants
-const LOGIN_EXPIRATION = 12;
-const LOCAL_TOKEN = 'token';
-const LOCAL_LOGIN_TIME = 'loginTime';
-
 function App() {
   const dispatch = useDispatch();
   const modalOpen = useSelector(state => state.modal.modalOpen);
 
   // fetch schedules and employees
-  useEffect(() => {
+  useEffect(async () => {
     // fetch schedules and update state
     getSchedules().then(({ data }) => {
         data.sort(scheduleCompareFn);
@@ -43,16 +39,10 @@ function App() {
     });
 
     // update login state
-    if (localStorage.getItem(LOCAL_TOKEN)) {
-      const expirationTime = new Date(parseInt(localStorage.getItem(LOCAL_LOGIN_TIME)) + LOGIN_EXPIRATION * 60 * 60 * 1000);
-
-      if (Date.now() < expirationTime) {
-        dispatch({ type: CONSTANTS.SET_LOGGED_IN_ACTION, loggedIn: true });
-      } else {
-        localStorage.removeItem(LOCAL_TOKEN);
-        localStorage.removeItem(LOCAL_LOGIN_TIME);
-      }
-    }
+    try {
+      await checkAuth();
+      dispatch({ type: CONSTANTS.SET_LOGGED_IN_ACTION, loggedIn: true });
+    } catch { }
   }, []);
 
   return (

@@ -19,7 +19,6 @@ const Modal = () => {
     const employees = useSelector(state => state.employees);
 
     const dispatch = useDispatch();
-    const authToken = localStorage.getItem('token');
     const [errMessage, setErrMessage] = useState();
 
     const [firstName, setFirstName] = useState(data.firstName);
@@ -46,7 +45,7 @@ const Modal = () => {
     const deleteSelectedEmployee = async () => {
         // delete employee
         try {
-            await deleteEmployee(data._id, authToken);
+            await deleteEmployee(data._id);
         } catch (err) {
             setErrMessage(ERROR_MSG);
             return;
@@ -59,7 +58,7 @@ const Modal = () => {
     const deleteSelectedSchedule = async () => {
         // delete schedule
         try {
-            await deleteSchedule(data._id, authToken);
+            await deleteSchedule(data._id);
         } catch (err) {
             setErrMessage(ERROR_MSG);
             return;
@@ -72,7 +71,7 @@ const Modal = () => {
     const updateSelectedEmployee = async () => {
         // update employee
         try {
-            await updateEmployee(data._id, authToken, firstName, lastName);
+            await updateEmployee(data._id, firstName, lastName);
         } catch (err) {
             setErrMessage(ERROR_MSG);
             return;
@@ -85,7 +84,7 @@ const Modal = () => {
     const updateSelectedSchedule = async () => {
         // update schedule
         try {
-            await updateSchedule(data._id, authToken, leads, backups);
+            await updateSchedule(data._id, leads, backups);
         } catch (err) {
             setErrMessage(ERROR_MSG)
             return;

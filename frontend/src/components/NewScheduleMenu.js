@@ -28,7 +28,6 @@ const NewScheduleMenu = ({ setMsg, setMode }) => {
     const [selectedEmployees, setSelectedEmployees] = useState([]);
     const [confirmMode, setConfirmMode] = useState(false);
     const [newSchedule, setNewSchedule] = useState();
-    const token = localStorage.getItem('token');
     const dispatch = useDispatch();
     const employees = useSelector(state => state.employees);
 
@@ -45,7 +44,7 @@ const NewScheduleMenu = ({ setMsg, setMode }) => {
 
         let res;
         try {
-            res = await createSchedule(token, month, year, selectedEmployees);
+            res = await createSchedule(month, year, selectedEmployees);
         } catch {
             return setError('Schedule creation failed');
         }

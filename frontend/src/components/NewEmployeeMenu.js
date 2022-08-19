@@ -13,7 +13,6 @@ const NewEmployeeMenu = ({ setMode, setMsg }) => {
     const [firstName, setFirstName] = useState('');
     const [lastName, setLastName] = useState('');
     const [error, setError] = useState('');
-    const token = localStorage.getItem('token');
     const dispatch = useDispatch();
 
     const refreshEmployees = () => {
@@ -29,7 +28,7 @@ const NewEmployeeMenu = ({ setMode, setMsg }) => {
         if (!firstName.length && !lastName.length) return setError('Employee must have a first name');
 
         try {
-            await createEmployee(token, firstName, lastName);
+            await createEmployee(firstName, lastName);
         } catch {
             return setError('Employee creation failed');
         }

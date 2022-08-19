@@ -6,16 +6,16 @@ const getEmployees = () => {
     return axios.get(EMPLOYEES_ENDPOINT);
 };
 
-const deleteEmployee = (id, token) => {
-    return axios.delete(EMPLOYEES_ENDPOINT, { data: { _id: id, token } });
+const deleteEmployee = (id) => {
+    return axios.delete(EMPLOYEES_ENDPOINT, { data: { _id: id } });
 };
 
-const updateEmployee = (id, token, firstName, lastName) => {
-    return axios.put(EMPLOYEES_ENDPOINT, { _id: id, token, firstName, lastName });
+const updateEmployee = (id, firstName, lastName) => {
+    return axios.put(EMPLOYEES_ENDPOINT, { _id: id, firstName, lastName });
 };
 
-const createEmployee = (token, firstName, lastName) => {
-    return axios.post(EMPLOYEES_ENDPOINT, { token, firstName, lastName });
+const createEmployee = (firstName, lastName) => {
+    return axios.post(EMPLOYEES_ENDPOINT, { firstName, lastName });
 };
 
 export {
