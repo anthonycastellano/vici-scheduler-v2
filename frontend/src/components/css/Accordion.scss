@@ -1,5 +1,7 @@
 @import '../../config';
 
+// mobile
+
 .delete-icon {
     color: darkred;
     margin: 3%;
@@ -128,4 +130,20 @@ div.employee-accordion-desc.hidden dd {
 p.highlight {
     color: $text-secondary;
     font-weight: 600;
+}
+
+
+// desktop
+@media (min-width: 768px){
+    // schedule accordion
+    div.schedule-accordion {
+        margin-left: 30%;
+        margin-right: 30%;
+    }
+
+    // employee accordion
+    div.employee-accordion {
+        margin-left: 35%;
+        margin-right: 35%;
+    }
 }
