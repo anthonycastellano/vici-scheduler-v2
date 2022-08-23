@@ -47,9 +47,15 @@ div.schedule-accordion-desc.hidden dd {
 }
 
 .schedule-accordion-desc table {
-    width: 100%;
-    height: 100%;
-    padding: 5%;
+    width: 90%;
+    height: 90%;
+    border-collapse: collapse;
+    margin-left: 5%;
+    margin-right: 5%;
+}
+
+.schedule-accordion-desc.shown tbody td {
+    border-top: 1px solid gray;
 }
 
 .schedule-accordion button {
@@ -109,9 +115,15 @@ div.employee-accordion-desc.hidden dd {
 }
 
 .employee-accordion-desc table {
-    width: 100%;
-    height: 100%;
-    padding: 5%;
+    width: 90%;
+    height: 90%;
+    border-collapse: collapse;
+    margin-left: 5%;
+    margin-right: 5%;
+}
+
+.employee-accordion-desc.shown tbody td {
+    border-top: 1px solid gray;
 }
 
 .employee-accordion button {
