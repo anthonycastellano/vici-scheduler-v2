@@ -76,8 +76,13 @@ div.employee-selector select {
     color: $text-secondary
 }
 
+#stats-container p {
+    height: 2rem;
+}
+
 .stats-col {
     padding: 0.5rem;
+    max-width: 5rem;
 }
 
 .stats-page select {
