@@ -4,19 +4,23 @@ const { sanitize, sanitizations } = require('indicative/sanitizer');
 // employees
 const employeeValidationRules = {
     firstName: [
-        validations.alpha()
+        validations.regex(['^[a-zA-Z ]+$']),
+        validations.max([12])
     ],
     lastName: [
-        validations.alpha()
+        validations.regex(['^[a-zA-Z ]+$']),
+        validations.max([20])
     ]
 };
 
 const employeeWithIDValidationRules = {
     firstName: [
-        validations.alpha()
+        validations.regex(['^[a-zA-Z ]+$']),
+        validations.max([12])
     ],
     lastName: [
-        validations.alpha()
+        validations.regex(['^[a-zA-Z ]+$']),
+        validations.max([20])
     ],
     _id: [
         validations.alphaNumeric(),

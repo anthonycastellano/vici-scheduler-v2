@@ -25,12 +25,14 @@ const NewEmployeeMenu = ({ setMode, setMsg }) => {
     const handleSubmit = async (e) => {
         e.preventDefault();
 
-        if (!firstName.length && !lastName.length) return setError('Employee must have a first name');
+        if (!firstName.length && !lastName.length) return setError('Employee must have a name');
 
         try {
             await createEmployee(firstName, lastName);
-        } catch {
-            return setError('Employee creation failed');
+        } catch (e) {
+            const res = e.response;
+            const invalidField = CONSTANTS.FIELD_MAP[res.data.field] ? CONSTANTS.FIELD_MAP[res.data.field] : 'creation';
+            return setError(`Validation failed on ${invalidField}`);
         }
 
         setMsg(`${firstName} ${lastName} was added to the system`);
