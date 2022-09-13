@@ -20,7 +20,11 @@ const CONSTANTS = {
     SECONDARY: 'Secondary',
     FILTER_YEAR: 'year',
     FILTER_MONTH: 'month',
-    FILTER_ALL: 'all'
+    FILTER_ALL: 'all',
+    FIELD_MAP: {
+        'firstName': 'first name',
+        'lastName': 'last name'
+    }
 };
 
 export default CONSTANTS; 

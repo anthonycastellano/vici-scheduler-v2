@@ -16,8 +16,7 @@ exports.create = async (req, res) => {
     try {
         await validateEmployee(req.body);
     } catch (e) {
-        e[0].error = 'Validation failed';
-        return res.status(400).send(e);
+        return res.status(400).json(e[0]);
     }
 
     // create employee
