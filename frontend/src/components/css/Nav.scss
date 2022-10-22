@@ -31,6 +31,7 @@
 .nav-header li span {
     padding: 0.2rem;
     border-bottom: 2px solid $background-nav;
+    transition: border-bottom-color 0.3s;
 }
 
 .nav-header li span.active-tab {
