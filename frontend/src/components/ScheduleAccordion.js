@@ -1,6 +1,7 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { getCurrentMonthIndex } from '../helpers/calendarHelpers';
 import { useSelector } from 'react-redux';
+import { convertEmployees } from '../helpers/helpers';
 
 // styling
 import './css/Accordion.scss';
@@ -18,37 +19,12 @@ const ScheduleAccordion = ({ schedules, employees }) => {
     const activeItem = useRef();
     const loggedIn = useSelector(state => state.loggedIn);
 
-    const getEmployeeNameFromID = (employeeID) => {
-        const targetEmployee = employees.find((employee) => employee._id === employeeID);
-        if (!targetEmployee) return 'Unknown';
-        else return `${targetEmployee.firstName} ${targetEmployee.lastName}`
-    };
-
-    // convert employee IDs to full names
-    const convertEmployees = (schedule) => {
-        const convertedLeads = [];
-        const convertedBackups = [];
-
-        for (let i = 0; i < schedule.leads.length; i++) {
-            convertedLeads.push(getEmployeeNameFromID(schedule.leads[i]));
-            convertedBackups.push(getEmployeeNameFromID(schedule.backups[i]));
-        }
-
-        return {
-            ...schedule,
-            leads: convertedLeads,
-            backups: convertedBackups,
-            leadIds: schedule.leads,
-            backupIds: schedule.backups
-        };
-    };
-
     const renderedSchedules = schedules.map((schedule, index) => {
         const showDescription = index === activeIndex;
         return (
             <div key={`${schedule._id}-item`}>
                 <ScheduleAccordionItem
-                    schedule={convertEmployees(schedule)}
+                    schedule={convertEmployees(schedule, employees)}
                     showDescription={showDescription}
                     onClick={() => { setActiveIndex(index) }}
                     activeItem={activeItem}
