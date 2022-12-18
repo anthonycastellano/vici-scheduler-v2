@@ -24,7 +24,8 @@ const CONSTANTS = {
     FIELD_MAP: {
         'firstName': 'first name',
         'lastName': 'last name'
-    }
+    },
+    MAX_LAST_NAME_CHARS: 14
 };
 
 export default CONSTANTS; 
