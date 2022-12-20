@@ -1,9 +1,6 @@
 import { createStore } from 'redux';
 import CONSTANTS from './constants';
 
-// devtools
-import { composeWithDevTools } from 'redux-devtools-extension';
-
 let initialState = {
     schedules: [],
     employees: [],
@@ -52,6 +49,6 @@ const reducer = (state = initialState, action) => {
     return state;
 };
 
-const store = createStore(reducer, composeWithDevTools());
+const store = createStore(reducer);
 
 export default store;
