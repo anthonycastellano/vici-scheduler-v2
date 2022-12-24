@@ -21,13 +21,13 @@ const Stats = ({ setMode }) => {
         const month = new Date().getMonth() + 1;
         switch (filter) {
             case CONSTANTS.FILTER_YEAR:
-                filteredSchedules = schedules.filter(schedule => schedule.year === year);
+                filteredSchedules = schedules ? schedules.filter(schedule => schedule.year === year) : [];
                 break;
             case CONSTANTS.FILTER_MONTH:
-                filteredSchedules = schedules.filter(schedule => schedule.year === year && schedule.month === month);
+                filteredSchedules = schedules ? schedules.filter(schedule => schedule.year === year && schedule.month === month) : [];
                 break;
             default:
-                filteredSchedules = schedules;
+                filteredSchedules = schedules ? schedules : [];
         }
 
         let newStats = { leadStats: {}, backupStats: {} };

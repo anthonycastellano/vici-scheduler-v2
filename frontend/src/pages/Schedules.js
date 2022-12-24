@@ -23,10 +23,16 @@ const Schedules = () => {
 
     return (
         <div>
-            {schedules.length ?
-                <ScheduleAccordion schedules={schedules} employees={employees}/>
+            {schedules ?
+                <div>
+                    {schedules.length ?
+                        <ScheduleAccordion schedules={schedules} employees={employees}/>
+                    :
+                        <img src={LoadingDots} alt='Loading...' />
+                    }
+                </div>
             :
-                <img src={LoadingDots} alt='Loading...' />
+                <p>No schedules created</p>
             }
         </div>
     );

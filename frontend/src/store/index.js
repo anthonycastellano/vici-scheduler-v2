@@ -2,8 +2,8 @@ import { createStore } from 'redux';
 import CONSTANTS from './constants';
 
 let initialState = {
-    schedules: [],
-    employees: [],
+    schedules: null,
+    employees: null,
     activeTab: CONSTANTS.SCHEDULES_TAB,
     loggedIn: false,
     modal: {

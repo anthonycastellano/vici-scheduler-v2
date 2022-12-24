@@ -26,10 +26,17 @@ const Employees = () => {
 
     return (
         <div>
-            {employees.length ?
-                <EmployeeAccordion employees={employees} schedules={schedules}/>
+            {employees ?
+                <div>
+                    {employees.length ?
+                        <EmployeeAccordion employees={employees} schedules={schedules ? schedules : []}/>
+                    :
+                        <img src={LoadingDots} alt='Loading...' />
+                    }
+
+                </div>
             :
-                <img src={LoadingDots} alt='Loading...' />
+                <p>No employees created</p>
             }
         </div>
     );
