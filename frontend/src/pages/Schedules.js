@@ -26,7 +26,7 @@ const Schedules = () => {
             {schedules ?
                 <div>
                     {schedules.length ?
-                        <ScheduleAccordion schedules={schedules} employees={employees}/>
+                        <ScheduleAccordion schedules={schedules ? schedules  : []} employees={employees ? employees : []}/>
                     :
                         <img src={LoadingDots} alt='Loading...' />
                     }

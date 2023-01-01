@@ -30,7 +30,8 @@ const Modal = () => {
     const refreshEmployees = () => {
         // refetch employees
         getEmployees().then(({ data }) => {
-            dispatch({ type: CONSTANTS.SET_EMPLOYEES_ACTION, employees: data });
+            if (data.length) dispatch({ type: CONSTANTS.SET_EMPLOYEES_ACTION, employees: data });
+            else dispatch({ type: CONSTANTS.SET_EMPLOYEES_ACTION, employees: null }); // reset to prevent infinite loading svg
         });
     };
 
@@ -38,7 +39,8 @@ const Modal = () => {
         // refetch and sort schedules
         getSchedules().then(({ data }) => {
             data.sort(scheduleCompareFn);
-            dispatch({ type: CONSTANTS.SET_SCHEDULES_ACTION, schedules: data });
+            if (data.length) dispatch({ type: CONSTANTS.SET_SCHEDULES_ACTION, schedules: data });
+            else dispatch({ type: CONSTANTS.SET_SCHEDULES_ACTION, schedules: null }); // reset to prevent infinite loading svg
         });
     };
 

@@ -29,7 +29,7 @@ const Employees = () => {
             {employees ?
                 <div>
                     {employees.length ?
-                        <EmployeeAccordion employees={employees} schedules={schedules ? schedules : []}/>
+                        <EmployeeAccordion employees={employees ? employees : []} schedules={schedules ? schedules : []}/>
                     :
                         <img src={LoadingDots} alt='Loading...' />
                     }

@@ -1,6 +1,7 @@
 import { createStore } from 'redux';
 import CONSTANTS from './constants';
 
+// TODO: fix schedule page issue
 let initialState = {
     schedules: null,
     employees: null,
