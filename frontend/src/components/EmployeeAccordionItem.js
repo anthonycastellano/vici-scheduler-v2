@@ -17,7 +17,7 @@ const EmployeeAccordionItem = ({
     onClick,
     loggedIn
 }) => {
-    const buttonText = showDescription ? <b>{`${employee.firstName} ${employee.lastName}`}</b> : <span>{`${employee.firstName} ${employee.lastName}`}</span>
+    const buttonText = showDescription ? <b>{`${employee.firstName} ${employee.lastName.substr(0, CONSTANTS.MAX_LAST_NAME_CHARS)}`}</b> : <span>{`${employee.firstName} ${employee.lastName}`}</span>
     const dispatch = useDispatch();
 
     const openModal = (modalType) => {

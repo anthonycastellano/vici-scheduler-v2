@@ -30,12 +30,12 @@ function App() {
     // fetch schedules and update state
     getSchedules().then(({ data }) => {
         data.sort(scheduleCompareFn);
-        dispatch({ type: CONSTANTS.SET_SCHEDULES_ACTION, schedules: data });
+        if (data.length) dispatch({ type: CONSTANTS.SET_SCHEDULES_ACTION, schedules: data });
     });
 
     // fetch employees and update state
     getEmployees().then(({ data }) => {
-      dispatch({ type: CONSTANTS.SET_EMPLOYEES_ACTION, employees: data });
+      if (data.length) dispatch({ type: CONSTANTS.SET_EMPLOYEES_ACTION, employees: data });
     });
 
     // update login state

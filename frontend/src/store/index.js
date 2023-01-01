@@ -1,12 +1,10 @@
 import { createStore } from 'redux';
 import CONSTANTS from './constants';
 
-// devtools
-import { composeWithDevTools } from 'redux-devtools-extension';
-
+// TODO: fix schedule page issue
 let initialState = {
-    schedules: [],
-    employees: [],
+    schedules: null,
+    employees: null,
     activeTab: CONSTANTS.SCHEDULES_TAB,
     loggedIn: false,
     modal: {
@@ -52,6 +50,6 @@ const reducer = (state = initialState, action) => {
     return state;
 };
 
-const store = createStore(reducer, composeWithDevTools());
+const store = createStore(reducer);
 
 export default store;
