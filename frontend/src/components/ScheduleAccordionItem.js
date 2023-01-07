@@ -21,6 +21,11 @@ const renderEmployeeRows = (schedule) => {
                 <td>
                     {schedule.backups[i]}
                 </td>
+                {schedule.assists &&
+                <td>
+                    {schedule.assists[i]}
+                </td>
+                }
             </tr>
         );
     }
@@ -49,7 +54,7 @@ const ScheduleAccordionItem = ({
 
     return (
         <div
-            className={`schedule-accordion`}
+            className={`schedule-accordion${schedule.assists ? ' with-assists' : ''}`}
             ref={showDescription ? activeItem : null}>
             <dt>
                 <button onClick={onClick} className={isCurrentMonth ? 'current-month' : null}>{buttonText}</button>
@@ -86,6 +91,11 @@ const ScheduleAccordionItem = ({
                                 <th>
                                     <h3>{CONSTANTS.SECONDARY}</h3>
                                 </th>
+                                {schedule.assists && 
+                                <th>
+                                    <h3>{CONSTANTS.ASSISTS}</h3>
+                                </th>
+                                }
                             </tr>
                         </thead>
                         <tbody>

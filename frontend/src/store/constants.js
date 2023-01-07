@@ -18,6 +18,7 @@ const CONSTANTS = {
     MONTH_OPTIONS: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'],
     PRIMARY: 'Primary',
     SECONDARY: 'Secondary',
+    ASSISTS: 'Assists',
     FILTER_YEAR: 'year',
     FILTER_MONTH: 'month',
     FILTER_ALL: 'all',

@@ -12,17 +12,22 @@ const getEmployeeNameFromID = (employeeID, employees) => {
 export function convertEmployees(schedule, employees) {
     const convertedLeads = [];
     const convertedBackups = [];
+    let convertedAssists;
+    if (schedule.assists) convertedAssists = [];
 
     for (let i = 0; i < schedule.leads.length; i++) {
         convertedLeads.push(getEmployeeNameFromID(schedule.leads[i], employees));
         convertedBackups.push(getEmployeeNameFromID(schedule.backups[i], employees));
+        if (convertedAssists) convertedAssists.push(getEmployeeNameFromID(schedule.assists[i], employees));
     }
 
     return {
         ...schedule,
         leads: convertedLeads,
         backups: convertedBackups,
+        assists: convertedAssists,
         leadIds: schedule.leads,
-        backupIds: schedule.backups
+        backupIds: schedule.backups,
+        assistIds: schedule.assists
     };
 };

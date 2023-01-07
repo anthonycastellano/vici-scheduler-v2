@@ -58,6 +58,10 @@ div.schedule-accordion-desc.hidden dd {
     border-top: 1px solid gray;
 }
 
+div.schedule-accordion.with-assists .schedule-accordion-desc {
+    font-size: 13px;
+}
+
 .schedule-accordion button {
     width: 100%;
     background: transparent;
