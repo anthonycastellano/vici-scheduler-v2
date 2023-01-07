@@ -82,6 +82,12 @@ const scheduleWithIDValidationRules = {
     ],
     'backups.*': [
         validations.alphaNumeric()
+    ],
+    assists: [
+        validations.array()
+    ],
+    'assists.*': [
+        validations.alphaNumeric()
     ]
 };
 
@@ -108,6 +114,10 @@ const scheduleSanitizationRules = {
         sanitizations.trim()
     ],
     'employees.*': [
+        sanitizations.stripTags(),
+        sanitizations.trim()
+    ],
+    'assists.*': [
         sanitizations.stripTags(),
         sanitizations.trim()
     ]
