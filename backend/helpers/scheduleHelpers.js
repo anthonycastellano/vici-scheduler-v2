@@ -25,7 +25,8 @@ exports.updateSchedule = (schedule) => {
 
     return scheduleCollection.updateOne({ _id: ObjectId(schedule._id) }, { $set: {
         leads: schedule.leads,
-        backups: schedule.backups
+        backups: schedule.backups,
+        assists: schedule.assists
     }});
 };
 

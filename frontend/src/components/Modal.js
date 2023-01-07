@@ -26,7 +26,7 @@ const Modal = () => {
 
     const [leads, setLeads] = useState(data.leadIds);
     const [backups, setBackups] = useState(data.backupIds);
-    const [assists, setAssists] = useState(data.assists);
+    const [assists, setAssists] = useState(data.assistIds);
 
 
     const refreshEmployees = () => {
