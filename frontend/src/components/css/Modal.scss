@@ -86,7 +86,16 @@
     color: black;
 }
 
-// desktop
-@media (min-width: 768px){
-    
+// mobile
+@media (max-width: 768px){
+    .with-assists .employee-selectors select, .with-assists .employee-selectors span {
+        margin: 0.3rem;
+        font-size: 0.8rem;
+        border-radius: 1rem;
+        padding: 0.3rem;
+    }
+
+    .with-assists .employee-selectors {
+        margin: 0;
+    }
 }

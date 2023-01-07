@@ -26,6 +26,8 @@ const Modal = () => {
 
     const [leads, setLeads] = useState(data.leadIds);
     const [backups, setBackups] = useState(data.backupIds);
+    const [assists, setAssists] = useState(data.assists);
+
 
     const refreshEmployees = () => {
         // refetch employees
@@ -86,7 +88,7 @@ const Modal = () => {
     const updateSelectedSchedule = async () => {
         // update schedule
         try {
-            await updateSchedule(data._id, leads, backups);
+            await updateSchedule(data._id, leads, backups, assists);
         } catch (err) {
             setErrMessage(ERROR_MSG)
             return;
@@ -106,6 +108,12 @@ const Modal = () => {
         let tempBackups = [...backups];
         tempBackups[index] = e.target.value;
         setBackups(tempBackups);
+    };
+
+    const updateAssist = (e, index) => {
+        let tempAssists = [...assists];
+        tempAssists[index] = e.target.value;
+        setAssists(tempAssists);
     };
 
     const renderEmployeeSelectors = (employeeList, updateListFn) => employeeList.map((employee, index) =>
@@ -169,7 +177,7 @@ const Modal = () => {
                     <div>
                         <p className='prompt'>Update <b>{`${data.month}/${data.year}`}</b> schedule to:</p>
 
-                        <div className='employee-selectors-container' >
+                        <div className={`employee-selectors-container${assists ? ' with-assists' : ''}`}>
                             <div className='employee-selectors'>
                                 {getSaturdays(data.year, data.month).map((date) => <span key={`${data.month}-${date}-text`}>{data.month}/{date}</span>)}
                             </div>
@@ -181,6 +189,12 @@ const Modal = () => {
                             <div className='employee-selectors'>
                                 {renderEmployeeSelectors(backups, updateBackup)}
                             </div>
+
+                            {assists &&
+                            <div className='employee-selectors'>
+                                {renderEmployeeSelectors(assists, updateAssist)}
+                            </div>
+                            }
                         </div>
 
                         {errMessage && <p className='error-message'>{errMessage}</p>}
