@@ -1,10 +1,12 @@
+import CONSTANTS from "../store/constants";
+
 export function scheduleCompareFn(schedule1, schedule2) {
     return schedule1.year > schedule2.year ||  (schedule1.year === schedule2.year && schedule1.month > schedule2.month) ?  1 : -1;
 };
 
 const getEmployeeNameFromID = (employeeID, employees) => {
     const targetEmployee = employees.find((employee) => employee._id === employeeID);
-    if (!targetEmployee) return 'Unknown';
+    if (!targetEmployee) return CONSTANTS.UNASSIGNED;
     else return `${targetEmployee.firstName} ${targetEmployee.lastName}`
 };
 

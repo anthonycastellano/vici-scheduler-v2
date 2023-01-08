@@ -19,6 +19,7 @@ const CONSTANTS = {
     PRIMARY: 'Primary',
     SECONDARY: 'Secondary',
     ASSISTS: 'Assists',
+    UNASSIGNED: 'Unassigned',
     FILTER_YEAR: 'year',
     FILTER_MONTH: 'month',
     FILTER_ALL: 'all',

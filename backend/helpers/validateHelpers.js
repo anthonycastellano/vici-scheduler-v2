@@ -1,5 +1,23 @@
-const { validate, validations } = require('indicative/validator');
+const { validate, validations, extend } = require('indicative/validator');
 const { sanitize, sanitizations } = require('indicative/sanitizer');
+const { getValue, skippable } = require('indicative-utils');
+
+// extensions
+extend('alphaNumericOrNull', {
+    async: false,
+
+    validate (data, field, args, config) {
+        const fieldValue = getValue(data, field);
+
+        if (skippable(fieldValue, field, config)) {
+            return true;
+        }
+
+        if (!fieldValue || /^\w+$/.test(fieldValue)) return true;
+
+        return false;
+    }
+});
 
 // employees
 const employeeValidationRules = {
@@ -75,19 +93,19 @@ const scheduleWithIDValidationRules = {
         validations.array()
     ],
     'leads.*': [
-        validations.alphaNumeric()
+        validations.alphaNumericOrNull()
     ],
     backups: [
         validations.array()
     ],
     'backups.*': [
-        validations.alphaNumeric()
+        validations.alphaNumericOrNull()
     ],
     assists: [
         validations.array()
     ],
     'assists.*': [
-        validations.alphaNumeric()
+        validations.alphaNumericOrNull()
     ]
 };
 

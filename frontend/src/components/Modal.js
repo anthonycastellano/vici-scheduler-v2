@@ -116,8 +116,13 @@ const Modal = () => {
     };
 
     const renderEmployeeSelectors = (employeeList, updateListFn) => employeeList.map((employee, index) =>
-        <select key={`${updateListFn.name}-${index}-selector`} value={employee} onChange={(e) => updateListFn(e, index)}>
-            {employees.map((employeeOption) => <option key={`${updateListFn.name}-${employeeOption._id}-option`} value={employeeOption._id}>{`${employeeOption.firstName} ${employeeOption.lastName}`}</option>)}
+        <select key={`${updateListFn.name}-${index}-selector`} value={employee ? employee : ''} onChange={(e) => updateListFn(e, index)}>
+            {[{}].concat(employees).map((employeeOption) =>
+                <option 
+                    key={`${updateListFn.name}-${employeeOption._id}-option`}
+                    value={employeeOption._id ? employeeOption._id : ''}>
+                        {employeeOption._id ? `${employeeOption.firstName} ${employeeOption.lastName}` : CONSTANTS.UNASSIGNED}
+                </option>)}
         </select>
     );
 
