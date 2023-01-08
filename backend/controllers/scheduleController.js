@@ -25,10 +25,10 @@ exports.create = async (req, res) => {
         return res.status(400).send(e);
     }
 
-    // TODO: check if already exists
+    // check if already exists
     if (await scheduleHelpers.exists(req.body.month, req.body.year)) return res.status(400).json({ error: 'Schedule already exists for selected month' });
 
-    const newSchedule = await scheduleHelpers.createSchedule(req.body.month, req.body.year, req.body.employees);
+    const newSchedule = await scheduleHelpers.createSchedule(req.body.month, req.body.year, req.body.employees, req.body.withAssists);
 
     if (newSchedule) return res.status(201).json(newSchedule[0]);
 

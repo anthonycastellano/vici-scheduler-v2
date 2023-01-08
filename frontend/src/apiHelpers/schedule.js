@@ -14,8 +14,8 @@ const updateSchedule = (id, leads, backups, assists) => {
     return axios.put(SCHEDULES_ENDPOINT, { _id: id, leads, backups, assists })
 };
 
-const createSchedule = (month, year, employees) => {
-    return axios.post(SCHEDULES_ENDPOINT, { month, year, employees });
+const createSchedule = (month, year, employees, withAssists) => {
+    return axios.post(SCHEDULES_ENDPOINT, { month, year, employees, withAssists });
 };
 
 export {

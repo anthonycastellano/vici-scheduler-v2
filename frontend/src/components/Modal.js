@@ -28,7 +28,6 @@ const Modal = () => {
     const [backups, setBackups] = useState(data.backupIds);
     const [assists, setAssists] = useState(data.assistIds);
 
-
     const refreshEmployees = () => {
         // refetch employees
         getEmployees().then(({ data }) => {

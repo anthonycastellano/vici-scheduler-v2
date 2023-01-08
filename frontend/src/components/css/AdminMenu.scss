@@ -55,7 +55,7 @@ div.employee-selector select {
 }
 
 .new-schedule-item-table table {
-    width: 80%;
+    width: 90%;
 }
 
 .new-schedule-item-table thead {
@@ -100,10 +100,22 @@ div.stats-page {
     background-color: $background-alternate;
 }
 
+.assist-checkbox input {
+    width: 1rem;
+    margin: 0.5rem;
+}
+
 // desktop
 @media (min-width: 768px){
     div.stats-page {
         margin-left: 20%;
         margin-right: 20%;
+    }
+}
+
+// mobile
+@media (max-width: 768px){
+    .new-schedule-item-table.with-assists {
+        font-size: 0.8rem;
     }
 }
