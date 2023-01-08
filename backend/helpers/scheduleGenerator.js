@@ -41,10 +41,10 @@ exports.createNewSchedule = (month, year, employees, withAssists) => {
         const newBackup = chooseRandom(employees.filter(e => e != newLead));
         newSchedule.backups.push(newBackup);
 
-        // choose assist
+        // fill assist, always null
         if (withAssists) {
-            const newAssist = chooseRandom(employees.filter(e => e != newLead && e != newBackup));
-            newSchedule.assists.push(newAssist);
+            // const newAssist = chooseRandom(employees.filter(e => e != newLead && e != newBackup));
+            newSchedule.assists.push(null);
         }
     }
 
