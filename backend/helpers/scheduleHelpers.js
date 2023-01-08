@@ -9,10 +9,10 @@ exports.getSchedules = (params) => {
     return scheduleCollection.find(params).toArray();
 };
 
-exports.createSchedule = async (month, year, employees) => {
+exports.createSchedule = async (month, year, employees, withAssists) => {
     const scheduleCollection = getDB().collection(SCHEDULE_COLLECTION_NAME);
 
-    const newSchedule = createNewSchedule(month, year, employees);
+    const newSchedule = createNewSchedule(month, year, employees, withAssists);
 
     const { insertedIds } = await scheduleCollection.insertMany([newSchedule]);
     if (insertedIds) {
@@ -25,7 +25,8 @@ exports.updateSchedule = (schedule) => {
 
     return scheduleCollection.updateOne({ _id: ObjectId(schedule._id) }, { $set: {
         leads: schedule.leads,
-        backups: schedule.backups
+        backups: schedule.backups,
+        assists: schedule.assists
     }});
 };
 

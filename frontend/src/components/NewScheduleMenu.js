@@ -28,6 +28,7 @@ const NewScheduleMenu = ({ setMsg, setMode }) => {
     const [selectedEmployees, setSelectedEmployees] = useState([]);
     const [confirmMode, setConfirmMode] = useState(false);
     const [newSchedule, setNewSchedule] = useState();
+    const [withAssists, setWithAssists] = useState(true);
     const dispatch = useDispatch();
     const employees = useSelector(state => state.employees);
 
@@ -44,7 +45,7 @@ const NewScheduleMenu = ({ setMsg, setMode }) => {
 
         let res;
         try {
-            res = await createSchedule(month, year, selectedEmployees);
+            res = await createSchedule(month, year, selectedEmployees, withAssists);
         } catch {
             return setError('Schedule creation failed');
         }
@@ -94,6 +95,9 @@ const NewScheduleMenu = ({ setMsg, setMode }) => {
                 <td>{`${month}/${day}`}</td>
                 <td>{newSchedule.leads[index]}</td>
                 <td>{newSchedule.backups[index]}</td>
+                {withAssists &&
+                <td>{newSchedule.assists[index]}</td>
+                }
             </tr>
         );
     };
@@ -105,7 +109,7 @@ const NewScheduleMenu = ({ setMsg, setMode }) => {
             {
                 !confirmMode ?
                     <form onSubmit={handleSubmit}>
-                        <h2>Create Schedule:</h2>
+                        <h1>Create Schedule</h1>
 
                         {error &&
                             <div className='error-alert'>
@@ -113,29 +117,41 @@ const NewScheduleMenu = ({ setMsg, setMode }) => {
                             </div>
                         }
 
-                        <p>Month/year:</p>
+                        <h2>Month/year</h2>
                         <div className='date-selectors'>
                             {renderMonthSelector()}
                             {renderYearSelector()}
                         </div>
-                        
-                        <p>Included employees:</p>
+
+                        <h2>Included employees</h2>
                         <div className='employee-selector'>
                             {renderEmployeeSelector()}
                         </div>
+
+                        <br/>
+
+                        <div className='assist-checkbox'>
+                            <input type='checkbox' checked={withAssists} onChange={(e) => setWithAssists(!withAssists)}/>
+                            Include {CONSTANTS.ASSIST}s?
+                        </div>
+
+                        <br/>
 
                         <input type='submit' value='Submit' />
                     </form>
                 :
                     <div className='new-schedule-item'>
                         <h1>{`${month}/${year} Schedule:`}</h1>
-                        <div className='new-schedule-item-table'>
+                        <div className={`new-schedule-item-table${withAssists ? ' with-assists' : ''}`}>
                             <table>
                                 <thead>
                                     <tr>
                                         <td><p>Weekend</p></td>
                                         <td><p>{CONSTANTS.PRIMARY}</p></td>
                                         <td><p>{CONSTANTS.SECONDARY}</p></td>
+                                        {withAssists &&
+                                        <td><p>{CONSTANTS.ASSIST}</p></td>
+                                        }
                                     </tr>
                                 </thead>
                                 <tbody>

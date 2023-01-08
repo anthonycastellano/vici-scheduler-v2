@@ -26,6 +26,7 @@ const Modal = () => {
 
     const [leads, setLeads] = useState(data.leadIds);
     const [backups, setBackups] = useState(data.backupIds);
+    const [assists, setAssists] = useState(data.assistIds);
 
     const refreshEmployees = () => {
         // refetch employees
@@ -86,7 +87,7 @@ const Modal = () => {
     const updateSelectedSchedule = async () => {
         // update schedule
         try {
-            await updateSchedule(data._id, leads, backups);
+            await updateSchedule(data._id, leads, backups, assists);
         } catch (err) {
             setErrMessage(ERROR_MSG)
             return;
@@ -108,9 +109,20 @@ const Modal = () => {
         setBackups(tempBackups);
     };
 
+    const updateAssist = (e, index) => {
+        let tempAssists = [...assists];
+        tempAssists[index] = e.target.value;
+        setAssists(tempAssists);
+    };
+
     const renderEmployeeSelectors = (employeeList, updateListFn) => employeeList.map((employee, index) =>
-        <select key={`${updateListFn.name}-${index}-selector`} value={employee} onChange={(e) => updateListFn(e, index)}>
-            {employees.map((employeeOption) => <option key={`${updateListFn.name}-${employeeOption._id}-option`} value={employeeOption._id}>{`${employeeOption.firstName} ${employeeOption.lastName}`}</option>)}
+        <select key={`${updateListFn.name}-${index}-selector`} value={employee ? employee : ''} onChange={(e) => updateListFn(e, index)}>
+            {[{}].concat(employees).map((employeeOption) =>
+                <option 
+                    key={`${updateListFn.name}-${employeeOption._id}-option`}
+                    value={employeeOption._id ? employeeOption._id : ''}>
+                        {employeeOption._id ? `${employeeOption.firstName} ${employeeOption.lastName}` : CONSTANTS.UNASSIGNED}
+                </option>)}
         </select>
     );
 
@@ -169,7 +181,7 @@ const Modal = () => {
                     <div>
                         <p className='prompt'>Update <b>{`${data.month}/${data.year}`}</b> schedule to:</p>
 
-                        <div className='employee-selectors-container' >
+                        <div className={`employee-selectors-container${assists ? ' with-assists' : ''}`}>
                             <div className='employee-selectors'>
                                 {getSaturdays(data.year, data.month).map((date) => <span key={`${data.month}-${date}-text`}>{data.month}/{date}</span>)}
                             </div>
@@ -181,6 +193,12 @@ const Modal = () => {
                             <div className='employee-selectors'>
                                 {renderEmployeeSelectors(backups, updateBackup)}
                             </div>
+
+                            {assists &&
+                            <div className='employee-selectors'>
+                                {renderEmployeeSelectors(assists, updateAssist)}
+                            </div>
+                            }
                         </div>
 
                         {errMessage && <p className='error-message'>{errMessage}</p>}
