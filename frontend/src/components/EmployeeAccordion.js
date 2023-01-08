@@ -37,6 +37,16 @@ const buildEmployeeUpcomingSchedules = (schedules) => {
                 employeeUpcomingScheduleMap[currentBackup].push(backupWeekElement)
                 :
                 employeeUpcomingScheduleMap[currentBackup] = [backupWeekElement];
+
+            // handle schedules with assists
+            if (schedule.assists) {
+                const currentAssist = schedule.assists[i];
+                const assistWeekElement = [`${schedule.month}/${saturdayDates[i]}`, CONSTANTS.ASSIST]
+                employeeUpcomingScheduleMap[currentAssist] ?
+                    employeeUpcomingScheduleMap[currentAssist].push(assistWeekElement)
+                    :
+                    employeeUpcomingScheduleMap[currentAssist] = [assistWeekElement];
+            }
         }
     }
 

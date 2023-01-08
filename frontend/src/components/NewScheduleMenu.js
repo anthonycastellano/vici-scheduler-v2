@@ -132,7 +132,7 @@ const NewScheduleMenu = ({ setMsg, setMode }) => {
 
                         <div className='assist-checkbox'>
                             <input type='checkbox' checked={withAssists} onChange={(e) => setWithAssists(!withAssists)}/>
-                            Include assists?
+                            Include {CONSTANTS.ASSIST}s?
                         </div>
 
                         <br/>
@@ -150,7 +150,7 @@ const NewScheduleMenu = ({ setMsg, setMode }) => {
                                         <td><p>{CONSTANTS.PRIMARY}</p></td>
                                         <td><p>{CONSTANTS.SECONDARY}</p></td>
                                         {withAssists &&
-                                        <td><p>{CONSTANTS.ASSISTS}</p></td>
+                                        <td><p>{CONSTANTS.ASSIST}</p></td>
                                         }
                                     </tr>
                                 </thead>

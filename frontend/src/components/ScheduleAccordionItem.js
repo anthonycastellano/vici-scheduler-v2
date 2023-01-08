@@ -93,7 +93,7 @@ const ScheduleAccordionItem = ({
                                 </th>
                                 {schedule.assists && 
                                 <th>
-                                    <h3>{CONSTANTS.ASSISTS}</h3>
+                                    <h3>{CONSTANTS.ASSIST}</h3>
                                 </th>
                                 }
                             </tr>
