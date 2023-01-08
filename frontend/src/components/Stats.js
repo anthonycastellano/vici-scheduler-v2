@@ -30,7 +30,7 @@ const Stats = ({ setMode }) => {
                 filteredSchedules = schedules ? schedules : [];
         }
 
-        let newStats = { leadStats: {}, backupStats: {} };
+        let newStats = { leadStats: {}, backupStats: {}, assistStats: {} };
         for (const schedule of filteredSchedules) {
             for (const lead of schedule.leads) {
                 if (newStats.leadStats[lead]) {
@@ -45,6 +45,16 @@ const Stats = ({ setMode }) => {
                     newStats.backupStats[backup] += 1; 
                 } else {
                     newStats.backupStats[backup] = 1;
+                }
+            }
+
+            if (schedule.assists) {
+                for (const assist of schedule.assists) {
+                    if (newStats.assistStats[assist]) {
+                        newStats.assistStats[assist] += 1; 
+                    } else {
+                        newStats.assistStats[assist] = 1;
+                    }
                 }
             }
         }
@@ -84,6 +94,13 @@ const Stats = ({ setMode }) => {
                         <h3>{CONSTANTS.SECONDARY}</h3>
                         {stats &&
                             employees.map(employee => <p key={`${employee._id}-col-2`}>{stats.backupStats[employee._id]}</p>)
+                        }
+                    </div>
+
+                    <div className='stats-col'>
+                        <h3>{CONSTANTS.ASSIST}</h3>
+                        {stats &&
+                            employees.map(employee => <p key={`${employee._id}-col-2`}>{stats.assistStats[employee._id]}</p>)
                         }
                     </div>
                 </div>
