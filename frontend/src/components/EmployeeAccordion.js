@@ -53,10 +53,13 @@ const buildEmployeeUpcomingSchedules = (schedules) => {
     return employeeUpcomingScheduleMap;
 };
 
-const EmployeeAccordion = ({ employees, schedules }) => {
-    const employeeUpcomingSchedules = buildEmployeeUpcomingSchedules(schedules);
-    const [activeIndex, setActiveIndex] = useState();
+const EmployeeAccordion = () => {
+    const employees = useSelector(state => state.employees);
+    const schedules = useSelector(state => state.schedules);
     const loggedIn = useSelector(state => state.loggedIn);
+
+    const employeeUpcomingSchedules = schedules ? buildEmployeeUpcomingSchedules(schedules) : {};
+    const [activeIndex, setActiveIndex] = useState();
 
     const renderedEmployees = employees.map(((employee, index) => {
         const showDescription = index === activeIndex;

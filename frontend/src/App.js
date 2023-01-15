@@ -31,11 +31,13 @@ function App() {
     getSchedules().then(({ data }) => {
         data.sort(scheduleCompareFn);
         if (data.length) dispatch({ type: CONSTANTS.SET_SCHEDULES_ACTION, schedules: data });
+        else dispatch({ type: CONSTANTS.SET_SCHEDULES_ACTION, schedules: null }); // reset to prevent infinite loading svg
     });
 
     // fetch employees and update state
     getEmployees().then(({ data }) => {
       if (data.length) dispatch({ type: CONSTANTS.SET_EMPLOYEES_ACTION, employees: data });
+      else dispatch({ type: CONSTANTS.SET_EMPLOYEES_ACTION, employees: null }); // reset to prevent infinite loading svg
     });
 
     // update login state
