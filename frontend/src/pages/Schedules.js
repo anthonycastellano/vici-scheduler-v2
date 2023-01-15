@@ -13,7 +13,6 @@ import ScheduleAccordion from '../components/ScheduleAccordion';
 
 const Schedules = () => {
     const schedules = useSelector(state => state.schedules);
-    const employees = useSelector(state => state.employees);
     const dispatch = useDispatch();
 
     useEffect(() => {
@@ -26,7 +25,7 @@ const Schedules = () => {
             {schedules ?
                 <div>
                     {schedules.length ?
-                        <ScheduleAccordion schedules={schedules ? schedules  : []} employees={employees ? employees : []}/>
+                        <ScheduleAccordion />
                     :
                         <img src={LoadingDots} alt='Loading...' />
                     }
