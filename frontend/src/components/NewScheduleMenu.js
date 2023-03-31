@@ -82,9 +82,9 @@ const NewScheduleMenu = ({ setMsg, setMode }) => {
 
     const renderEmployeeSelector = () => (
         <select multiple={true} onChange={updateSelectedEmployees}>
-            {employees.map((employee) =>
+            {employees ? employees.map((employee) =>
                 <option key={`${employee._id}-option`} value={employee._id}>{`${employee.firstName} ${employee.lastName}`}</option>
-            )}
+            ) : []}
         </select>
     );
 
