@@ -137,7 +137,7 @@ const NewScheduleMenu = ({ setMsg, setMode }) => {
 
                         <br/>
 
-                        <input type='submit' value='Submit' />
+                        <input disabled={!selectedEmployees.length} type='submit' value='Submit' />
                     </form>
                 :
                     <div className='new-schedule-item'>
