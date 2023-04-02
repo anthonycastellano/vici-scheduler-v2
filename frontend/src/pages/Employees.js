@@ -13,7 +13,6 @@ import './css/Employees.scss';
 
 const Employees = () => {
     const employees = useSelector(state => state.employees);
-    const schedules = useSelector(state => state.schedules);
     const dispatch = useDispatch();
 
     useEffect(() => {
@@ -29,7 +28,7 @@ const Employees = () => {
             {employees ?
                 <div>
                     {employees.length ?
-                        <EmployeeAccordion employees={employees ? employees : []} schedules={schedules ? schedules : []}/>
+                        <EmployeeAccordion />
                     :
                         <img src={LoadingDots} alt='Loading...' />
                     }

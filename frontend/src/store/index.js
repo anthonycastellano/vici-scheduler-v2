@@ -3,8 +3,8 @@ import CONSTANTS from './constants';
 
 // TODO: fix schedule page issue
 let initialState = {
-    schedules: null,
-    employees: null,
+    schedules: [],
+    employees: [],
     activeTab: CONSTANTS.SCHEDULES_TAB,
     loggedIn: false,
     modal: {

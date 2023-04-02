@@ -13,11 +13,14 @@ import ScheduleAccordionItem from './ScheduleAccordionItem';
 const ACTIVE_ACCORDION_OFFSET = 100;
 
 
-const ScheduleAccordion = ({ schedules, employees }) => {
+const ScheduleAccordion = () => {
+    const employees = useSelector(state => state.employees);
+    const schedules = useSelector(state => state.schedules);
+    const loggedIn = useSelector(state => state.loggedIn);
+    
     const currentMonthIdx = getCurrentMonthIndex(schedules);
     const [activeIndex, setActiveIndex] = useState(currentMonthIdx);
     const activeItem = useRef();
-    const loggedIn = useSelector(state => state.loggedIn);
 
     const renderedSchedules = schedules.map((schedule, index) => {
         const showDescription = index === activeIndex;

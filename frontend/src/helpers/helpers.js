@@ -12,6 +12,8 @@ const getEmployeeNameFromID = (employeeID, employees) => {
 
 // convert employee IDs to full names
 export function convertEmployees(schedule, employees) {
+    if (!employees) return { ...schedule, leads: [], backups: [], assists: [] };
+
     const convertedLeads = [];
     const convertedBackups = [];
     let convertedAssists;
