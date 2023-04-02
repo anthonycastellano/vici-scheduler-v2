@@ -1,6 +1,9 @@
+const DEFAULT_DATE_SHIFT = 15;
+
 // get month name from index
 export function getMonthString(month) {
     const date = new Date();
+    date.setDate(DEFAULT_DATE_SHIFT); // fixes weird bug when running on the 31st
     date.setMonth(month - 1);
     return date.toLocaleString('en-US', {
         month: 'long'

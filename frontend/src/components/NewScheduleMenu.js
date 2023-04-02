@@ -82,9 +82,9 @@ const NewScheduleMenu = ({ setMsg, setMode }) => {
 
     const renderEmployeeSelector = () => (
         <select multiple={true} onChange={updateSelectedEmployees}>
-            {employees.map((employee) =>
+            {employees ? employees.map((employee) =>
                 <option key={`${employee._id}-option`} value={employee._id}>{`${employee.firstName} ${employee.lastName}`}</option>
-            )}
+            ) : []}
         </select>
     );
 
@@ -137,7 +137,7 @@ const NewScheduleMenu = ({ setMsg, setMode }) => {
 
                         <br/>
 
-                        <input type='submit' value='Submit' />
+                        <input disabled={!selectedEmployees.length} type='submit' value='Submit' />
                     </form>
                 :
                     <div className='new-schedule-item'>
