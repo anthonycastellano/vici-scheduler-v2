@@ -4,9 +4,6 @@ services:
     build:
       dockerfile: Dockerfile
       context: ./backend
-    volumes:
-      - /app/node_modules
-      - ./backend:/app
     depends_on:
       - mongo
   client:
@@ -22,7 +19,7 @@ services:
       dockerfile: Dockerfile
       context: ./nginx
     ports:
-      - '3000:80'
+      - '80:80'
     depends_on:
       - api
       - client
@@ -30,7 +27,7 @@ services:
     image: mongo
     restart: always
     environment:
-      - MONGO_INITDB_ROOT_USERNAME=mongo
-      - MONGO_INITDB_ROOT_PASSWORD=mongo
+      - MONGO_INITDB_ROOT_USERNAME=mongouser
+      - MONGO_INITDB_ROOT_PASSWORD=mongopassword
     ports:
       - '27017:27017'
