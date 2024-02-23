@@ -14,6 +14,8 @@ import './css/Admin.scss';
 const Admin = () => {
     const dispatch = useDispatch();
     const loggedIn = useSelector(state => state.loggedIn);
+    const employees = useSelector(state => state.employees);
+    const schedules = useSelector(state => state.schedules);
     const [mode, setMode] = useState(CONSTANTS.ADMIN_MODE_MENU);
     const [msg, setMsg] = useState();
 
@@ -39,7 +41,9 @@ const Admin = () => {
                         <h2>I would like to...</h2>
                         <button onClick={() => setMode(CONSTANTS.ADMIN_MODE_EMPLOYEE)}>create an <b>employee</b></button>
                         <button onClick={() => setMode(CONSTANTS.ADMIN_MODE_SCHEDULE)}>create a <b>schedule</b></button>
-                        <button onClick={() => setMode(CONSTANTS.ADMIN_MODE_STATS)}>view <b>stats</b></button>
+                        {employees && schedules &&
+                            <button onClick={() => setMode(CONSTANTS.ADMIN_MODE_STATS)}>view <b>stats</b></button>
+                        }
                     </div>
                 )
         }

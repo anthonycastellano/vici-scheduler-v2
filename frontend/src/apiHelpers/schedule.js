@@ -11,7 +11,10 @@ const deleteSchedule = (id) => {
 };
 
 const updateSchedule = (id, leads, backups, assists) => {
-    return axios.put(SCHEDULES_ENDPOINT, { _id: id, leads, backups, assists })
+    const updatedSchedule = { _id: id, leads, backups }
+    if (assists) updatedSchedule.assists = assists;
+
+    return axios.put(SCHEDULES_ENDPOINT, updatedSchedule)
 };
 
 const createSchedule = (month, year, employees, withAssists) => {
