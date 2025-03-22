@@ -148,8 +148,7 @@ const authValidationRules = {
         validations.alphaNumeric()
     ],
     password: [
-        validations.required(),
-        validations.alphaNumeric()
+        validations.required()
     ]
 };
 
