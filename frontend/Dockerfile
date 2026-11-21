@@ -1,10 +1,12 @@
-FROM node:16-bookworm as react-build
+FROM node:22-alpine as react-build
 WORKDIR '/app'
-COPY . .
-RUN npm install
+COPY ./package.json ./package-lock.json ./
+RUN npm ci
+COPY ./public ./public
+COPY ./src ./src
 RUN npm run build
 
-FROM nginx:alpine
+FROM nginx:stable-alpine
 COPY default.conf /etc/nginx/conf.d/default.conf
 COPY --from=react-build /app/build /usr/share/nginx/html
 EXPOSE 80

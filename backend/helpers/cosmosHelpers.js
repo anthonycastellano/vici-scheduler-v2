@@ -2,12 +2,16 @@ const { MongoClient } = require('mongodb');
 
 let _db;
 
-exports.mongoConnect = (callback) => {
-    MongoClient.connect(process.env.COSMOS_CONNECTION_STRING, (err, client) => {
+exports.mongoConnect = async (callback) => {
+    try {
+        const client = await MongoClient.connect(process.env.COSMOS_CONNECTION_STRING);
         _db = client.db('calendar-db');
         console.log('DB connected');
         callback();
-    });
+    } catch (err) {
+        console.error('Unable to connect to DB', err);
+        process.exit(1);
+    }
 };
 
 exports.getDB = () => {

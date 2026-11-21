@@ -1,11 +1,15 @@
-FROM node:14.14.0-alpine
+FROM node:22-alpine
 
 WORKDIR '/app'
 
-COPY ./package.json ./
+COPY ./package.json ./package-lock.json ./
 
-RUN npm install
+RUN npm ci --omit=dev
 
-COPY . .
+COPY --chown=node:node . .
 
-CMD ["npm", "start"]
+USER node
+
+EXPOSE 3001
+# run node directly: keeps npm (and its vulnerable bundled deps) out of the container runtime
+CMD ["node", "index.js"]

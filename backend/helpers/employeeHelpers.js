@@ -1,5 +1,5 @@
 const { getDB } = require('./cosmosHelpers');
-const ObjectId = require('mongodb').ObjectID;
+const { ObjectId } = require('mongodb');
 
 const EMPLOYEE_COLLECTION_NAME = 'employees';
 
@@ -22,7 +22,7 @@ exports.updateEmployee = (employee) => {
     // store empty last name if none provided
     if (!employee.lastName) employee.lastName = "";
 
-    return employeeCollection.updateOne({ _id: ObjectId(employee._id) }, { $set: {
+    return employeeCollection.updateOne({ _id: new ObjectId(employee._id) }, { $set: {
         firstName: employee.firstName,
         lastName: employee.lastName
     }});
@@ -30,5 +30,5 @@ exports.updateEmployee = (employee) => {
 
 exports.deleteEmployee = (id) => {
     const employeeCollection = getDB().collection(EMPLOYEE_COLLECTION_NAME);
-    return employeeCollection.deleteOne({ _id: ObjectId(id) });
+    return employeeCollection.deleteOne({ _id: new ObjectId(id) });
 };

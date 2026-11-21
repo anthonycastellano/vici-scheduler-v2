@@ -64,23 +64,58 @@ The application will be accessible at `http://localhost:3000`.
 
 ### Production Setup
 
-To run the production-ready containers:
+1. Configure environment variables:
+   ```bash
+   cp .env.sample .env   # repo root — used by docker compose
+   ```
+   Generate the admin credentials hash (never store plaintext or base64 passwords):
+   ```bash
+   npm --prefix backend run hash-password -- <username> <password>
+   ```
+   Copy the printed `ADMIN_USERNAME` / `ADMIN_PASSWORD_HASH` values into `.env`.
 
-```bash
-docker-compose up -d
-```
+2. Launch the production containers:
+   ```bash
+   docker compose up -d
+   ```
 
 The application will be accessible via the Nginx proxy on port `80`.
+MongoDB is intentionally **not** published to the host in production; only the
+internal compose network can reach it.
+
+> **Note:** The proxy currently serves plain HTTP. Before exposing this to the
+> internet, terminate TLS (e.g. point a domain at the host and add a Let's
+> Encrypt certificate to `nginx/default.conf`). The auth cookie is marked
+> `Secure` in production (`NODE_ENV=production`), so login requires HTTPS.
 
 ## Environment Variables
 
-The backend requires the following environment variables (configured in `backend/.env`):
+Production reads a `.env` file in the **repo root** (consumed by docker
+compose); for running the backend directly (e.g. `npm run dev`), use
+`backend/.env`:
 
 | Variable | Description |
 |----------|-------------|
-| `TOKEN_KEY` | Secret key used for signing JWT tokens |
-| `COSMOG_CONNECTION_STRING` | MongoDB connection string (e.g., `mongodb://user:pass@host:port/db`) |
-| `ADMIN_CREDS_B64` | Base64 encoded administrator credentials (`user:password`) |
+| `TOKEN_KEY` | Secret key used for signing JWT tokens (`openssl rand -hex 32`) |
+| `COSMOS_CONNECTION_STRING` | MongoDB connection string (e.g., `mongodb://user:pass@host:port/db?authSource=admin`) |
+| `ADMIN_USERNAME` | Administrator login name |
+| `ADMIN_PASSWORD_HASH` | bcrypt hash of the admin password (`npm run hash-password`) |
+| `MONGO_INITDB_ROOT_USERNAME` | Mongo root user (production compose only) |
+| `MONGO_INITDB_ROOT_PASSWORD` | Mongo root password (production compose only) |
+
+## Restoring data from db-backups/
+
+The `db-backups/` folder contains MongoDB JSON exports. With the dev stack
+running (mongo published on `localhost:27017`):
+
+```bash
+docker cp db-backups/2026-11-calendar-db.employees.json $(docker ps -qf name=mongo) /tmp/employees.json
+docker cp db-backups/2026-11-calendar-db.schedules.json  $(docker ps -qf name=mongo) /tmp/schedules.json
+docker exec $(docker ps -qf name=mongo) mongoimport -u <user> -p <pass> --authenticationDatabase admin \
+  --db calendar-db --collection employees --jsonArray --file /tmp/employees.json
+docker exec $(docker ps -qf name=mongo) mongoimport -u <user> -p <pass> --authenticationDatabase admin \
+  --db calendar-db --collection schedules --jsonArray --file /tmp/schedules.json
+```
 
 ## API Endpoints
 

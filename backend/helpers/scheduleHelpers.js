@@ -1,5 +1,5 @@
 const { getDB } = require('./cosmosHelpers');
-const ObjectId = require('mongodb').ObjectID;
+const { ObjectId } = require('mongodb');
 const { createNewSchedule } = require('./scheduleGenerator');
 
 const SCHEDULE_COLLECTION_NAME = 'schedules';
@@ -23,7 +23,7 @@ exports.createSchedule = async (month, year, employees, withAssists) => {
 exports.updateSchedule = (schedule) => {
     const scheduleCollection = getDB().collection(SCHEDULE_COLLECTION_NAME);
 
-    return scheduleCollection.updateOne({ _id: ObjectId(schedule._id) }, { $set: {
+    return scheduleCollection.updateOne({ _id: new ObjectId(schedule._id) }, { $set: {
         leads: schedule.leads,
         backups: schedule.backups,
         assists: schedule.assists
@@ -32,7 +32,7 @@ exports.updateSchedule = (schedule) => {
 
 exports.deleteSchedule = (id) => {
     const scheduleCollection = getDB().collection(SCHEDULE_COLLECTION_NAME);
-    return scheduleCollection.deleteOne({ _id: ObjectId(id) });
+    return scheduleCollection.deleteOne({ _id: new ObjectId(id) });
 };
 
 exports.exists = async (month, year) => {

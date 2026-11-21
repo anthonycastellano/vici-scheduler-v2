@@ -1,4 +1,3 @@
-version: '3'
 services:
   api:
     build:
@@ -27,10 +26,11 @@ services:
       - api
       - client
   mongo:
-    image: mongo
+    image: mongo:8.0
     restart: always
     environment:
       - MONGO_INITDB_ROOT_USERNAME=mongo
       - MONGO_INITDB_ROOT_PASSWORD=mongo
     ports:
+      # dev only: needed for seeding/restoring db-backups with mongoimport
       - '27017:27017'
