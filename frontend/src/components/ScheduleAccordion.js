@@ -39,10 +39,29 @@ const ScheduleAccordion = () => {
     });
 
     useEffect(() => {
-        window.scrollTo({
-            top: activeItem.current.offsetTop - ACTIVE_ACCORDION_OFFSET,
-            behavior: 'smooth'
-        });
+        let cancelled = false;
+
+        const scrollToActive = () => {
+            if (cancelled || !activeItem.current) return;
+            // getBoundingClientRect instead of offsetTop: offsetTop is relative to
+            // the nearest positioned/transformed ancestor, and the entrance
+            // animations give ancestors a transform, which would break it
+            const rect = activeItem.current.getBoundingClientRect();
+            window.scrollTo({
+                top: rect.top + window.scrollY - ACTIVE_ACCORDION_OFFSET,
+                behavior: 'smooth'
+            });
+        };
+
+        // wait for webfonts before measuring: the Roboto swap changes table
+        // row heights after mount, which would clamp the smooth scroll short
+        if (document.fonts && document.fonts.ready) {
+            document.fonts.ready.then(() => requestAnimationFrame(scrollToActive));
+        } else {
+            requestAnimationFrame(scrollToActive);
+        }
+
+        return () => { cancelled = true; };
     }, []);
 
     return (

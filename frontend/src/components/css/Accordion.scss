@@ -222,8 +222,9 @@ div.employee-accordion-desc {
 }
 
 // staggered card entrance (cards are wrapped in plain divs inside the dl)
+// 'backwards' fill so no transform lingers after the animation (see App.scss)
 dl > div {
-    animation: card-in 500ms $ease-fluid both;
+    animation: card-in 500ms $ease-fluid backwards;
 }
 
 @for $i from 1 through 8 {
@@ -241,10 +242,6 @@ dl > div:nth-child(n+9) {
     from {
         opacity: 0;
         transform: translateY(10px);
-    }
-    to {
-        opacity: 1;
-        transform: translateY(0);
     }
 }
 
