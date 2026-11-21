@@ -1,3 +1,11 @@
-img {
-    padding-top: 30%;
+@import '../../config';
+
+img.loading-dots {
+    padding-top: 3.5rem;
+    opacity: 0.75;
+}
+
+p.empty-state {
+    color: $text-muted;
+    padding-top: 2rem;
 }

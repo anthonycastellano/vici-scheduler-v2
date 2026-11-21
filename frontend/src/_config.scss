@@ -1,17 +1,39 @@
 // theme
 
-$background-primary: #282c34;
-$background-alternate: #3c424f;
-$background-nav: #3e4b6b;
-$background-modal: rgba(40, 44, 52, 0.9);
-$background-modal-compatible: rgb(40, 44, 52);
+$background-primary: #14161b;    // page background (near-black, cool tint)
+$background-alternate: #1d212a;  // raised surface: cards, modals, forms
+$background-raised: #272c37;     // inputs, hover fills
+$background-nav: rgba(20, 22, 27, 0.85); // translucent header (blur applied in Nav.scss)
+$background-modal: rgba(8, 10, 14, 0.72);
+$background-modal-compatible: rgba(8, 10, 14, 0.88);
 
-$text-primary: #fff;
-$text-secondary: #d1c43c;
+$border-subtle: rgba(255, 255, 255, 0.08);
+$border-strong: rgba(255, 255, 255, 0.16);
+
+$text-primary: #eceef2;
+$text-secondary: #eac35d;        // gold accent
+$text-secondary-hover: #f4d376;
+$text-on-accent: #1b1e26;        // text on gold fills
+$text-muted: #9aa3b2;
+$danger: #e5695f;
+
+$shadow-card: 0 1px 2px rgba(0, 0, 0, 0.3), 0 8px 24px rgba(0, 0, 0, 0.35);
+$shadow-modal: 0 4px 12px rgba(0, 0, 0, 0.45), 0 24px 64px rgba(0, 0, 0, 0.5);
+
+$radius-card: 14px;
+$radius-control: 8px;
+
+// shared input focus treatment
+$focus-ring: 0 0 0 3px rgba(234, 195, 93, 0.18);
 
 // transitions
 
-$accordion-transition-speed: 150ms;
-$accordion-transition-curve: ease-out;
+$accordion-transition-speed: 320ms;
+$accordion-transition-curve: cubic-bezier(0.33, 1, 0.68, 1); // easeOutCubic
 
 $nav-transition-speed: 200ms;
+
+// motion curves — expo-out feels "fluid": fast start, long glide to rest
+$ease-fluid: cubic-bezier(0.16, 1, 0.3, 1);
+$transition-fast: 150ms;
+$transition-base: 250ms;

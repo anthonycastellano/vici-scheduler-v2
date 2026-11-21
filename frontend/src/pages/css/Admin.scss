@@ -6,23 +6,53 @@ div.admin-menu {
     align-items: center;
 }
 
-.admin-menu button {
-    font-size: 20px;
+.admin-menu h2 {
+    color: $text-primary;
+    font-size: 1.15rem;
     font-weight: 500;
-    width: 20rem;
-    height: 3.5rem;
-    margin: 1.5rem;
-    background-color: $text-secondary;
-    border-radius: 1rem;
-    border-style: none;
-    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.5);
-    color: black;
+    margin: 0.5rem 0 1rem;
 }
 
-// desktop
-@media (min-width: 768px){
-    .admin-menu button {
-        width: 30rem;
-        height: 4rem;
-    }
+.admin-menu button {
+    display: block;
+    width: 100%;
+    max-width: 26rem;
+    min-height: 48px;
+    margin: 0.45rem 0;
+    background-color: $text-secondary;
+    color: $text-on-accent;
+    font-family: inherit;
+    font-size: 1rem;
+    font-weight: 500;
+    border: none;
+    border-radius: 10px;
+    box-shadow: 0 1px 2px rgba(0, 0, 0, 0.25), 0 4px 14px rgba(0, 0, 0, 0.3);
+    cursor: pointer;
+    transition: background-color 150ms ease, transform 100ms ease, box-shadow 150ms ease;
+}
+
+.admin-menu button b {
+    font-weight: 700;
+}
+
+.admin-menu button:hover {
+    background-color: $text-secondary-hover;
+    transform: translateY(-1px);
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3), 0 8px 22px rgba(0, 0, 0, 0.35);
+}
+
+.admin-menu button:active {
+    transform: translateY(0) scale(0.985);
+    transition-duration: 60ms;
+}
+
+p.success-msg {
+    color: $text-secondary;
+    background: rgba(234, 195, 93, 0.08);
+    border: 1px solid rgba(234, 195, 93, 0.25);
+    border-radius: $radius-control;
+    display: inline-block;
+    padding: 0.55rem 1rem;
+    font-size: 0.9rem;
+    margin-top: 1.25rem;
 }

@@ -27,11 +27,11 @@ const Schedules = () => {
                     {schedules.length ?
                         <ScheduleAccordion />
                     :
-                        <img src={LoadingDots} alt='Loading...' />
+                        <img className='loading-dots' src={LoadingDots} alt='Loading...' />
                     }
                 </div>
             :
-                <p>No schedules created</p>
+                <p className='empty-state'>No schedules created</p>
             }
         </div>
     );

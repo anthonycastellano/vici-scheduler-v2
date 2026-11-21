@@ -10,20 +10,22 @@ const Nav = () => {
 
     return (
         <header className='nav-header'>
-            <p id='title'>Vici Surgical</p>
-            <nav>
-                <ul>
-                    <li>
-                        <Link to="/"><span className={activeTab === CONSTANTS.SCHEDULES_TAB ? 'active-tab' : null} >Schedules</span></Link>
-                    </li>
-                    <li>
-                        <Link to='/employees'><span className={activeTab === CONSTANTS.EMPLOYEES_TAB ? 'active-tab' : null} >Employees</span></Link>
-                    </li>
-                    <li>
-                        <Link to='/admin'><span className={activeTab === CONSTANTS.ADMIN_TAB ? 'active-tab' : null} >Admin</span></Link>
-                    </li>
-                </ul>
-            </nav>
+            <div className='nav-inner'>
+                <Link to='/' className='nav-brand'>Vici Surgical</Link>
+                <nav>
+                    <ul>
+                        <li>
+                            <Link to="/"><span className={activeTab === CONSTANTS.SCHEDULES_TAB ? 'active-tab' : null} >Schedules</span></Link>
+                        </li>
+                        <li>
+                            <Link to='/employees'><span className={activeTab === CONSTANTS.EMPLOYEES_TAB ? 'active-tab' : null} >Employees</span></Link>
+                        </li>
+                        <li>
+                            <Link to='/admin'><span className={activeTab === CONSTANTS.ADMIN_TAB ? 'active-tab' : null} >Admin</span></Link>
+                        </li>
+                    </ul>
+                </nav>
+            </div>
         </header>
     );
 };

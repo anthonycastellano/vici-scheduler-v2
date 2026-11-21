@@ -1,102 +1,191 @@
 @import '../../config';
 
 .modalBackground {
-    width: 100%;
-    height: 100%;
+    position: fixed;
+    inset: 0;
     background-color: $background-modal-compatible;
     background-color: $background-modal;
-    position: fixed;
+    backdrop-filter: blur(6px);
+    -webkit-backdrop-filter: blur(6px);
     display: flex;
     justify-content: center;
     align-items: center;
+    z-index: 200;
+    padding: 1rem;
+    animation: backdrop-in 200ms ease-out both;
+}
+
+@keyframes backdrop-in {
+    from { opacity: 0; }
+    to { opacity: 1; }
 }
 
 .modalContainer {
-    margin: 10%;
-    width: 20rem;
+    width: 100%;
+    max-width: 26rem;
+    max-height: calc(100vh - 2rem);
+    overflow-y: auto;
+    background-color: $background-alternate;
+    border: 1px solid $border-subtle;
+    border-radius: 16px;
+    box-shadow: $shadow-modal;
+    padding: 1.5rem 1.25rem;
+    box-sizing: border-box;
+    animation: modal-in 340ms $ease-fluid both;
+}
+
+@keyframes modal-in {
+    from {
+        opacity: 0;
+        transform: translateY(1.25rem) scale(0.96);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0) scale(1);
+    }
 }
 
 .error-message {
-    color: red;
+    color: $danger;
+    font-size: 0.9rem;
 }
 
 .prompt {
-    font-size: 25px;
+    font-size: 1.05rem;
+    line-height: 1.45;
+    margin: 0.25rem 0 1.25rem;
 }
 
 .confirm-buttons {
     display: flex;
-    justify-content: space-between;
+    justify-content: flex-end;
+    gap: 0.6rem;
+    margin-top: 1.5rem;
 }
 
+// default button = secondary/ghost
 .confirm-buttons button {
-    background-color: $text-secondary;
-    padding: 4%;
-    width: 6rem;
-    margin: 10%; 
-    border-style: none;
-    border-radius: 1rem;
-    color: black;
+    background: $background-raised;
+    border: 1px solid $border-subtle;
+    border-radius: $radius-control;
+    color: $text-primary;
+    font-family: inherit;
+    font-size: 0.95rem;
+    font-weight: 500;
+    padding: 0.6rem 1.2rem;
+    min-height: 44px;
+    cursor: pointer;
+    transition: background-color 150ms ease, border-color 150ms ease;
 }
 
-.delete-button {
-    font-weight: bold;
+.confirm-buttons button:hover {
+    border-color: $border-strong;
+    background: #2d3340;
+}
+
+// primary action
+.confirm-buttons .delete-button {
+    background: $text-secondary;
+    border-color: transparent;
+    color: $text-on-accent;
+    font-weight: 600;
+}
+
+.confirm-buttons .delete-button:hover {
+    background: $text-secondary-hover;
+    border-color: transparent;
 }
 
 .name-fields {
     display: flex;
-    justify-content: space-between;
-    margin-top: 3rem;
-    margin-bottom: 3rem;
+    gap: 0.75rem;
+    margin: 1.25rem 0 0.5rem;
 }
 
 .name-fields input {
-    width: 7rem;
-    border-bottom: 1px solid white;
-    border-top: none;
-    border-left: none;
-    border-right: none;
-    border-radius: 0px;
-    background-color: $background-modal;
-    color: white;
-    font-size: 15px;
+    flex: 1;
+    min-width: 0;
+    background: $background-raised;
+    border: 1px solid $border-subtle;
+    border-radius: $radius-control;
+    color: $text-primary;
+    font-family: inherit;
+    font-size: 16px; // prevents iOS zoom-on-focus
+    padding: 0.65rem 0.8rem;
+    transition: border-color 150ms ease, box-shadow 150ms ease;
+}
+
+.name-fields input:hover {
+    border-color: $border-strong;
+}
+
+.name-fields input:focus {
+    outline: none;
+    border-color: rgba(234, 195, 93, 0.55);
+    box-shadow: $focus-ring;
 }
 
 .employee-selectors-container {
     display: flex;
     flex-direction: row;
     justify-content: center;
+    gap: 0.5rem;
 }
 
 .employee-selectors {
     display: flex;
     flex-direction: column;
-    margin: 1rem;
-    justify-content: space-between;
+    justify-content: flex-start;
 }
 
-.employee-selectors select, .employee-selectors span {
-    margin: 0.5rem;
-    font-size: 1rem;
-    border-radius: 1rem;
-    padding: 0.3rem;
+.employee-selectors span {
+    color: $text-muted;
+    font-size: 0.9rem;
+    font-variant-numeric: tabular-nums;
+    line-height: 2.6rem;
 }
 
 .employee-selectors select {
-    color: black;
+    box-sizing: border-box;
+    width: 8.5rem;
+    background: $background-raised;
+    border: 1px solid $border-subtle;
+    border-radius: $radius-control;
+    color: $text-primary;
+    font-family: inherit;
+    font-size: 16px; // prevents iOS zoom-on-focus
+    padding: 0.5rem 0.5rem;
+    margin: 0 0 0.6rem;
+    transition: border-color 150ms ease, box-shadow 150ms ease;
+}
+
+.employee-selectors select:hover {
+    border-color: $border-strong;
+}
+
+.employee-selectors select:focus {
+    outline: none;
+    border-color: rgba(234, 195, 93, 0.55);
+    box-shadow: $focus-ring;
 }
 
 // mobile
-@media (max-width: 768px){
-    .with-assists .employee-selectors select, .with-assists .employee-selectors span {
-        margin: 0.3rem;
+@media (max-width: 767px){
+    // give selectors room to breathe on narrow screens
+    .with-assists .employee-selectors select {
+        width: 6.25rem;
         font-size: 0.8rem;
-        border-radius: 1rem;
-        padding: 0.3rem;
+        padding: 0.45rem 0.35rem;
     }
 
-    .employee-selectors {
-        margin: 0;
-        max-width: 7rem;
+    .with-assists .employee-selectors span {
+        font-size: 0.78rem;
+    }
+}
+
+// desktop
+@media (min-width: 768px){
+    .modalContainer {
+        padding: 1.75rem 1.5rem;
     }
 }

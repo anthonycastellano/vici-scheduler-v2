@@ -1,76 +1,108 @@
 @import '../../config';
 
+// action icons (edit / delete)
+
+.edit-icon,
 .delete-icon {
-    color: darkred;
-    margin: 3%;
+    flex: none;
+    align-self: center;
+    color: $text-muted;
+    cursor: pointer;
+    padding: 0.45rem;
+    margin: 0 0.1rem;
+    border-radius: $radius-control;
+    transition: color 150ms ease, background-color 150ms ease;
 }
 
-.edit-icon {
-    margin: 3%;
+.edit-icon:hover {
+    color: $text-secondary;
+    background: rgba(234, 195, 93, 0.1);
+}
+
+.delete-icon:hover {
+    color: $danger;
+    background: rgba(229, 105, 95, 0.1);
+}
+
+// shared card shell
+
+%card {
+    background-color: $background-alternate;
+    border: 1px solid $border-subtle;
+    border-radius: $radius-card;
+    box-shadow: $shadow-card;
 }
 
 // schedule accordion
 
 div.schedule-accordion {
-    margin-left: 10%;
-    margin-right: 10%;
-    margin-bottom: 1rem;
-    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.5);
-    border-radius: 15px;
-    background-color: $background-alternate;
+    @extend %card;
+    margin-bottom: 0.85rem;
+    text-align: left;
 }
 
 div.schedule-accordion dt {
     display: flex;
-    justify-content: space-between;
+    align-items: center;
+    padding: 0.2rem 0.5rem 0.2rem 0.75rem;
+}
+
+// modern auto-height animation: grid 0fr -> 1fr animates to real content height
+// (no max-height guesswork), with the description fading/sliding in via its children
+%accordion-desc {
+    display: grid;
+    grid-template-rows: 0fr;
+    transition: grid-template-rows $accordion-transition-speed $accordion-transition-curve;
+
+    > dd {
+        overflow: hidden;
+        min-height: 0;
+        margin-inline-start: 0;
+        opacity: 0;
+        transform: translateY(-0.35rem);
+        transition: opacity $accordion-transition-speed $accordion-transition-curve,
+                    transform $accordion-transition-speed $accordion-transition-curve;
+    }
+
+    &.shown {
+        grid-template-rows: 1fr;
+
+        > dd {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    }
 }
 
 div.schedule-accordion-desc {
-    transition: max-height $accordion-transition-speed $accordion-transition-curve;
-}
-
-div.schedule-accordion-desc.hidden {
-    max-height: 0;
-}
-
-div.schedule-accordion-desc.shown {
-    max-height: 1000px;
-}
-
-div.schedule-accordion-desc dd {
-    transition: font-size $accordion-transition-speed $accordion-transition-curve;
-    margin-inline-start: 0;
-}
-
-div.schedule-accordion-desc.hidden dd {
-    font-size: 0px;
-}
-
-.schedule-accordion-desc table {
-    width: 90%;
-    height: 90%;
-    border-collapse: collapse;
-    margin-left: 5%;
-    margin-right: 5%;
-}
-
-.schedule-accordion-desc.shown tbody td {
-    border-top: 1px solid gray;
+    @extend %accordion-desc;
 }
 
 div.schedule-accordion.with-assists .schedule-accordion-desc {
-    font-size: 0.8rem;
+    font-size: 0.85rem;
 }
 
 .schedule-accordion button {
-    width: 100%;
+    flex: 1;
+    min-width: 0;
     background: transparent;
     border: none;
     color: $text-primary;
-    font-weight: 100;
-    font-size: 2rem;
-    margin-top: 0.5rem;
-    margin-bottom: 0.5rem;
+    font-family: inherit;
+    font-weight: 500;
+    font-size: 1.1rem;
+    text-align: center;
+    padding: 0.9rem 0.25rem;
+    cursor: pointer;
+    transition: color 150ms ease;
+}
+
+.schedule-accordion button b {
+    font-weight: 700;
+}
+
+.schedule-accordion button:hover {
+    color: $text-secondary-hover;
 }
 
 .schedule-accordion button.current-month {
@@ -80,84 +112,166 @@ div.schedule-accordion.with-assists .schedule-accordion-desc {
 // employee accordion
 
 div.employee-accordion {
-    margin-left: 20%;
-    margin-right: 20%;
-    margin-bottom: 1rem;
-    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.5);
-    border-radius: 15px;
-    background-color: $background-alternate;
+    @extend %card;
+    margin-bottom: 0.85rem;
+    text-align: left;
 }
 
 div.employee-accordion dt {
     display: flex;
-    justify-content: space-between;
+    align-items: center;
+    padding: 0.2rem 0.5rem 0.2rem 0.75rem;
 }
 
 div.employee-accordion-desc {
-    transition: max-height $accordion-transition-speed $accordion-transition-curve;
-}
-
-div.employee-accordion-desc.hidden {
-    max-height: 0;
-}
-
-div.employee-accordion-desc.shown {
-    max-height: 10000px;
-}
-
-div.employee-accordion-desc dd {
-    transition: font-size $accordion-transition-speed $accordion-transition-curve;
-    margin-inline-start: 0;
-}
-
-div.employee-accordion-desc.hidden dd {
-    font-size: 0px;
+    @extend %accordion-desc;
 }
 
 .employee-accordion-desc li {
     list-style-type: none;
 }
 
-.employee-accordion-desc table {
-    width: 90%;
-    height: 90%;
-    border-collapse: collapse;
-    margin-left: 5%;
-    margin-right: 5%;
-}
-
-.employee-accordion-desc.shown tbody td {
-    border-top: 1px solid gray;
-}
-
 .employee-accordion button {
-    width: 100%;
+    flex: 1;
+    min-width: 0;
     background: transparent;
     border: none;
     color: $text-primary;
-    font-weight: 100;
-    font-size: 1.4rem;
-    margin-top: 0.5rem;
-    margin-bottom: 0.5rem;
+    font-family: inherit;
+    font-weight: 500;
+    font-size: 1rem;
+    text-align: center;
+    padding: 0.85rem 0.25rem;
+    cursor: pointer;
+    transition: color 150ms ease;
+}
+
+.employee-accordion button b {
+    font-weight: 700;
+}
+
+.employee-accordion button:hover {
+    color: $text-secondary-hover;
+}
+
+// shared table treatment
+// collapsed descriptions are clipped by the grid animation, so table styles
+// apply regardless of state
+
+.schedule-accordion-desc table,
+.employee-accordion-desc table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 0;
+}
+
+.schedule-accordion-desc.shown dd,
+.employee-accordion-desc.shown dd {
+    padding: 0 1.1rem 1.1rem;
+}
+
+.schedule-accordion-desc.shown thead,
+.employee-accordion-desc.shown thead {
+    border-bottom: 1px solid $border-subtle;
+}
+
+.schedule-accordion-desc.shown th,
+.employee-accordion-desc.shown th,
+.employee-accordion-desc.shown thead td {
+    text-align: center;
+    padding: 0.1rem 0.4rem 0.6rem;
+}
+
+.schedule-accordion-desc.shown th h3,
+.employee-accordion-desc.shown th h3,
+.employee-accordion-desc.shown thead td h3 {
+    font-size: 0.72rem;
+    font-weight: 600;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: $text-muted;
+    margin: 0;
+}
+
+.schedule-accordion-desc.shown td,
+.employee-accordion-desc.shown td {
+    text-align: center;
+    padding: 0.7rem 0.4rem;
+    font-size: 0.95rem;
+    font-variant-numeric: tabular-nums;
+}
+
+.schedule-accordion-desc td p,
+.employee-accordion-desc td p {
+    margin: 0;
+}
+
+.schedule-accordion-desc.shown tbody tr:not(:last-child) td,
+.employee-accordion-desc.shown tbody tr:not(:last-child) td {
+    border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+.schedule-accordion-desc td,
+.employee-accordion-desc td {
+    transition: background-color $transition-fast ease;
+}
+
+.schedule-accordion-desc.shown tbody tr:hover td,
+.employee-accordion-desc.shown tbody tr:hover td {
+    background: rgba(255, 255, 255, 0.02);
+}
+
+// staggered card entrance (cards are wrapped in plain divs inside the dl)
+dl > div {
+    animation: card-in 500ms $ease-fluid both;
+}
+
+@for $i from 1 through 8 {
+    dl > div:nth-child(#{$i}) {
+        animation-delay: #{($i - 1) * 45}ms;
+    }
+}
+
+// beyond the eighth, cards appear without delay
+dl > div:nth-child(n+9) {
+    animation-delay: 0ms;
+}
+
+@keyframes card-in {
+    from {
+        opacity: 0;
+        transform: translateY(10px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
 }
 
 p.highlight {
     color: $text-secondary;
-    font-weight: 600;
+    font-weight: 500;
 }
 
+// mobile
+@media (max-width: 767px){
+    .schedule-accordion button {
+        font-size: 1rem;
+    }
+
+    .schedule-accordion-desc td,
+    .employee-accordion-desc td {
+        padding: 0.6rem 0.3rem;
+    }
+}
 
 // desktop
 @media (min-width: 768px){
-    // schedule accordion
-    div.schedule-accordion {
-        margin-left: 30%;
-        margin-right: 30%;
+    div.schedule-accordion dt {
+        padding: 0.3rem 0.75rem 0.3rem 1rem;
     }
 
-    // employee accordion
-    div.employee-accordion {
-        margin-left: 35%;
-        margin-right: 35%;
+    div.employee-accordion dt {
+        padding: 0.3rem 0.75rem 0.3rem 1rem;
     }
 }

@@ -54,7 +54,7 @@ const Admin = () => {
             {loggedIn ?
             <div>
                 {renderMenu()}
-                {mode === CONSTANTS.ADMIN_MODE_MENU && msg && <p>{msg}</p>}
+                {mode === CONSTANTS.ADMIN_MODE_MENU && msg && <p className='success-msg'>{msg}</p>}
             </div>
             :
             <div>

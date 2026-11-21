@@ -1,125 +1,187 @@
 @import '../../config';
 
 .back-btn {
-    color: $text-secondary;
+    color: $text-muted;
     background: transparent;
-    border-style: none;
-    font-size: 50px;
-    display: flex;
+    border: none;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0.4rem;
+    margin: -0.4rem 0 0 -0.4rem;
+    border-radius: $radius-control;
+    cursor: pointer;
+    transition: color 150ms ease, background-color 150ms ease;
 }
 
-h2 {
-    padding-top: 1rem;
+.back-btn svg {
+    width: 1.9rem;
+    height: 1.9rem;
+}
+
+.back-btn:hover {
+    color: $text-primary;
+    background: $background-raised;
 }
 
 div.date-selectors {
     display: flex;
     justify-content: center;
+    gap: 0.5rem;
 }
 
 .date-selectors select {
-    margin: 1rem;
-    width: 5rem;
-    height: 2rem;
-    font-size: 1rem;
-    border-radius: 1rem;
+    width: auto;
+    min-width: 6.5rem;
+    text-align: center;
+    text-align-last: center;
 }
 
-div.employee-selector select {
-    margin: 1rem;
-    width: 10rem;
-    text-align: center;
-    border-radius: 1rem;
+.employee-selector select {
+    min-height: 11rem;
 }
+
+.assist-checkbox {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+    color: $text-muted;
+    font-size: 0.95rem;
+    margin: 1rem 0 0.5rem;
+}
+
+.assist-checkbox input {
+    width: 1.1rem;
+    height: 1.1rem;
+    margin: 0;
+    accent-color: $text-secondary;
+}
+
+// new schedule preview card
 
 .new-schedule-item {
-    margin-left: 10%;
-    margin-right: 10%;
-    margin-bottom: 1rem;
-    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.5);
-    border-radius: 1rem;
     background-color: $background-alternate;
+    border: 1px solid $border-subtle;
+    border-radius: $radius-card;
+    box-shadow: $shadow-card;
+    padding: 1.25rem 1rem 1.5rem;
+    margin-bottom: 1rem;
 }
 
 .new-schedule-item h1 {
-    padding: 1rem;
-    margin: 0;
+    padding: 0;
+    margin: 0.25rem 0 1rem;
     color: $text-secondary;
+    font-size: 1.3rem;
+    font-weight: 500;
 }
 
 .new-schedule-item-table {
     display: flex;
     justify-content: center;
-    font-size: 1rem;
-    padding-bottom: 1rem;
+    font-size: 0.95rem;
 }
 
 .new-schedule-item-table table {
-    width: 90%;
+    width: 100%;
+    max-width: 26rem;
+    border-collapse: collapse;
 }
 
 .new-schedule-item-table thead {
-    font-weight: bold;
+    border-bottom: 1px solid $border-subtle;
+}
+
+.new-schedule-item-table thead p {
+    font-size: 0.72rem;
+    font-weight: 600;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: $text-muted;
+    margin: 0;
+    padding-bottom: 0.5rem;
 }
 
 .new-schedule-item-table tbody td {
-    padding: 0.5rem;
+    padding: 0.65rem 0.4rem;
+    font-variant-numeric: tabular-nums;
 }
+
+.new-schedule-item-table tbody tr:not(:last-child) td {
+    border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+.new-schedule-item-table td p {
+    margin: 0;
+}
+
+// stats
 
 #stats-container {
     display: flex;
     flex-direction: row;
     justify-content: center;
+    margin-top: 1rem;
 }
 
 #stats-container h3 {
-    color: $text-secondary
+    font-size: 0.72rem;
+    font-weight: 600;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: $text-muted;
+    margin: 0 0 0.6rem;
 }
 
 #stats-container p {
     height: 2rem;
+    margin: 0;
+    font-size: 0.9rem;
+    font-variant-numeric: tabular-nums;
 }
 
 .stats-col {
-    padding: 0.5rem;
-    max-width: 5rem;
+    padding: 0 0.6rem;
+    min-width: 5rem;
 }
 
 .stats-page select {
-    width: 6rem;
-    height: 1.6rem;
+    display: block;
+    width: auto;
+    min-width: 9rem;
+    margin: 0.5rem auto 0.5rem;
     text-align: center;
-    border-radius: 1rem;
+    text-align-last: center;
 }
 
 div.stats-page {
-    margin-left: 10%;
-    margin-right: 10%;
-    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.5);
-    border-radius: 1rem;
     background-color: $background-alternate;
-}
-
-.assist-checkbox input {
-    width: 1rem;
-    margin: 0.5rem;
+    border: 1px solid $border-subtle;
+    border-radius: $radius-card;
+    box-shadow: $shadow-card;
+    padding: 1.25rem 1rem 1.5rem;
 }
 
 // desktop
 @media (min-width: 768px){
-    div.stats-page {
-        margin-left: 20%;
-        margin-right: 20%;
+    .new-schedule-item-table table {
+        max-width: 30rem;
     }
 }
 
 // mobile
-@media (max-width: 768px){
+@media (max-width: 767px){
     .new-schedule-item-table.with-assists {
         font-size: 0.8rem;
     }
 
     #stats-container {
         font-size: 0.8rem;
+    }
+
+    .stats-col {
+        min-width: 4.25rem;
+        padding: 0 0.35rem;
     }
 }

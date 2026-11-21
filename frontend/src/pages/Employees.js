@@ -30,12 +30,12 @@ const Employees = () => {
                     {employees.length ?
                         <EmployeeAccordion />
                     :
-                        <img src={LoadingDots} alt='Loading...' />
+                        <img className='loading-dots' src={LoadingDots} alt='Loading...' />
                     }
 
                 </div>
             :
-                <p>No employees created</p>
+                <p className='empty-state'>No employees created</p>
             }
         </div>
     );

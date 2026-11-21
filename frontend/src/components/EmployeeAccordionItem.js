@@ -37,7 +37,7 @@ const EmployeeAccordionItem = ({
                     <MdModeEdit
                         className='edit-icon'
                         title='Edit employee'
-                        size={'2em'}
+                        size={'1.5em'}
                         onClick={() => openModal(CONSTANTS.MODAL_UPDATE_EMPLOYEE)}
                     />
                 }
@@ -45,7 +45,7 @@ const EmployeeAccordionItem = ({
                     <MdDelete
                         className='delete-icon'
                         title='Delete employee'
-                        size={'2em'}
+                        size={'1.5em'}
                         onClick={() => openModal(CONSTANTS.MODAL_DELETE_EMPLOYEE)}
                     />
                 }

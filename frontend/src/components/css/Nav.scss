@@ -2,54 +2,106 @@
 
 .nav-header {
     width: 100%;
-    height: fit-content;
-    background-color: $background-nav;
     position: fixed;
-    top: 0px;
+    top: 0;
+    z-index: 100;
+    background: $background-nav;
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    border-bottom: 1px solid $border-subtle;
 }
 
-.nav-header a {
-    padding: 0.5rem;
-    color: $text-primary;
+.nav-inner {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 0.5rem;
+    max-width: 72rem;
+    margin: 0 auto;
+    padding: 0 1rem;
+    height: 3.75rem;
+}
+
+.nav-brand {
+    color: $text-secondary;
+    font-size: 1.05rem;
+    font-weight: 500;
+    letter-spacing: 0.01em;
     text-decoration: none;
+    white-space: nowrap;
+    padding: 0.5rem 0.25rem;
+}
+
+.nav-brand:hover {
+    color: $text-secondary-hover;
 }
 
 .nav-header ul {
-    height: 100%;
     list-style: none;
     display: flex;
-    padding: 1rem;
-    margin: 0;
     align-items: center;
-    justify-content: center;
+    gap: 0.25rem;
+    padding: 0;
+    margin: 0;
 }
 
 .nav-header li {
-    margin: 0 1rem;
-    flex: 0.4;
+    margin: 0;
+}
+
+.nav-header a {
+    display: inline-block;
+    padding: 0.5rem 0.6rem;
+    text-decoration: none;
 }
 
 .nav-header li span {
-    padding: 0.2rem;
-    border-bottom: 2px solid $background-nav;
-    transition: border-bottom-color 0.3s;
+    position: relative;
+    display: inline-block;
+    color: $text-muted;
+    font-size: 0.95rem;
+    font-weight: 500;
+    padding-bottom: 0.3rem;
+    transition: color $nav-transition-speed ease;
+}
+
+.nav-header li span::after {
+    content: '';
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    height: 2px;
+    border-radius: 2px;
+    background: $text-secondary;
+    transform: scaleX(0);
+    transform-origin: center;
+    transition: transform $nav-transition-speed $ease-fluid;
+}
+
+.nav-header a:hover span {
+    color: $text-primary;
+}
+
+.nav-header a:hover span::after {
+    transform: scaleX(1);
 }
 
 .nav-header li span.active-tab {
-    border-bottom-color: $text-secondary;
+    color: $text-secondary;
 }
 
-#title {
-    margin: 0;
-    font-size: 2rem;
-    text-align: center;
-    color: $text-secondary;
+.nav-header li span.active-tab::after {
+    transform: scaleX(1);
 }
 
 // desktop
 @media (min-width: 768px){
-    .nav-header li {
-        margin: 0 3.5rem;
-        flex: initial;
+    .nav-inner {
+        padding: 0 1.5rem;
+    }
+
+    .nav-header a {
+        padding: 0.5rem 0.9rem;
     }
 }

@@ -63,7 +63,7 @@ const ScheduleAccordionItem = ({
                     <MdEditCalendar
                         className='edit-icon'
                         title='Edit schedule'
-                        size={'2em'}
+                        size={'1.5em'}
                         onClick={() => openModal(CONSTANTS.MODAL_UPDATE_SCHEDULE)}
                     />
                 }
@@ -71,7 +71,7 @@ const ScheduleAccordionItem = ({
                     <MdDelete
                         className='delete-icon'
                         title='Delete schedule'
-                        size={'2em'}
+                        size={'1.5em'}
                         onClick={() => openModal(CONSTANTS.MODAL_DELETE_SCHEDULE)}
                     />
                 }
