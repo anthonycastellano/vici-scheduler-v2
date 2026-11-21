@@ -34,5 +34,9 @@ services:
     environment:
       - MONGO_INITDB_ROOT_USERNAME=${MONGO_INITDB_ROOT_USERNAME}
       - MONGO_INITDB_ROOT_PASSWORD=${MONGO_INITDB_ROOT_PASSWORD}
-    # not published to the host on purpose: the api container reaches it
-    # over the internal compose network. Publish 27017 only for debugging.
+    ports:
+      # Published deliberately: Tony accesses this DB directly from MongoDB
+      # Compass and has accepted the exposure (no sensitive data; access
+      # controlled via DigitalOcean cloud firewall IP allow rules).
+      # Do not "harden" this back to loopback without asking.
+      - '27017:27017'

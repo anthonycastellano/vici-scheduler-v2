@@ -96,7 +96,9 @@ employees/schedules, restore changed fields).
   `node_modules` (dev deps included) into images. Backend prod image runs
   `node index.js` directly (not `npm start`) to keep the base image's
   vulnerable bundled npm out of the runtime.
-- Prod compose does **not** publish 27017; the dev compose does (for seeding).
+- Prod compose **publishes 27017** (owner preference: direct MongoDB Compass
+  access, no sensitive data; exposure managed via DigitalOcean cloud firewall
+  IP allow rules — leave this alone, see docker-compose.yml comment).
 
 ## Known remaining issues (accepted)
 
@@ -115,6 +117,7 @@ employees/schedules, restore changed fields).
 - `jwt.verify` pinned to `['HS256']`; jsonwebtoken must stay ≥ 9.
 - Login endpoint keeps its rate limiter.
 - Admin write endpoints stay behind `authMiddleware`; public GETs stay read-only.
-- Secrets only via env; compose never publishes mongo in prod.
+- Secrets only via env. (27017 publication is an explicit, documented owner
+  exception — see Architecture notes.)
 - After changes touching these areas, re-run `npm audit` in both packages and
   re-seed + E2E the admin flows before calling it done.

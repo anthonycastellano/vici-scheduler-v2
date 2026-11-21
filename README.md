@@ -80,8 +80,8 @@ The application will be accessible at `http://localhost:3000`.
    ```
 
 The application will be accessible via the Nginx proxy on port `80`.
-MongoDB is intentionally **not** published to the host in production; only the
-internal compose network can reach it.
+MongoDB is published on `27017` for direct Compass access (managed via
+DigitalOcean firewall IP allow rules).
 
 > **Note:** The proxy currently serves plain HTTP. Before exposing this to the
 > internet, terminate TLS (e.g. point a domain at the host and add a Let's
